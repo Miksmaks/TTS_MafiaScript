@@ -1,3 +1,4 @@
+-- Функции поддержки
 function copy(t)
 	local t2 = {}
     for k,v in pairs(t) do
@@ -6,6 +7,42 @@ function copy(t)
     return t2
 end
 
+function random(a,b)
+  return math.random(a,b)
+end
+
+function RandomShuffleRole(ArrayRoles,  NumberOfPlayers)
+  local arr = copy(ArrayRoles)
+  if (#ArrayRoles < NumberOfPlayers) then
+    local n = NumberOfPlayers-#ArrayRoles
+    for i = 1, n do
+      table.insert(arr,"Мирный")
+    end
+  end
+  for i = 1, NumberOfPlayers do
+    local rv = random(1,NumberOfPlayers)
+    arr[i],arr[rv] = arr[rv],arr[i]
+  end
+  return arr
+end
+
+function F(a,F,O,L,Pos,Rot,S,W,H,FS,Color,FColor) -- Конструктор кнопок
+	local p = {}
+    p.click_function = F
+    p.function_owner = O
+    p.label = L
+    p.position = Pos
+    p.rotation = Rot
+    p.scale = S
+    p.width = W
+    p.height = H
+    p.font_size = FS
+    p.color = Color
+    p.font_color = FColor
+    a.createButton(p)
+end
+
+-- Классы (доработать)
 Class_Effect = {}
 Class_Effect.Name = "Название эффекта"
 Class_Effect.Owner = "PlayerName"
@@ -42,6 +79,7 @@ Class_Player.IndexStatus = 0
 Class_Player.Inventory = {}
 Class_Player.Effects = {}
 
+-- База загрузки
 function onLoad() -- Основной архив (категорически не трогать!)
   --[[ Напоминалка!!
   TMafia = {"Мафия","Политик","Проститутка","Шофер","Вышибала","Адвокат","Подтасовщик улик","Портной","Шпион","Вор","Букмекер","Уборщик","Отравитель","Химик","Саботер","Террорист","Новичок"}
@@ -67,6 +105,7 @@ function onLoad() -- Основной архив (категорически н�
   Town_KillList = {} -- По цветам (ибо могут меняться)
   Town_DeadList = {} -- По именам
   Town_Effects = {}
+  GamePhase = 0
   -- Настройки
   Setting_SkipFirstNight = false
   Setting_NightTimer = 60
@@ -77,23 +116,7 @@ function onLoad() -- Основной архив (категорически н�
   F(startObj,"StartGame",self,"Начать игру",{4, 0.25, 1.7},{0.00, 0.00, 0.00},{2, 2, 2},500,300,70,{1, 1, 1},{0.25, 0.25, 0.25})
 end
 
-function F(a,F,O,L,Pos,Rot,S,W,H,FS,Color,FColor) -- Конструктор кнопок
-	local p = {}
-    p.click_function = F
-    p.function_owner = O
-    p.label = L
-    p.position = Pos
-    p.rotation = Rot
-    p.scale = S
-    p.width = W
-    p.height = H
-    p.font_size = FS
-    p.color = Color
-    p.font_color = FColor
-    a.createButton(p)
-end
-  
-  
+-- UI поддержка (доработать)
 function ShowElement(id) -- Функция показа объекта
 	UI.setAttribute(id,"active","true")
 end
@@ -121,7 +144,7 @@ function startUI() -- Показать стартовые объекты для 
 	]]
 end
 
-
+-- Команды чата
 function onChat(message,Player) -- Функция связанная с чатом, а точнее команды
 	--[[
     if message == "@admin" and Player.admin == true and admin == 0 then -- Вкл/выкл режим админа
@@ -168,7 +191,7 @@ function onChat(message,Player) -- Функция связанная с чато
 	]]
 end
 
-
+-- Основной триггер
 function onUpdate()  --- Триггер сна
 	--[[
     if start == 1 then
@@ -188,4 +211,73 @@ function onUpdate()  --- Триггер сна
       end
     end
 	]]
+end
+
+function CreateRole(role)
+  local r = copy(Class_Role)
+  if (role == "Мирный") then
+    r.Name = "Мирный"
+    r.Description = "У тебя нет особых способностей.Просто...будь мирным)"
+    r.IndexTeam = 1
+    r.Targets = {}
+    r.Abilities = {}
+  elseif (role == "Мафия") then
+    r.Name = "Мафия"
+    r.Description = "Ты принадлежишь клану мафии.Каждую ночь ты голосуешь вместе со своим кланом за убийство мирного игрока.Постарайся, чтобы тебя или твоего союзника не убили мирные."
+    r.IndexTeam = 2
+    r.Targets = {}
+    r.Abilities = {}
+  elseif (role == "Полицейский") then
+    r.Name = "Полицейский"
+    r.Description = "Ты принадлежишь команде мирных.Ночью ты можешь узнать принадлежит ли выбранный игрок клану мафии или нет.Будь аккуратен,ведь у них может быть тот, кто может обмануть твою способность."
+    r.IndexTeam = 1
+    r.Targets = {}
+    r.Abilities = {}
+  elseif (role == "Доктор") then
+    r.Name = "Доктор"
+    r.Description = "Ты принадлежишь команде мирных.Ночью ты можешь спасти игрока от смерти.Выбранный тобою игрок будет спасен от одного убийства в эту ночь.Но себя ты можешь спасти только 1 раз.Будь бдителен, ведь ты тот , кто может спасти и узнать невиновных."
+    r.IndexTeam = 1
+    r.Targets = {}
+    r.Abilities = {}
+  elseif (role == "Детектив") then
+    r.Name = "Детектив"
+    r.Description = "Ты принадлежишь команде мирных.Ночью ты расследуешь дело о клане мафии.Твои расследования каждую ночь приносят информацию о роли , выбранного тобою , игрока.Но аккуратнее, ведь в клане мафии может быть тот, кто может помешать в расследовании."
+    r.IndexTeam = 1
+    r.Targets = {}
+    r.Abilities = {}
+  elseif (role == "Серийный убийца") then
+    r.Name = "Серийный убийца"
+    r.Description = "Ты одинокий хладнокровный убийца...Ты убиваешь,потому что хочешь услышать чистые...крики жертв ... в тишине...Даже мафия боится тебя.Каждую ночь ты убиваешь игрока.Помни: твой главный враг - мафия,поэтому прими помощь жителей,но они тоже должны будут умереть.Ты победишь в этой игре , если всех ,кроме тебя,умрут..."
+    r.IndexTeam = 2
+    r.Targets = {}
+    r.Abilities = {}
+  end
+  return r
+end
+
+function StartGame()
+  Town_NumberOfLivingPeople = #Player.getPlayers()
+  if (Town_NumberOfLivingPeople < 3) then
+    broadcastToAll("Недостаточно игроков для начала игры. Необходимо минимум 3 игрока.",{0.856, 0.1, 0.094})
+  elseif (Town_NumberOfLivingPeople < #Town_StartRoles) then
+    broadcastToAll("Пул ролей превышает текущее количество игроков. Уберите лишние.",{0.856, 0.1, 0.094})
+  else
+    local arr = Player.getPlayers()
+    local Roles = RandomShuffleRole(Town_StartRoles,  Town_NumberOfLivingPeople)
+    for i = 1, Town_NumberOfLivingPeople do
+      if (arr[i].seated == true and arr[i].color != "Grey") then
+        local player = copy(Class_Player)
+        player.Name = arr[i].name
+        player.Color = arr[i].color
+        player.Role = CreateRole(Roles[i])
+        player.IndexStatus = 1
+        table.insert(Town_Players,player)
+        -- Добавить UI включение и расстановку
+      end
+    end
+    -- Добавить UI расстановку
+    broadcastToAll("Подготовка к игре завершена",{0.118, 0.53, 1})
+    GamePhase = 1
+    -- Запуск фазы через функцию фаз (придумать так, чтоб было универсально)
+  end
 end
