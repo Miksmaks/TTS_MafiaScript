@@ -1,0 +1,469 @@
+<!-- Табличка Фазы -->
+<Image active="false" width="500" height="50" offsetXY="0 450" id="WhitePhase1" visibility="White"></Image>
+<Text active="false" fontSize="40" offsetXY="0 450" id="WhitePhase2" visibility="White">Фаза</Text>
+<!-- Табличка времени -->
+<Image active="false" width="120" height="40" offsetXY="0 400" id="WhiteTime1" visibility="White"></Image>
+<Text active="false" fontSize="20" offsetXY="0 400" color="Black" id="WhiteTime2" visibility="White">Время</Text>
+<!-- Табличка роли -->
+<VerticalScrollView active="false" allowDragging="true" returnToOriginalPositionWhenReleased="false" vertical="false" width="420" height="100" noScrollbars="true" offsetXY="-650 250" id="WhiteRole1" visibility="White">
+<Text alignment="UpperLeft" fontSize="32" offsetXY="0 235" text=" Роль:ХЗ" id="WhiteRole2" visibility="White"></Text>
+<Button width="70" height="50" offsetXY="-170 190" color="Grey" id="Whitechat" visibility="White" onClick="actionChat">Чат</Button>
+<Button width="70" height="50" offsetXY="-100 190" color="Green" id="Whitetab" visibility="White" onClick="actionTab">Список</Button>
+<Button width="70" height="50" offsetXY="-30 190" color="Green" id="Whitetime" visibility="White" onClick="actionTime">Время</Button>
+<Button width="70" height="50" offsetXY="40 190" color="Blue" id="Whiterole" visibility="White" onClick="actionRole">Роль?</Button>
+<Button width="70" height="50" offsetXY="110 190" color="Purple" id="Whitemove" visibility="White">Действие</Button>
+<VerticalScrollView width="400" height="400" offsetXY="0 -50" id="WhiteMafChat1" visibility="White">
+  <Text alignment="UpperLeft" fontSize="14" text="" id="WhiteMafText" offsetXY="3 0" visibility="White"></Text>
+</VerticalScrollView>
+<InputField width="400" height="30" offsetXY="0 -235" text="Напишите сообщение" id="WhiteMafChat2" visibility="White" onSubmit="MafiaChat" onValueChanged="changetext"></InputField>
+</VerticalScrollView>
+<!-- Табличка голосования -->
+<Image active="false" width="1200" height="100" offsetXY="0 -488" id="Whitetablevote" visibility="White"></Image>
+<!-- Список игроков и ролей -->
+<VerticalScrollView active="false" width="405" height="420" offsetXY="755 -50" id="Whitetabplayers" visibility="White">
+
+<Text offsetXY="3 0" fontSize="18" alignment="UpperLeft" id="Whitetabtext" visibility="White">
+
+</Text>
+
+</VerticalScrollView>
+
+<!-- Кнопки голосования -->
+
+<Button active="false" width="120" height="100" offsetXY="-540 -488" id="Whitevote1" color="White" text="Выбрать" visibility="White" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="-420 -488" id="Whitevote2" color="Brown" text="Выбрать" visibility="White" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="-300 -488" id="Whitevote3" color="Red" text="Выбрать" visibility="White" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="-180 -488" id="Whitevote4" color="Orange" text="Выбрать" visibility="White" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="-60 -488" id="Whitevote5" color="Yellow" text="Выбрать" visibility="White" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="60 -488" id="Whitevote6" color="Green" text="Выбрать" visibility="White" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="180 -488" id="Whitevote7" color="Teal" text="Выбрать" visibility="White" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="300 -488" id="Whitevote8" color="Blue" text="Выбрать" visibility="White" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="420 -488" id="Whitevote9" color="Purple" text="Выбрать" visibility="White" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="540 -488" id="Whitevote10" color="Pink" text="Выбрать" visibility="White" onClick="actionVote"></Button>
+
+<!-- Кнопки меню -->
+<Button active="false" width="600" height="50" offsetXY="0 -410" id="Whitesleep" color="Blue" text="Спать" fontSize="35" visibility="White" onClick="ButtonSleep"></Button>
+<!-- След -->
+<!-- Табличка Фазы -->
+<Image active="false" width="500" height="50" offsetXY="0 450" id="BrownPhase1" visibility="Brown"></Image>
+<Text active="false" fontSize="40" offsetXY="0 450" id="BrownPhase2" visibility="Brown">Фаза</Text>
+<!-- Табличка времени -->
+<Image active="false" width="120" height="40" offsetXY="0 400" id="BrownTime1" visibility="Brown"></Image>
+<Text active="false" fontSize="20" offsetXY="0 400" color="Black" id="BrownTime2" visibility="Brown">Время</Text>
+<!-- Табличка роли -->
+<VerticalScrollView active="false" allowDragging="true" returnToOriginalPositionWhenReleased="false" vertical="false" width="420" height="100" noScrollbars="true" offsetXY="-650 250" id="BrownRole1" visibility="Brown">
+<Text alignment="UpperLeft" fontSize="32" offsetXY="0 235" text=" Роль:ХЗ" id="BrownRole2" visibility="Brown"></Text>
+<Button width="70" height="50" offsetXY="-170 190" color="Grey" id="Brownchat" visibility="Brown" onClick="actionChat">Чат</Button>
+<Button width="70" height="50" offsetXY="-100 190" color="Green" id="Browntab" visibility="Brown" onClick="actionTab">Список</Button>
+<Button width="70" height="50" offsetXY="-30 190" color="Green" id="Browntime" visibility="Brown" onClick="actionTime">Время</Button>
+<Button width="70" height="50" offsetXY="40 190" color="Blue" id="Brownrole" visibility="Brown" onClick="actionRole">Роль?</Button>
+<Button width="70" height="50" offsetXY="110 190" color="Purple" id="Brownmove" visibility="Brown">Действие</Button>
+<VerticalScrollView width="400" height="400" offsetXY="0 -50" id="BrownMafChat1" visibility="Brown">
+  <Text alignment="UpperLeft" fontSize="14" text="" id="BrownMafText" offsetXY="3 0" visibility="Brown"></Text>
+</VerticalScrollView>
+<InputField width="400" height="30" offsetXY="0 -235" text="Напишите сообщение" id="BrownMafChat2" visibility="Brown" onSubmit="MafiaChat" onValueChanged="changetext"></InputField>
+</VerticalScrollView>
+<!-- Табличка голосования -->
+<Image active="false" width="1200" height="100" offsetXY="0 -488" id="Browntablevote" visibility="Brown"></Image>
+<!-- Список игроков и ролей -->
+<VerticalScrollView active="false" width="405" height="420" offsetXY="755 -50" id="Browntabplayers" visibility="Brown">
+
+<Text offsetXY="3 0" fontSize="18" alignment="UpperLeft" id="Browntabtext" visibility="Brown">
+
+</Text>
+
+</VerticalScrollView>
+
+<!-- Кнопки голосования -->
+
+<Button active="false" width="120" height="100" offsetXY="-540 -488" id="Brownvote1" color="White" text="Выбрать" visibility="Brown" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="-420 -488" id="Brownvote2" color="Brown" text="Выбрать" visibility="Brown" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="-300 -488" id="Brownvote3" color="Red" text="Выбрать" visibility="Brown" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="-180 -488" id="Brownvote4" color="Orange" text="Выбрать" visibility="Brown" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="-60 -488" id="Brownvote5" color="Yellow" text="Выбрать" visibility="Brown" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="60 -488" id="Brownvote6" color="Green" text="Выбрать" visibility="Brown" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="180 -488" id="Brownvote7" color="Teal" text="Выбрать" visibility="Brown" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="300 -488" id="Brownvote8" color="Blue" text="Выбрать" visibility="Brown" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="420 -488" id="Brownvote9" color="Purple" text="Выбрать" visibility="Brown" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="540 -488" id="Brownvote10" color="Pink" text="Выбрать" visibility="Brown" onClick="actionVote"></Button>
+
+<!-- Кнопки меню -->
+<Button active="false" width="600" height="50" offsetXY="0 -410" id="Brownsleep" color="Blue" text="Спать" fontSize="35" visibility="Brown" onClick="ButtonSleep"></Button>
+
+<!-- След -->
+<!-- Табличка Фазы -->
+<Image active="false" width="500" height="50" offsetXY="0 450" id="RedPhase1" visibility="Red"></Image>
+<Text active="false" fontSize="40" offsetXY="0 450" id="RedPhase2" visibility="Red">Фаза</Text>
+<!-- Табличка времени -->
+<Image active="false" width="120" height="40" offsetXY="0 400" id="RedTime1" visibility="Red"></Image>
+<Text active="false" fontSize="20" offsetXY="0 400" color="Black" id="RedTime2" visibility="Red">Время</Text>
+<!-- Табличка роли -->
+<VerticalScrollView active="false" allowDragging="true" returnToOriginalPositionWhenReleased="false" vertical="false" width="420" height="100" noScrollbars="true" offsetXY="-650 250" id="RedRole1" visibility="Red">
+<Text alignment="UpperLeft" fontSize="32" offsetXY="0 235" text=" Роль:ХЗ" id="RedRole2" visibility="Red"></Text>
+<Button width="70" height="50" offsetXY="-170 190" color="Grey" id="Redchat" visibility="Red" onClick="actionChat">Чат</Button>
+<Button width="70" height="50" offsetXY="-100 190" color="Green" id="Redtab" visibility="Red" onClick="actionTab">Список</Button>
+<Button width="70" height="50" offsetXY="-30 190" color="Green" id="Redtime" visibility="Red" onClick="actionTime">Время</Button>
+<Button width="70" height="50" offsetXY="40 190" color="Blue" id="Redrole" visibility="Red" onClick="actionRole">Роль?</Button>
+<Button width="70" height="50" offsetXY="110 190" color="Purple" id="Redmove" visibility="Red">Действие</Button>
+<VerticalScrollView width="400" height="400" offsetXY="0 -50" id="RedMafChat1" visibility="Red">
+  <Text alignment="UpperLeft" fontSize="14" text="" id="RedMafText" offsetXY="3 0" visibility="Red"></Text>
+</VerticalScrollView>
+<InputField width="400" height="30" offsetXY="0 -235" text="Напишите сообщение" id="RedMafChat2" visibility="Red" onSubmit="MafiaChat" onValueChanged="changetext"></InputField>
+</VerticalScrollView>
+<!-- Табличка голосования -->
+<Image active="false" width="1200" height="100" offsetXY="0 -488" id="Redtablevote" visibility="Red"></Image>
+<!-- Список игроков и ролей -->
+<VerticalScrollView active="false" width="405" height="420" offsetXY="755 -50" id="Redtabplayers" visibility="Red">
+
+<Text offsetXY="3 0" fontSize="18" alignment="UpperLeft" id="Redtabtext" visibility="Red">
+
+</Text>
+
+</VerticalScrollView>
+
+<!-- Кнопки голосования -->
+
+<Button active="false" width="120" height="100" offsetXY="-540 -488" id="Redvote1" color="White" text="Выбрать" visibility="Red" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="-420 -488" id="Redvote2" color="Brown" text="Выбрать" visibility="Red" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="-300 -488" id="Redvote3" color="Red" text="Выбрать" visibility="Red" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="-180 -488" id="Redvote4" color="Orange" text="Выбрать" visibility="Red" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="-60 -488" id="Redvote5" color="Yellow" text="Выбрать" visibility="Red" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="60 -488" id="Redvote6" color="Green" text="Выбрать" visibility="Red" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="180 -488" id="Redvote7" color="Teal" text="Выбрать" visibility="Red" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="300 -488" id="Redvote8" color="Blue" text="Выбрать" visibility="Red" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="420 -488" id="Redvote9" color="Purple" text="Выбрать" visibility="Red" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="540 -488" id="Redvote10" color="Pink" text="Выбрать" visibility="Red" onClick="actionVote"></Button>
+
+<!-- Кнопки меню -->
+<Button active="false" width="600" height="50" offsetXY="0 -410" id="Redsleep" color="Blue" text="Спать" fontSize="35" visibility="Red" onClick="ButtonSleep"></Button>
+
+<!-- След -->
+<!-- Табличка Фазы -->
+<Image active="false" width="500" height="50" offsetXY="0 450" id="OrangePhase1" visibility="Orange"></Image>
+<Text active="false" fontSize="40" offsetXY="0 450" id="OrangePhase2" visibility="Orange">Фаза</Text>
+<!-- Табличка времени -->
+<Image active="false" width="120" height="40" offsetXY="0 400" id="OrangeTime1" visibility="Orange"></Image>
+<Text active="false" fontSize="20" offsetXY="0 400" color="Black" id="OrangeTime2" visibility="Orange">Время</Text>
+<!-- Табличка роли -->
+<VerticalScrollView active="false" allowDragging="true" returnToOriginalPositionWhenReleased="false" vertical="false" width="420" height="100" noScrollbars="true" offsetXY="-650 250" id="OrangeRole1" visibility="Orange">
+<Text alignment="UpperLeft" fontSize="32" offsetXY="0 235" text=" Роль:ХЗ" id="OrangeRole2" visibility="Orange"></Text>
+<Button width="70" height="50" offsetXY="-170 190" color="Grey" id="Orangechat" visibility="Orange" onClick="actionChat">Чат</Button>
+<Button width="70" height="50" offsetXY="-100 190" color="Green" id="Orangetab" visibility="Orange" onClick="actionTab">Список</Button>
+<Button width="70" height="50" offsetXY="-30 190" color="Green" id="Orangetime" visibility="Orange" onClick="actionTime">Время</Button>
+<Button width="70" height="50" offsetXY="40 190" color="Blue" id="Orangerole" visibility="Orange" onClick="actionRole">Роль?</Button>
+<Button width="70" height="50" offsetXY="110 190" color="Purple" id="Orangemove" visibility="Orange">Действие</Button>
+<VerticalScrollView width="400" height="400" offsetXY="0 -50" id="OrangeMafChat1" visibility="Orange">
+  <Text alignment="UpperLeft" fontSize="14" text="" id="OrangeMafText" offsetXY="3 0" visibility="Orange"></Text>
+</VerticalScrollView>
+<InputField width="400" height="30" offsetXY="0 -235" text="Напишите сообщение" id="OrangeMafChat2" visibility="Orange" onSubmit="MafiaChat" onValueChanged="changetext"></InputField>
+</VerticalScrollView>
+<!-- Табличка голосования -->
+<Image active="false" width="1200" height="100" offsetXY="0 -488" id="Orangetablevote" visibility="Orange"></Image>
+<!-- Список игроков и ролей -->
+<VerticalScrollView active="false" width="405" height="420" offsetXY="755 -50" id="Orangetabplayers" visibility="Orange">
+
+<Text offsetXY="3 0" fontSize="18" alignment="UpperLeft" id="Orangetabtext" visibility="Orange">
+
+</Text>
+
+</VerticalScrollView>
+
+<!-- Кнопки голосования -->
+
+<Button active="false" width="120" height="100" offsetXY="-540 -488" id="Orangevote1" color="White" text="Выбрать" visibility="Orange" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="-420 -488" id="Orangevote2" color="Brown" text="Выбрать" visibility="Orange" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="-300 -488" id="Orangevote3" color="Red" text="Выбрать" visibility="Orange" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="-180 -488" id="Orangevote4" color="Orange" text="Выбрать" visibility="Orange" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="-60 -488" id="Orangevote5" color="Yellow" text="Выбрать" visibility="Orange" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="60 -488" id="Orangevote6" color="Green" text="Выбрать" visibility="Orange" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="180 -488" id="Orangevote7" color="Teal" text="Выбрать" visibility="Orange" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="300 -488" id="Orangevote8" color="Blue" text="Выбрать" visibility="Orange" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="420 -488" id="Orangevote9" color="Purple" text="Выбрать" visibility="Orange" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="540 -488" id="Orangevote10" color="Pink" text="Выбрать" visibility="Orange" onClick="actionVote"></Button>
+
+<!-- Кнопки меню -->
+<Button active="false" width="600" height="50" offsetXY="0 -410" id="Orangesleep" color="Blue" text="Спать" fontSize="35" visibility="Orange" onClick="ButtonSleep"></Button>
+
+<!-- След -->
+<!-- Табличка Фазы -->
+<Image active="false" width="500" height="50" offsetXY="0 450" id="YellowPhase1" visibility="Yellow"></Image>
+<Text active="false" fontSize="40" offsetXY="0 450" id="YellowPhase2" visibility="Yellow">Фаза</Text>
+<!-- Табличка времени -->
+<Image active="false" width="120" height="40" offsetXY="0 400" id="YellowTime1" visibility="Yellow"></Image>
+<Text active="false" fontSize="20" offsetXY="0 400" color="Black" id="YellowTime2" visibility="Yellow">Время</Text>
+<!-- Табличка роли -->
+<VerticalScrollView active="false" allowDragging="true" returnToOriginalPositionWhenReleased="false" vertical="false" width="420" height="100" noScrollbars="true" offsetXY="-650 250" id="YellowRole1" visibility="Yellow">
+<Text alignment="UpperLeft" fontSize="32" offsetXY="0 235" text=" Роль:ХЗ" id="YellowRole2" visibility="Yellow"></Text>
+<Button width="70" height="50" offsetXY="-170 190" color="Grey" id="Yellowchat" visibility="Yellow" onClick="actionChat">Чат</Button>
+<Button width="70" height="50" offsetXY="-100 190" color="Green" id="Yellowtab" visibility="Yellow" onClick="actionTab">Список</Button>
+<Button width="70" height="50" offsetXY="-30 190" color="Green" id="Yellowtime" visibility="Yellow" onClick="actionTime">Время</Button>
+<Button width="70" height="50" offsetXY="40 190" color="Blue" id="Yellowrole" visibility="Yellow" onClick="actionRole">Роль?</Button>
+<Button width="70" height="50" offsetXY="110 190" color="Purple" id="Yellowmove" visibility="Yellow">Действие</Button>
+<VerticalScrollView width="400" height="400" offsetXY="0 -50" id="YellowMafChat1" visibility="Yellow">
+  <Text alignment="UpperLeft" fontSize="14" text="" id="YellowMafText" offsetXY="3 0" visibility="Yellow"></Text>
+</VerticalScrollView>
+<InputField width="400" height="30" offsetXY="0 -235" text="Напишите сообщение" id="YellowMafChat2" visibility="Yellow" onSubmit="MafiaChat" onValueChanged="changetext"></InputField>
+</VerticalScrollView>
+<!-- Табличка голосования -->
+<Image active="false" width="1200" height="100" offsetXY="0 -488" id="Yellowtablevote" visibility="Yellow"></Image>
+<!-- Список игроков и ролей -->
+<VerticalScrollView active="false" width="405" height="420" offsetXY="755 -50" id="Yellowtabplayers" visibility="Yellow">
+
+<Text offsetXY="3 0" fontSize="18" alignment="UpperLeft" id="Yellowtabtext" visibility="Yellow">
+
+</Text>
+
+</VerticalScrollView>
+
+<!-- Кнопки голосования -->
+
+<Button active="false" width="120" height="100" offsetXY="-540 -488" id="Yellowvote1" color="White" text="Выбрать" visibility="Yellow" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="-420 -488" id="Yellowvote2" color="Brown" text="Выбрать" visibility="Yellow" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="-300 -488" id="Yellowvote3" color="Red" text="Выбрать" visibility="Yellow" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="-180 -488" id="Yellowvote4" color="Orange" text="Выбрать" visibility="Yellow" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="-60 -488" id="Yellowvote5" color="Yellow" text="Выбрать" visibility="Yellow" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="60 -488" id="Yellowvote6" color="Green" text="Выбрать" visibility="Yellow" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="180 -488" id="Yellowvote7" color="Teal" text="Выбрать" visibility="Yellow" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="300 -488" id="Yellowvote8" color="Blue" text="Выбрать" visibility="Yellow" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="420 -488" id="Yellowvote9" color="Purple" text="Выбрать" visibility="Yellow" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="540 -488" id="Yellowvote10" color="Pink" text="Выбрать" visibility="Yellow" onClick="actionVote"></Button>
+
+<!-- Кнопки меню -->
+<Button active="false" width="600" height="50" offsetXY="0 -410" id="Yellowsleep" color="Blue" text="Спать" fontSize="35" visibility="Yellow" onClick="ButtonSleep"></Button>
+
+<!-- След -->
+<!-- Табличка Фазы -->
+<Image active="false" width="500" height="50" offsetXY="0 450" id="GreenPhase1" visibility="Green"></Image>
+<Text active="false" fontSize="40" offsetXY="0 450" id="GreenPhase2" visibility="Green">Фаза</Text>
+<!-- Табличка времени -->
+<Image active="false" width="120" height="40" offsetXY="0 400" id="GreenTime1" visibility="Green"></Image>
+<Text active="false" fontSize="20" offsetXY="0 400" color="Black" id="GreenTime2" visibility="Green">Время</Text>
+<!-- Табличка роли -->
+<VerticalScrollView active="false" allowDragging="true" returnToOriginalPositionWhenReleased="false" vertical="false" width="420" height="100" noScrollbars="true" offsetXY="-650 250" id="GreenRole1" visibility="Green">
+<Text alignment="UpperLeft" fontSize="32" offsetXY="0 235" text=" Роль:ХЗ" id="GreenRole2" visibility="Green"></Text>
+<Button width="70" height="50" offsetXY="-170 190" color="Grey" id="Greenchat" visibility="Green" onClick="actionChat">Чат</Button>
+<Button width="70" height="50" offsetXY="-100 190" color="Green" id="Greentab" visibility="Green" onClick="actionTab">Список</Button>
+<Button width="70" height="50" offsetXY="-30 190" color="Green" id="Greentime" visibility="Green" onClick="actionTime">Время</Button>
+<Button width="70" height="50" offsetXY="40 190" color="Blue" id="Greenrole" visibility="Green" onClick="actionRole">Роль?</Button>
+<Button width="70" height="50" offsetXY="110 190" color="Purple" id="Greenmove" visibility="Green">Действие</Button>
+<VerticalScrollView width="400" height="400" offsetXY="0 -50" id="GreenMafChat1" visibility="Green">
+  <Text alignment="UpperLeft" fontSize="14" text="" id="GreenMafText" offsetXY="3 0" visibility="Green"></Text>
+</VerticalScrollView>
+<InputField width="400" height="30" offsetXY="0 -235" text="Напишите сообщение" id="GreenMafChat2" visibility="Green" onSubmit="MafiaChat" onValueChanged="changetext"></InputField>
+</VerticalScrollView>
+<!-- Табличка голосования -->
+<Image active="false" width="1200" height="100" offsetXY="0 -488" id="Greentablevote" visibility="Green"></Image>
+<!-- Список игроков и ролей -->
+<VerticalScrollView active="false" width="405" height="420" offsetXY="755 -50" id="Greentabplayers" visibility="Green">
+
+<Text offsetXY="3 0" fontSize="18" alignment="UpperLeft" id="Greentabtext" visibility="Green">
+
+</Text>
+
+</VerticalScrollView>
+
+<!-- Кнопки голосования -->
+
+<Button active="false" width="120" height="100" offsetXY="-540 -488" id="Greenvote1" color="White" text="Выбрать" visibility="Green" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="-420 -488" id="Greenvote2" color="Brown" text="Выбрать" visibility="Green" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="-300 -488" id="Greenvote3" color="Red" text="Выбрать" visibility="Green" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="-180 -488" id="Greenvote4" color="Orange" text="Выбрать" visibility="Green" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="-60 -488" id="Greenvote5" color="Yellow" text="Выбрать" visibility="Green" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="60 -488" id="Greenvote6" color="Green" text="Выбрать" visibility="Green" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="180 -488" id="Greenvote7" color="Teal" text="Выбрать" visibility="Green" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="300 -488" id="Greenvote8" color="Blue" text="Выбрать" visibility="Green" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="420 -488" id="Greenvote9" color="Purple" text="Выбрать" visibility="Green" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="540 -488" id="Greenvote10" color="Pink" text="Выбрать" visibility="Green" onClick="actionVote"></Button>
+
+<!-- Кнопки меню -->
+<Button active="false" width="600" height="50" offsetXY="0 -410" id="Greensleep" color="Blue" text="Спать" fontSize="35" visibility="Green" onClick="ButtonSleep"></Button>
+
+<!-- След -->
+<!-- Табличка Фазы -->
+<Image active="false" width="500" height="50" offsetXY="0 450" id="TealPhase1" visibility="Teal"></Image>
+<Text active="false" fontSize="40" offsetXY="0 450" id="TealPhase2" visibility="Teal">Фаза</Text>
+<!-- Табличка времени -->
+<Image active="false" width="120" height="40" offsetXY="0 400" id="TealTime1" visibility="Teal"></Image>
+<Text active="false" fontSize="20" offsetXY="0 400" color="Black" id="TealTime2" visibility="Teal">Время</Text>
+<!-- Табличка роли -->
+<VerticalScrollView active="false" allowDragging="true" returnToOriginalPositionWhenReleased="false" vertical="false" width="420" height="100" noScrollbars="true" offsetXY="-650 250" id="TealRole1" visibility="Teal">
+<Text alignment="UpperLeft" fontSize="32" offsetXY="0 235" text=" Роль:ХЗ" id="TealRole2" visibility="Teal"></Text>
+<Button width="70" height="50" offsetXY="-170 190" color="Grey" id="Tealchat" visibility="Teal" onClick="actionChat">Чат</Button>
+<Button width="70" height="50" offsetXY="-100 190" color="Green" id="Tealtab" visibility="Teal" onClick="actionTab">Список</Button>
+<Button width="70" height="50" offsetXY="-30 190" color="Green" id="Tealtime" visibility="Teal" onClick="actionTime">Время</Button>
+<Button width="70" height="50" offsetXY="40 190" color="Blue" id="Tealrole" visibility="Teal" onClick="actionRole">Роль?</Button>
+<Button width="70" height="50" offsetXY="110 190" color="Purple" id="Tealmove" visibility="Teal">Действие</Button>
+<VerticalScrollView width="400" height="400" offsetXY="0 -50" id="TealMafChat1" visibility="Teal">
+  <Text alignment="UpperLeft" fontSize="14" text="" id="TealMafText" offsetXY="3 0" visibility="Teal"></Text>
+</VerticalScrollView>
+<InputField width="400" height="30" offsetXY="0 -235" text="Напишите сообщение" id="TealMafChat2" visibility="Teal" onSubmit="MafiaChat" onValueChanged="changetext"></InputField>
+</VerticalScrollView>
+<!-- Табличка голосования -->
+<Image active="false" width="1200" height="100" offsetXY="0 -488" id="Tealtablevote" visibility="Teal"></Image>
+<!-- Список игроков и ролей -->
+<VerticalScrollView active="false" width="405" height="420" offsetXY="755 -50" id="Tealtabplayers" visibility="Teal">
+
+<Text offsetXY="3 0" fontSize="18" alignment="UpperLeft" id="Tealtabtext" visibility="Teal">
+
+</Text>
+
+</VerticalScrollView>
+
+<!-- Кнопки голосования -->
+
+<Button active="false" width="120" height="100" offsetXY="-540 -488" id="Tealvote1" color="White" text="Выбрать" visibility="Teal" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="-420 -488" id="Tealvote2" color="Brown" text="Выбрать" visibility="Teal" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="-300 -488" id="Tealvote3" color="Red" text="Выбрать" visibility="Teal" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="-180 -488" id="Tealvote4" color="Orange" text="Выбрать" visibility="Teal" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="-60 -488" id="Tealvote5" color="Yellow" text="Выбрать" visibility="Teal" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="60 -488" id="Tealvote6" color="Green" text="Выбрать" visibility="Teal" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="180 -488" id="Tealvote7" color="Teal" text="Выбрать" visibility="Teal" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="300 -488" id="Tealvote8" color="Blue" text="Выбрать" visibility="Teal" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="420 -488" id="Tealvote9" color="Purple" text="Выбрать" visibility="Teal" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="540 -488" id="Tealvote10" color="Pink" text="Выбрать" visibility="Teal" onClick="actionVote"></Button>
+
+<!-- Кнопки меню -->
+<Button active="false" width="600" height="50" offsetXY="0 -410" id="Tealsleep" color="Blue" text="Спать" fontSize="35" visibility="Teal" onClick="ButtonSleep"></Button>
+
+<!-- След -->
+<!-- Табличка Фазы -->
+<Image active="false" width="500" height="50" offsetXY="0 450" id="BluePhase1" visibility="Blue"></Image>
+<Text active="false" fontSize="40" offsetXY="0 450" id="BluePhase2" visibility="Blue">Фаза</Text>
+<!-- Табличка времени -->
+<Image active="false" width="120" height="40" offsetXY="0 400" id="BlueTime1" visibility="Blue"></Image>
+<Text active="false" fontSize="20" offsetXY="0 400" color="Black" id="BlueTime2" visibility="Blue">Время</Text>
+<!-- Табличка роли -->
+<VerticalScrollView active="false" allowDragging="true" returnToOriginalPositionWhenReleased="false" vertical="false" width="420" height="100" noScrollbars="true" offsetXY="-650 250" id="BlueRole1" visibility="Blue">
+<Text alignment="UpperLeft" fontSize="32" offsetXY="0 235" text=" Роль:ХЗ" id="BlueRole2" visibility="Blue"></Text>
+<Button width="70" height="50" offsetXY="-170 190" color="Grey" id="Bluechat" visibility="Blue" onClick="actionChat">Чат</Button>
+<Button width="70" height="50" offsetXY="-100 190" color="Green" id="Bluetab" visibility="Blue" onClick="actionTab">Список</Button>
+<Button width="70" height="50" offsetXY="-30 190" color="Green" id="Bluetime" visibility="Blue" onClick="actionTime">Время</Button>
+<Button width="70" height="50" offsetXY="40 190" color="Blue" id="Bluerole" visibility="Blue" onClick="actionRole">Роль?</Button>
+<Button width="70" height="50" offsetXY="110 190" color="Purple" id="Bluemove" visibility="Blue">Действие</Button>
+<VerticalScrollView width="400" height="400" offsetXY="0 -50" id="BlueMafChat1" visibility="Blue">
+  <Text alignment="UpperLeft" fontSize="14" text="" id="BlueMafText" offsetXY="3 0" visibility="Blue"></Text>
+</VerticalScrollView>
+<InputField width="400" height="30" offsetXY="0 -235" text="Напишите сообщение" id="BlueMafChat2" visibility="Blue" onSubmit="MafiaChat" onValueChanged="changetext"></InputField>
+</VerticalScrollView>
+<!-- Табличка голосования -->
+<Image active="false" width="1200" height="100" offsetXY="0 -488" id="Bluetablevote" visibility="Blue"></Image>
+<!-- Список игроков и ролей -->
+<VerticalScrollView active="false" width="405" height="420" offsetXY="755 -50" id="Bluetabplayers" visibility="Blue">
+
+<Text offsetXY="3 0" fontSize="18" alignment="UpperLeft" id="Bluetabtext" visibility="Blue">
+
+</Text>
+
+</VerticalScrollView>
+
+<!-- Кнопки голосования -->
+
+<Button active="false" width="120" height="100" offsetXY="-540 -488" id="Bluevote1" color="White" text="Выбрать" visibility="Blue" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="-420 -488" id="Bluevote2" color="Brown" text="Выбрать" visibility="Blue" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="-300 -488" id="Bluevote3" color="Red" text="Выбрать" visibility="Blue" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="-180 -488" id="Bluevote4" color="Orange" text="Выбрать" visibility="Blue" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="-60 -488" id="Bluevote5" color="Yellow" text="Выбрать" visibility="Blue" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="60 -488" id="Bluevote6" color="Green" text="Выбрать" visibility="Blue" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="180 -488" id="Bluevote7" color="Teal" text="Выбрать" visibility="Blue" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="300 -488" id="Bluevote8" color="Blue" text="Выбрать" visibility="Blue" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="420 -488" id="Bluevote9" color="Purple" text="Выбрать" visibility="Blue" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="540 -488" id="Bluevote10" color="Pink" text="Выбрать" visibility="Blue" onClick="actionVote"></Button>
+
+<!-- Кнопки меню -->
+<Button active="false" width="600" height="50" offsetXY="0 -410" id="Bluesleep" color="Blue" text="Спать" fontSize="35" visibility="Blue" onClick="ButtonSleep"></Button>
+
+<!-- След -->
+<!-- Табличка Фазы -->
+<Image active="false" width="500" height="50" offsetXY="0 450" id="PurplePhase1" visibility="Purple"></Image>
+<Text active="false" fontSize="40" offsetXY="0 450" id="PurplePhase2" visibility="Purple">Фаза</Text>
+<!-- Табличка времени -->
+<Image active="false" width="120" height="40" offsetXY="0 400" id="PurpleTime1" visibility="Purple"></Image>
+<Text active="false" fontSize="20" offsetXY="0 400" color="Black" id="PurpleTime2" visibility="Purple">Время</Text>
+<!-- Табличка роли -->
+<VerticalScrollView active="false" allowDragging="true" returnToOriginalPositionWhenReleased="false" vertical="false" width="420" height="100" noScrollbars="true" offsetXY="-650 250" id="PurpleRole1" visibility="Purple">
+<Text alignment="UpperLeft" fontSize="32" offsetXY="0 235" text=" Роль:ХЗ" id="PurpleRole2" visibility="Purple"></Text>
+<Button width="70" height="50" offsetXY="-170 190" color="Grey" id="Purplechat" visibility="Purple" onClick="actionChat">Чат</Button>
+<Button width="70" height="50" offsetXY="-100 190" color="Green" id="Purpletab" visibility="Purple" onClick="actionTab">Список</Button>
+<Button width="70" height="50" offsetXY="-30 190" color="Green" id="Purpletime" visibility="Purple" onClick="actionTime">Время</Button>
+<Button width="70" height="50" offsetXY="40 190" color="Blue" id="Purplerole" visibility="Purple" onClick="actionRole">Роль?</Button>
+<Button width="70" height="50" offsetXY="110 190" color="Purple" id="Purplemove" visibility="Purple">Действие</Button>
+<VerticalScrollView width="400" height="400" offsetXY="0 -50" id="PurpleMafChat1" visibility="Purple">
+  <Text alignment="UpperLeft" fontSize="14" text="" id="PurpleMafText" offsetXY="3 0" visibility="Purple"></Text>
+</VerticalScrollView>
+<InputField width="400" height="30" offsetXY="0 -235" text="Напишите сообщение" id="PurpleMafChat2" visibility="Purple" onSubmit="MafiaChat" onValueChanged="changetext"></InputField>
+</VerticalScrollView>
+<!-- Табличка голосования -->
+<Image active="false" width="1200" height="100" offsetXY="0 -488" id="Purpletablevote" visibility="Purple"></Image>
+<!-- Список игроков и ролей -->
+<VerticalScrollView active="false" width="405" height="420" offsetXY="755 -50" id="Purpletabplayers" visibility="Purple">
+
+<Text offsetXY="3 0" fontSize="18" alignment="UpperLeft" id="Purpletabtext" visibility="Purple">
+
+</Text>
+
+</VerticalScrollView>
+
+<!-- Кнопки голосования -->
+
+<Button active="false" width="120" height="100" offsetXY="-540 -488" id="Purplevote1" color="White" text="Выбрать" visibility="Purple" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="-420 -488" id="Purplevote2" color="Brown" text="Выбрать" visibility="Purple" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="-300 -488" id="Purplevote3" color="Red" text="Выбрать" visibility="Purple" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="-180 -488" id="Purplevote4" color="Orange" text="Выбрать" visibility="Purple" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="-60 -488" id="Purplevote5" color="Yellow" text="Выбрать" visibility="Purple" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="60 -488" id="Purplevote6" color="Green" text="Выбрать" visibility="Purple" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="180 -488" id="Purplevote7" color="Teal" text="Выбрать" visibility="Purple" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="300 -488" id="Purplevote8" color="Blue" text="Выбрать" visibility="Purple" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="420 -488" id="Purplevote9" color="Purple" text="Выбрать" visibility="Purple" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="540 -488" id="Purplevote10" color="Pink" text="Выбрать" visibility="Purple" onClick="actionVote"></Button>
+
+<!-- Кнопки меню -->
+<Button active="false" width="600" height="50" offsetXY="0 -410" id="Purplesleep" color="Blue" text="Спать" fontSize="35" visibility="Purple" onClick="ButtonSleep"></Button>
+
+<!-- След -->
+<!-- Табличка Фазы -->
+<Image active="false" width="500" height="50" offsetXY="0 450" id="PinkPhase1" visibility="Pink"></Image>
+<Text active="false" fontSize="40" offsetXY="0 450" id="PinkPhase2" visibility="Pink">Фаза</Text>
+<!-- Табличка времени -->
+<Image active="false" width="120" height="40" offsetXY="0 400" id="PinkTime1" visibility="Pink"></Image>
+<Text active="false" fontSize="20" offsetXY="0 400" color="Black" id="PinkTime2" visibility="Pink">Время</Text>
+<!-- Табличка роли -->
+<VerticalScrollView active="false" allowDragging="true" returnToOriginalPositionWhenReleased="false" vertical="false" width="420" height="100" noScrollbars="true" offsetXY="-650 250" id="PinkRole1" visibility="Pink">
+<Text alignment="UpperLeft" fontSize="32" offsetXY="0 235" text=" Роль:ХЗ" id="PinkRole2" visibility="Pink"></Text>
+<Button width="70" height="50" offsetXY="-170 190" color="Grey" id="Pinkchat" visibility="Pink" onClick="actionChat">Чат</Button>
+<Button width="70" height="50" offsetXY="-100 190" color="Green" id="Pinktab" visibility="Pink" onClick="actionTab">Список</Button>
+<Button width="70" height="50" offsetXY="-30 190" color="Green" id="Pinktime" visibility="Pink" onClick="actionTime">Время</Button>
+<Button width="70" height="50" offsetXY="40 190" color="Blue" id="Pinkrole" visibility="Pink" onClick="actionRole">Роль?</Button>
+<Button width="70" height="50" offsetXY="110 190" color="Purple" id="Pinkmove" visibility="Pink">Действие</Button>
+<VerticalScrollView width="400" height="400" offsetXY="0 -50" id="PinkMafChat1" visibility="Pink">
+  <Text alignment="UpperLeft" fontSize="14" text="" id="PinkMafText" offsetXY="3 0" visibility="Pink"></Text>
+</VerticalScrollView>
+<InputField width="400" height="30" offsetXY="0 -235" text="Напишите сообщение" id="PinkMafChat2" visibility="Pink" onSubmit="MafiaChat" onValueChanged="changetext"></InputField>
+</VerticalScrollView>
+<!-- Табличка голосования -->
+<Image active="false" width="1200" height="100" offsetXY="0 -488" id="Pinktablevote" visibility="Pink"></Image>
+<!-- Список игроков и ролей -->
+<VerticalScrollView active="false" width="405" height="420" offsetXY="755 -50" id="Pinktabplayers" visibility="Pink">
+
+<Text offsetXY="3 0" fontSize="18" alignment="UpperLeft" id="Pinktabtext" visibility="Pink">
+
+</Text>
+
+</VerticalScrollView>
+
+<!-- Кнопки голосования -->
+
+<Button active="false" width="120" height="100" offsetXY="-540 -488" id="Pinkvote1" color="White" text="Выбрать" visibility="Pink" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="-420 -488" id="Pinkvote2" color="Brown" text="Выбрать" visibility="Pink" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="-300 -488" id="Pinkvote3" color="Red" text="Выбрать" visibility="Pink" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="-180 -488" id="Pinkvote4" color="Orange" text="Выбрать" visibility="Pink" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="-60 -488" id="Pinkvote5" color="Yellow" text="Выбрать" visibility="Pink" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="60 -488" id="Pinkvote6" color="Green" text="Выбрать" visibility="Pink" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="180 -488" id="Pinkvote7" color="Teal" text="Выбрать" visibility="Pink" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="300 -488" id="Pinkvote8" color="Blue" text="Выбрать" visibility="Pink" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="420 -488" id="Pinkvote9" color="Purple" text="Выбрать" visibility="Pink" onClick="actionVote"></Button>
+<Button active="false" width="120" height="100" offsetXY="540 -488" id="Pinkvote10" color="Pink" text="Выбрать" visibility="Pink" onClick="actionVote"></Button>
+
+<!-- Кнопки меню -->
+<Button active="false" width="600" height="50" offsetXY="0 -410" id="Pinksleep" color="Blue" text="Спать" fontSize="35" visibility="Pink" onClick="ButtonSleep"></Button>
+
+<!-- След -->

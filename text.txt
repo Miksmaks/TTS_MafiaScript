@@ -1,0 +1,31 @@
+Создай скрипт для настольной игры Mafia в TableTop Simulator используя API.
+Используй следующие параметры:
+1. На столе должна быть панель управления, которая определяет какие роли входят в игру.
+2. На столе для запуска игры должна быть установлена кнопка "Старт".
+3. Каждый игрок имеет на экране XML интерфейс, который должен создаваться в lua-скрипте и содержать окно с игровым временем, названием роли
+и кнопкой, которая приватно пишет описание роли в чат.
+4. В игре есть три главных фазы: "Общее обсуждение", "Голосование" и "Ночное время". Все фазы сменяются циклично и через определенное количество игрового времени.
+5. Во время фазы "Ночное время" каждая роль по очереди просыпается, делает свое действие и может заснуть. В эту фазу внизу экрана появляется кнопка "Спать", 
+при нажатии на которую игрок заснет и ход игры продолжится (просыпается следующий игрок).
+6. Во время фазы "Голосование" у всех игроков, которые до сих пор живы, появляется меню с игроками, которые живы, для голосования на исключение. Имена должны быть оформлены
+ввиде кнопок с соответствующими цветами.
+7. Во время фазы "Ночное время" во время хода Мафии появляется аналогичное меню для голосования, как в пункте 6.
+
+
+Control panel:
+Create a control panel object on the table
+Add buttons for each role (e.g. Mafia, Doctor, Villager) that can be included in the game
+Allow the players to select which roles they want to include by clicking on the buttons
+Create a "Start" button that will start the game when clicked
+XML interface:
+Create an XML interface for each player with a window that displays the game time, the player's role, and a button that privately writes a description of the role in the chat
+Place the XML interface on the player's screen
+Phases:
+Create three main phases: "General Discussion", "Voting", and "Night Time"
+Set up a timer for each phase that will switch to the next phase after a certain amount of playing time
+During the "Night Time" phase, wake up each role in turn and allow them to do their own action
+Create a "Sleep" button at the bottom of the screen that players can press to fall asleep and continue the game
+Voting:
+During the "Voting" phase, create a menu with buttons for each player who is still alive
+Allow players to vote for exclusion by clicking on the buttons
+During the "Night Time" phase, create a similar voting menu for the Mafia to use during their move

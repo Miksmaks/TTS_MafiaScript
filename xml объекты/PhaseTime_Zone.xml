@@ -1,0 +1,14 @@
+
+<!-- Поле фазы и времени -->
+<TableLayout offsetXY="0 350" width="400" height="200" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >
+  <Row preferredHeight="50">
+    <Cell>
+        <Text color="#FFFFFF" alignment="MiddleCenter" fontSize="36">Обсуждение</Text>
+    </Cell>
+  </Row>
+  <Row preferredHeight="50">
+    <Cell>
+        <Text color="#FFFFFF" alignment="MiddleCenter" fontSize="36">180 сек</Text>
+    </Cell>
+  </Row>
+</TableLayout>

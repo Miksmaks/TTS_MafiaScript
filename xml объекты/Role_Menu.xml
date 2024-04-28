@@ -1,0 +1,14 @@
+
+<!-- Меню игроков -->
+<TableLayout offsetXY="700 -100" width="400" height="400" columnWidths="100 300" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >
+  <Row preferredHeight="300">
+    <Cell>
+        <Button color="#20B2AA80" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72">◄</Button>
+    </Cell>
+    <Cell>
+      <VerticalScrollView width="281" height="100">
+        <Text color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Игрок 1</Text>
+      </VerticalScrollView>
+    </Cell>
+  </Row>
+</TableLayout>

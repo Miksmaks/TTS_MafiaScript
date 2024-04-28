@@ -1,0 +1,28 @@
+<!-- Менюшка игрока -->
+<TableLayout id="tablelayout1_color" class="UI_Menu" offsetXY="-600 250" width="300" height="340" useGlobalCellPadding="false" rowBackgroundColor="#80808080" allowDragging="true" returnToOriginalPositionWhenReleased="false">
+  <Row id="row1_color" preferredHeight="50">
+    <Cell id="cell1_color" columnSpan="2" overrideGlobalCellPadding="true" padding="10 0 0 0">
+      <text id="text1_color" color="#FFFFFF" alignment="MiddleLeft" fontSize="24">Роль: ...</text>
+    </Cell>
+  </Row>
+  <Row id="row2_color" preferredHeight="50">
+    <Cell id="cell2_color" overrideGlobalCellPadding="true" padding="5 5 5 5">
+      <button id="button1_color" color="#0000FF80" textColor="#FFFFFF" width="50" height="50">Описание</button>
+    </Cell>
+    <Cell id="cell3_color" overrideGlobalCellPadding="true" padding="5 5 5 5">
+      <button id="button2_color" color="#80808080" textColor="#FFFFFF" width="50" height="50">Чат</button>
+    </Cell>
+  </Row>
+  <Row id="row3_color" visibility="" preferredHeight="200">
+    <Cell id="cell4_color" columnSpan="2">
+      <VerticalScrollView id="scrollview1_color">
+        <text id="text2_color" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Miksmaks: V_ano долбаеб</text>
+      </VerticalScrollView>
+    </Cell>
+  </Row>
+  <Row id="row4_color" visibility="" preferredHeight="40">
+    <Cell id="cell5_color" columnSpan="2" padding="5 5 5 5">
+      <InputField id="inputfield1_color" placeholder="Написать сообщение" lineType="MultiLineSubmit" characterLimit="100"></InputField>
+    </Cell>
+  </Row>
+</TableLayout>

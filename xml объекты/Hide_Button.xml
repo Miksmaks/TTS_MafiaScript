@@ -1,0 +1,3 @@
+
+<!-- Кнопка сокрытия -->
+<Button color="#00FA9A80" offsetXY="900 -250" width="100" height="100" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72">X</Button>

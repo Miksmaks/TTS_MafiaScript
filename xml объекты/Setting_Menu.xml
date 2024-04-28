@@ -1,0 +1,39 @@
+
+<!-- Меню настроек -->
+<TableLayout width="2000" height="1800" rowBackgroundColor="#00000080">
+  <Row preferredHeight="1500">
+    <Cell>
+      <TableLayout>
+        <!-- Строка настройки -->
+        <Row preferredHeight="50">
+          <Cell>
+            <TableLayout width="200" height="50" useGlobalCellPadding="false" columnWidths="610 71">
+              <Row preferredHeight="50">
+                <Cell><Text Color="#FF0000" fontSize="36">Мафия</Text></Cell>
+                <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36">+</Button></Cell>
+              </Row>
+            </TableLayout>
+          </Cell>
+        </Row>
+        <Row preferredHeight="50">
+          <Cell>
+            <TableLayout width="200" height="50" useGlobalCellPadding="false" columnWidths="610 71">
+              <Row preferredHeight="50">
+                <Cell><Text Color="#FF0000" fontSize="36">Адвокат</Text></Cell>
+                <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36">+</Button></Cell>
+              </Row>
+            </TableLayout>
+          </Cell>
+        </Row>
+      </TableLayout>
+    </Cell>
+    <Cell>
+    </Cell>
+    <Cell>
+    </Cell>
+  </Row>
+  <Row preferredHeight="300">
+    <Cell columnSpan="3">
+    </Cell>
+  </Row>
+</TableLayout>

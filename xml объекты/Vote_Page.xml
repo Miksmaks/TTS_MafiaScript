@@ -1,0 +1,19 @@
+
+<!-- Билютень голосования -->
+<TableLayout offsetXY="-300 -200" width="300" height="400" useGlobalCellPadding="false" rowBackgroundColor="#80808080" allowDragging="true" returnToOriginalPositionWhenReleased="false">
+  <Row preferredHeight="50">
+    <Cell>
+        <Text color="#FFFFFF" alignment="MiddleCenter" fontSize="20">Билютень для голосования</Text>
+    </Cell>
+  </Row>
+  <Row preferredHeight="350">
+    <Cell padding="1 1 1 1">
+      <VerticalScrollView width="281" height="100" >
+        <Button height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="14">Тест функция 1</Button>
+        <Button height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="14">Тест функция 2</Button>
+        <Button height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="14">Тест функция 3</Button>
+        <Button height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="14">Тест функция 4</Button>
+      </VerticalScrollView>
+    </Cell>
+  </Row>
+</TableLayout>
