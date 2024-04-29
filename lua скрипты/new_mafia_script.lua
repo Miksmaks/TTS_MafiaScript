@@ -59,6 +59,23 @@ function wait(F,i)   -- Ожидание
   Wait.frames(F, i*60)
 end
 
+function TownTimer()
+  if (TimeCounter == 0) then
+    -- UI взаимодействие
+    broadcastToAll("Время вышло.",{0.627, 0.125, 0.941})
+  else
+    TimeCounter = TimeCounter - 1
+    -- UI взаимодействие
+    wait(TownTimer,1)
+  end
+end
+
+function StartTimer(func,delay) -- Основной таймер
+  TimeCounter = delay
+  TownTimer() -- Запуск таймера
+  wait(func,TimeCounter+1)
+end
+
 -- Классы (доработать)
 Class_Effect = {}
 Class_Effect.Name = "Название эффекта"
@@ -127,6 +144,7 @@ function onLoad() -- Основной архив (категорически н�
   Night_Progress = 0
   Night_Stop = false
   Night_Over = true
+  TimeCounter = 0
   -- Настройки
   Setting_SkipFirstDay = false
   Setting_NightTimer = 60
@@ -237,6 +255,18 @@ function isAllSleep()  --- Проверка сна
     end
   end
   return check
+end
+
+function SortRoleList() -- Сортировка листа ролей для порядка ночью
+  local sort_list = {}
+  for i=1,#OrderRoleList do
+    if (find(OrderRoleList[i],Town_StartRoles) != 0) then -- по порядку
+      table.insert(sort_list,OrderRoleList[i])
+    elseif (i == 15) then -- если роли "Мафия" нет, но есть клан мафии, то добавляется
+      table.insert(sort_list,OrderRoleList[i])
+    end
+  end
+  Town_StartRoles = copy(sort_list)
 end
 
 function CreateRole(role)
@@ -458,3 +488,21 @@ function NightVote()
   -- Добавить Night_Progression когда разберемся с порядком
 end
 
+
+--[[
+  Сделать:
+  --
+  3. Разработать UI id для всех элементов (id-main_parent-name-color)
+  4. Подсоединить данные к UI
+  5. Сделать функции воздействия на UI списки с кнопками
+  --
+  6. Разработать систему эффектов
+  7. Проработать ночные фазы
+  --
+  8. Подсоединить UI к эффектам
+  9. Подсоединить UI к пулу ролей на столе
+  10. Тестирование
+
+  Тестирование:
+  1. Night_Progression - отсортирован список для пробуждения. У "Мафия" особенное пробуждение с голосованием.
+]]
