@@ -385,6 +385,7 @@ function DayVote()
   else
     printToAll("Равное кол-во голосов.Голосование заканчивается.Наступает ночь.",{0.856, 0.1, 0.094})
   end
+  Town_PlayerVotes = {}
   GamePhase = 2 -- Разрешение на закрытие глаз
   -- Добавить UI кнопку на закрытие глаз. Отключить функцию закрытия глаз в игре
 end
@@ -453,6 +454,7 @@ function NightVote()
     -- Голосование не прошло успешно. 
   end
   Night_Stop = false
+  Town_MafiaVotes = {}
   -- Добавить Night_Progression когда разберемся с порядком
 end
 
