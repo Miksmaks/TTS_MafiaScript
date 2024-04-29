@@ -1,4 +1,3 @@
-
 <!-- Билютень голосования -->
 <TableLayout offsetXY="-300 -200" width="300" height="400" useGlobalCellPadding="false" rowBackgroundColor="#80808080" allowDragging="true" returnToOriginalPositionWhenReleased="false">
   <Row preferredHeight="50">
@@ -8,12 +7,54 @@
   </Row>
   <Row preferredHeight="350">
     <Cell padding="1 1 1 1">
-      <VerticalScrollView width="281" height="100" >
-        <Button height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="14">Тест функция 1</Button>
-        <Button height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="14">Тест функция 2</Button>
-        <Button height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="14">Тест функция 3</Button>
-        <Button height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="14">Тест функция 4</Button>
-      </VerticalScrollView>
+      <TableLayout preferredHeight="50" childAlignment="UpperCenter" spacing="5" childForceExpandHeight="true">
+        <Row width="250">
+          <Cell>
+            <Button height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20">Тест функция 1</Button>
+          </Cell>
+        </Row>
+        <Row width="250">
+          <Cell>
+            <Button height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20">Тест функция 2</Button>
+          </Cell>
+        </Row>
+        <Row width="250">
+          <Cell>
+            <Button height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20">Тест функция 3</Button>
+          </Cell>
+        </Row>
+        <Row width="250">
+          <Cell>
+            <Button height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20">Тест функция 4</Button>
+          </Cell>
+        </Row>
+        <Row width="250">
+          <Cell>
+            <Button height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20">Тест функция 5</Button>
+          </Cell>
+        </Row>
+        <Row width="250">
+          <Cell>
+            <Button height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20">Тест функция 6</Button>
+          </Cell>
+        </Row>
+        <Row width="250">
+          <Cell>
+            <Button height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20">Тест функция 7</Button>
+          </Cell>
+        </Row>
+        <Row width="250">
+          <Cell>
+            <Button height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20">Тест функция 8</Button>
+          </Cell>
+        </Row>
+        <Row width="250">
+          <Cell>
+            <Button height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20">Тест функция 9</Button>
+          </Cell>
+        </Row>
+      </TableLayout>
     </Cell>
   </Row>
 </TableLayout>
+

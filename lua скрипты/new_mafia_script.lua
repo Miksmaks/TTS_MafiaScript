@@ -26,20 +26,37 @@ function RandomShuffleRole(ArrayRoles,  NumberOfPlayers)
   return arr
 end
 
+function find(obj,arr) -- Содержится ли объект в массиве? Если да, то какой первый индекс?
+  local k = 0
+  local stop = false
+  for i = 1,#arr do
+    if (arr[i] == obj and !stop) then
+      k = i
+      stop = true
+    end
+  end
+  return k
+end
+
+
 function F(a,F,O,L,Pos,Rot,S,W,H,FS,Color,FColor) -- Конструктор кнопок
 	local p = {}
-    p.click_function = F
-    p.function_owner = O
-    p.label = L
-    p.position = Pos
-    p.rotation = Rot
-    p.scale = S
-    p.width = W
-    p.height = H
-    p.font_size = FS
-    p.color = Color
-    p.font_color = FColor
-    a.createButton(p)
+  p.click_function = F
+  p.function_owner = O
+  p.label = L
+  p.position = Pos
+  p.rotation = Rot
+  p.scale = S
+  p.width = W
+  p.height = H
+  p.font_size = FS
+  p.color = Color
+  p.font_color = FColor
+  a.createButton(p)
+end
+
+function wait(F,i)   -- Ожидание
+  Wait.frames(F, i*60)
 end
 
 -- Классы (доработать)
@@ -99,6 +116,7 @@ function onLoad() -- Основной архив (категорически н�
   Town_CounterPhases = 0
   Town_CounterDays = 0
   Town_CounterNights = 0
+  Town_CurrentPhase = 0
   Town_MafiaChat = {} -- каждый элемент это Владелец надписи и Надпись
   Town_PlayerVotes = {} -- Каждый элемент это Владелец голоса и Голос
   Town_MafiaVotes = {}-- Каждый элемент это Владелец голоса и Голос
@@ -106,8 +124,11 @@ function onLoad() -- Основной архив (категорически н�
   Town_DeadList = {} -- По именам
   Town_Effects = {}
   GamePhase = 0
+  Night_Progress = 0
+  Night_Stop = false
+  Night_Over = true
   -- Настройки
-  Setting_SkipFirstNight = false
+  Setting_SkipFirstDay = false
   Setting_NightTimer = 60
   Setting_DayTimer = 60
   Setting_VoteTimer = 20
@@ -193,24 +214,29 @@ end
 
 -- Основной триггер
 function onUpdate()  --- Триггер сна
-	--[[
-    if start == 1 then
-      if sleep() == 1 and night1 == 0 and upd == 0 then
-        upd = 1
+  if (GamePhase == 2) then
+    if (isAllSleep()) then
+      if (Night_Progress == 0) then
         printToAll("Эта ночь начнется через 5 секунд...",{0.192, 0.701, 0.168})
-        Logs("Запуск ночи")
-        Logs("Начало ночной фазы:Действия")
-        wait(night,5)
-      elseif sleep() == 1 and night1 != 0 and upd == 2 then
-        if MafTimer != 1 then
-          Logs("Продолжается фаза ночи")
-          upd = 1
-          time = 0
-          wait(night,2)
-        end
+        -- Запуск ночных действий через 5 секунд
+        Night_Over = false
+      elseif (Night_Progress != 0 and !Night_Stop) then
+        -- Продолжение ночных действий
       end
     end
-	]]
+  end
+end
+
+function isAllSleep()  --- Проверка сна
+  local check = true
+  for i = 1,#Town_Players do
+    if Player[Town_Players[i].Color] != nil then
+      if Player[Town_Players[i].Color].blindfolded == false and find(Town_Players[i].Name) == 0 then
+        check = false
+      end
+    end
+  end
+  return check
 end
 
 function CreateRole(role)
@@ -255,6 +281,20 @@ function CreateRole(role)
   return r
 end
 
+function PhaseChange()
+  if (Town_CurrentPhase == 1) then
+    wait(Phase_DaySpeech,2)
+  elseif (Town_CurrentPhase== 2) then
+    wait(Phase_DayVote,2)
+  elseif (Town_CurrentPhase == 3) then
+    wait(Phase_NightVote,2)
+  elseif (Town_CurrentPhase == 4) then
+    wait(Phase_NightAction,2)
+  elseif (Town_CurrentPhase == 5) then
+    wait(Phase_DayAction,2)
+  end
+end
+
 function StartGame()
   Town_NumberOfLivingPeople = #Player.getPlayers()
   if (Town_NumberOfLivingPeople < 3) then
@@ -277,7 +317,142 @@ function StartGame()
     end
     -- Добавить UI расстановку
     broadcastToAll("Подготовка к игре завершена",{0.118, 0.53, 1})
+    Notes.setNotes("")
     GamePhase = 1
+    if (Setting_SkipFirstDay) then
+      -- Если до мафии никого в колоде нет, то фаза ночного голосования, иначе ночное действие
+    else
+      Town_CurrentPhase = 1 -- Признак начала игры
+      PhaseChange() -- Начало дня
+    end
     -- Запуск фазы через функцию фаз (придумать так, чтоб было универсально)
   end
 end
+
+function Phase_DaySpeech()
+  -- Установка фазы и таймера UI
+  -- Активация таймера UI
+end
+
+function Phase_DayVote()
+  -- Установка фазы и таймера UI
+  -- Активация таймера UI
+end
+
+function Phase_NightVote()
+  -- Установка фазы и таймера UI
+  -- Активация таймера UI
+end
+
+function Phase_NightAction()
+  -- Установка фазы и таймера UI
+  -- Активация таймера UI
+end
+
+function Phase_DayAction()
+  -- Установка фазы и таймера UI
+  -- Активация таймера UI
+end
+
+function DayVote()
+  local votes = {}
+  local counter = {}
+  local maxCount = 0
+  local finishVote = {}
+  for i=1,#Town_PlayerVotes do
+    local indexObj = find(Town_PlayerVotes[i][2],votes)
+    if (indexObj == 0) then
+      table.insert(votes,Town_PlayerVotes[i][2])
+      table.insert(counter,1)
+    else  
+      counter[indexObj] = counter[indexObj] + 1
+    end
+  end
+  for i=1,#counter do
+    if (counter[i]>=maxCount) then
+      maxCount = counter[i]
+    end
+  end
+  for i=1,#counter do
+    if (counter[i] == maxCount) then
+      table.insert(finishVote,{votes[i],maxCount})
+    end
+  end
+  if (#finishVote == 1) then
+    printToAll("Голосование прошло успешно!",{0.129, 0.694, 0.607})
+    -- Фаза дня - Действие на 5 секунд для активации способности, если игрок пожелает нажать в текущее время
+    -- Убить игрока если действие не отменило казнь
+  else
+    printToAll("Равное кол-во голосов.Голосование заканчивается.Наступает ночь.",{0.856, 0.1, 0.094})
+  end
+  GamePhase = 2 -- Разрешение на закрытие глаз
+  -- Добавить UI кнопку на закрытие глаз. Отключить функцию закрытия глаз в игре
+end
+
+function NightProgression()
+  if (!isAllSleep()) then 
+    Night_Over = true
+    broadcastToAll("Ночь отменена!",{0.856, 0.1, 0.094})
+    printToAll("Ночь отменена игроками:",{0.856, 0.1, 0.094})
+    for i = 1,#Town_Players do
+      if Player[Town_Players[i].Color].blindfolded == true then
+        Player[Town_Players[i].Color].blindfolded = false
+      else
+        printToAll(tostring(Town_Players[i].Name),{0.856, 0.1, 0.094})
+      end
+    end
+    return false
+  end
+  if (!Night_Over) then
+    -- Действия ролей
+  else
+    GamePhase = 1
+    -- Подведение итогов ночи
+    -- работа с UI
+    for i = 1,#Town_Players do
+      Player[Town_Players[i].Color].blindfolded = false
+    end
+    printToAll("Ночь №"..tostring(Town_CounterNights).." окончена",{0.192, 0.701, 0.168})
+    printToAll("Итог ночи:",{0.956, 0.392, 0.113})
+    -- Перевод списка убийств в смерти
+    broadcastToAll("День начинается!",{0.118, 0.53, 1})
+    Town_CurrentPhase = 1 -- Перевод в день обсуждения
+    PhaseChange() -- Начало дня
+  end
+end
+
+function NightVote()
+  local votes = {}
+  local counter = {}
+  local maxCount = 0
+  local finishVote = {}
+  for i=1,#Town_MafiaVotes do
+    local indexObj = find(Town_MafiaVotes[i][2],votes)
+    if (indexObj == 0) then
+      table.insert(votes,Town_MafiaVotes[i][2])
+      table.insert(counter,1)
+    else  
+      counter[indexObj] = counter[indexObj] + 1
+    end
+  end
+  for i=1,#counter do
+    if (counter[i]>=maxCount) then
+      maxCount = counter[i]
+    end
+  end
+  for i=1,#counter do
+    if (counter[i] == maxCount) then
+      table.insert(finishVote,{votes[i],maxCount})
+    end
+  end
+  if (#finishVote == 1) then
+    printToAll("Голосование прошло успешно!",{0.129, 0.694, 0.607})
+    -- Добавить игрока в список убийств
+  else
+    printToAll("Голосование прошло успешно!",{0.129, 0.694, 0.607})
+    -- Голосование не прошло успешно. 
+  end
+  Night_Stop = false
+  -- Добавить Night_Progression когда разберемся с порядком
+end
+

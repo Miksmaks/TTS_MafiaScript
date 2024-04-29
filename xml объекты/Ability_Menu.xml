@@ -1,18 +1,36 @@
-
 <!-- Меню способностей (кнопки позиционировать с помощью функции) -->
 <TableLayout offsetXY="-700 -100" width="400" height="200" columnWidths="300 100" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >
   <Row preferredHeight="150">
     <Cell>
-      <VerticalScrollView width="281" height="100" >
-        <Button height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="14">Тест функция 1</Button>
-        <Button height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="14">Тест функция 2</Button>
-        <Button height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="14">Тест функция 3</Button>
-        <Button height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="14">Тест функция 4</Button>
-      </VerticalScrollView>
+      <TableLayout preferredHeight="50" columnWidths="220 80" childAlignment="UpperCenter" spacing="5" childForceExpandHeight="true">
+        <Row width="250">
+          <Cell>
+            <Button height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20">Тест функция 1</Button>
+          </Cell>
+          <Cell>
+            <text color="#FFFFFF" fontSize="36">99</text>
+          </Cell>
+        </Row>
+        <Row width="250">
+          <Cell>
+            <Button height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20">Тест функция 2</Button>
+          </Cell>
+          <Cell>
+            <text color="#FFFFFF" fontSize="36">99</text>
+          </Cell>
+        </Row>
+        <Row width="250">
+          <Cell>
+            <Button height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20">Тест функция 3</Button>
+          </Cell>
+          <Cell>
+            <text color="#FFFFFF" fontSize="36">99</text>
+          </Cell>
+        </Row>
+      </TableLayout>
     </Cell>
     <Cell>
         <Button color="#C7158580" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72">►</Button>
     </Cell>
   </Row>
 </TableLayout>
-
