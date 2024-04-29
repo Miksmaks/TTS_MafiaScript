@@ -1,0 +1,106 @@
+<!-- Цвет: Белый -->
+<!-- Менюшка игрока -->
+<TableLayout id="id-PlayerMenu-Table-White" offsetXY="-600 250" width="300" height="340" useGlobalCellPadding="false" rowBackgroundColor="#80808080" allowDragging="true" returnToOriginalPositionWhenReleased="false">
+  <Row preferredHeight="50">
+    <Cell columnSpan="2" overrideGlobalCellPadding="true" padding="10 0 0 0">
+      <text id="id-PlayerMenu-TextRole-White" color="#FFFFFF" alignment="MiddleLeft" fontSize="24">Роль: ...</text>
+    </Cell>
+  </Row>
+  <Row preferredHeight="50">
+    <Cell overrideGlobalCellPadding="true" padding="5 5 5 5">
+      <button id="id-PlayerMenu-ButtonDescription-White" color="#0000FF80" textColor="#FFFFFF" width="50" height="50">Описание</button>
+    </Cell>
+    <Cell overrideGlobalCellPadding="true" padding="5 5 5 5">
+      <button id="id-PlayerMenu-ButtonChat-White" color="#80808080" textColor="#FFFFFF" width="50" height="50">Чат</button>
+    </Cell>
+  </Row>
+  <Row visibility="" preferredHeight="200">
+    <Cell columnSpan="2">
+      <VerticalScrollView>
+        <text id="id-PlayerMenu-TextChat-White" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Miksmaks: V_ano долбаеб</text>
+      </VerticalScrollView>
+    </Cell>
+  </Row>
+  <Row visibility="" preferredHeight="40">
+    <Cell columnSpan="2" padding="5 5 5 5">
+      <InputField id="id-PlayerMenu-InputChat-White" placeholder="Написать сообщение" lineType="MultiLineSubmit" characterLimit="100"></InputField>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Меню способностей -->
+<TableLayout id="id-AbilityMenu-Table-White" offsetXY="-700 -100" width="400" height="200" columnWidths="300 100" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >
+  <Row preferredHeight="150">
+    <Cell>
+      <TableLayout id="id-AbilityMenu-InnerTable-White" preferredHeight="50" columnWidths="220 80" childAlignment="UpperCenter" spacing="5" childForceExpandHeight="true">
+        
+		<Row width="250">
+          <Cell>
+            <Button height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20">Тест функция 1</Button>
+          </Cell>
+          <Cell>
+            <text color="#FFFFFF" fontSize="36">99</text>
+          </Cell>
+        </Row>
+		
+      </TableLayout>
+    </Cell>
+    <Cell>
+        <Button id="id-AbilityMenu-ButtonChange-White" color="#C7158580" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72">►</Button>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Меню игроков -->
+<TableLayout id="id-PlayersList-Table-White" offsetXY="700 -100" width="400" height="400" columnWidths="100 300" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >
+  <Row preferredHeight="300">
+    <Cell>
+        <Button id="id-PlayersList-ButtonChange-White" color="#20B2AA80" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72">◄</Button>
+    </Cell>
+    <Cell>
+      <VerticalScrollView width="281" height="100">
+        <Text id="id-PlayersList-TextList-White" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Игрок 1</Text>
+      </VerticalScrollView>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Кнопка сокрытия -->
+<Button id="id-Hide-ButtonChange-White" color="#00FA9A80" offsetXY="900 -250" width="100" height="100" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72">X</Button>
+
+<!-- Поле фазы и времени -->
+<TableLayout id="id-Time-Table-White" offsetXY="0 350" width="400" height="200" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >
+  <Row preferredHeight="50">
+    <Cell>
+        <Text id="id-Time-TextPhase-White" color="#FFFFFF" alignment="MiddleCenter" fontSize="36">Обсуждение</Text>
+    </Cell>
+  </Row>
+  <Row preferredHeight="50">
+    <Cell>
+        <Text id="id-Time-TextTime-White" color="#FFFFFF" alignment="MiddleCenter" fontSize="36">180 сек</Text>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Билютень голосования -->
+<TableLayout id="id-Vote-Table-White" offsetXY="-300 -200" width="300" height="400" useGlobalCellPadding="false" rowBackgroundColor="#80808080" allowDragging="true" returnToOriginalPositionWhenReleased="false">
+  <Row preferredHeight="50">
+    <Cell>
+        <Text color="#FFFFFF" alignment="MiddleCenter" fontSize="20">Билютень для голосования</Text>
+    </Cell>
+  </Row>
+  <Row preferredHeight="350">
+    <Cell padding="1 1 1 1">
+      <TableLayout id="id-Vote-InnerTable-White" preferredHeight="50" childAlignment="UpperCenter" spacing="5" childForceExpandHeight="true">
+	  
+        <Row width="250">
+          <Cell>
+            <Button height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20">Тест функция 1</Button>
+          </Cell>
+        </Row>
+		
+      </TableLayout>
+    </Cell>
+  </Row>
+</TableLayout>
+
