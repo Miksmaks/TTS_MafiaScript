@@ -141,6 +141,7 @@ function onLoad() -- Основной архив (категорически н�
   Town_DeadList = {} -- По именам
   Town_Effects = {}
   GamePhase = 0
+  PhaseActionTag = "" -- Это тег текущего действия для UI. Если охотник ,например, стреляет, то выборка цели будет с таким тегом
   Night_Progress = 0
   Night_Stop = false
   Night_Over = true
@@ -150,6 +151,8 @@ function onLoad() -- Основной архив (категорически н�
   Setting_NightTimer = 60
   Setting_DayTimer = 60
   Setting_VoteTimer = 20
+  Setting_NightActionTime = 10
+  Setting_DayActionTime = 5
   Setting_GreyTalk = false
   Setting_AdminMode = false
   F(startObj,"StartGame",self,"Начать игру",{4, 0.25, 1.7},{0.00, 0.00, 0.00},{2, 2, 2},500,300,70,{1, 1, 1},{0.25, 0.25, 0.25})
@@ -277,6 +280,34 @@ function UI_PlayersShow(player,message,namef)
   end
 end
 
+function UI_VoteBlank(player,message,namef) -- message передает индекс в порядке цветов
+  for i=1,#Town_Players do
+    if (Town_Players[i].Color == player.color) then
+      if (Town_CurrentPhase == 2) then -- дневное голосование
+        table.insert(Town_PlayerVotes,{Town_Players[i].Name,FromColorToPlayer(OrderColorList[message]).Name})
+      elseif (Town_CurrentPhase == 3) then -- ночное голосование
+        table.insert(Town_MafiaVotes,{Town_Players[i].Name,FromColorToPlayer(OrderColorList[message]).Name})
+      elseif (Town_CurrentPhase == 4 or Town_CurrentPhase == 5) then -- ночной и дневной выбор
+        local target = copy(Class_Target)
+        target.nameTag = PhaseActionTag
+        target.PlayerName = FromColorToPlayer(OrderColorList[message]).Name
+        table.insert(Town_Players[i].Role.Targets,target)
+      end
+      UiHideElement("id-Vote-Table-"..player.color)
+    end
+  end
+end
+
+function UI_AbilityMenu(player,message,namef)
+  for i=1,#Town_Players do
+    if (Town_Players[i].Color == player.color) then
+      -- Определить ограничения в какую фазу было нажато
+      -- По message выбирает способность из списка данного игрока
+      -- При использовании убавить на 1 счетчик использования
+    end
+  end
+end
+
 function UI_ShowAll(player,message,namef)
   for i=1,#Town_Players do
     if (Town_Players[i].Color == player.color) then
@@ -300,6 +331,7 @@ end
 
 function UI_ButtonSleep(player,message,namef)
   player.blindfolded = true
+  UiHideElement("id-Sleep-Button-"..player.color)
 end
 
 
@@ -393,6 +425,15 @@ function SortRoleList() -- Сортировка листа ролей для п�
   Town_StartRoles = copy(sort_list)
 end
 
+function FromColorToPlayer(color) -- Read only!
+  for i=1,#Town_Players do
+    if (Town_Players[i].Color == color) then
+      return Town_Players[i]
+    end
+  end
+  return nil
+end
+
 function CreateRole(role)
   local r = copy(Class_Role)
   if (role == "Мирный") then
@@ -470,7 +511,7 @@ function StartGame()
       end
     end
     SortRoleList()
-    -- Доработать тут в виде функции
+    -- Доработать тут в виде функции (позднее)
     local ListText = "Колода ролей:\n"
     for i=1,#Town_StartRoles do
       ListText = ListText .. Town_StartRoles[i].."\n"
@@ -487,37 +528,49 @@ function StartGame()
     GamePhase = 1
     if (Setting_SkipFirstDay) then
       -- Если до мафии никого в колоде нет, то фаза ночного голосования, иначе ночное действие
+      -- Решить этот вопрос в функции сна
     else
       Town_CurrentPhase = 1 -- Признак начала игры
       PhaseChange() -- Начало дня
     end
-    -- Запуск фазы через функцию фаз (придумать так, чтоб было универсально)
   end
 end
 
 function Phase_DaySpeech()
-  -- Установка фазы и таймера UI
-  -- Активация таймера UI
+  Town_CurrentPhase = 1
+  UiSetPhase(OrderPhaseList[1])
+  UiSetTime(Setting_DayTimer)
+  StartTimer(Phase_DayVote,Setting_DayTimer)
 end
 
 function Phase_DayVote()
-  -- Установка фазы и таймера UI
-  -- Активация таймера UI
+  Town_CurrentPhase = 2
+  UiSetPhase(OrderPhaseList[2])
+  UiSetTime(Setting_VoteTimer)
+  StartTimer(DayVote,Setting_VoteTimer)
 end
 
 function Phase_NightVote()
-  -- Установка фазы и таймера UI
-  -- Активация таймера UI
+  Town_CurrentPhase = 3
+  UiSetPhase(OrderPhaseList[3])
+  UiSetTime(Setting_VoteTimer)
+  StartTimer(NightVote,Setting_VoteTimer)
 end
 
 function Phase_NightAction()
-  -- Установка фазы и таймера UI
-  -- Активация таймера UI
+  Town_CurrentPhase = 4
+  UiSetPhase(OrderPhaseList[4])
+  UiSetTime(Setting_NightActionTime)
+  -- NightProgression надо сначало сделать, чтобы дальше приписать функцию
+  --StartTimer(nil,Setting_NightActionTime) 
 end
 
 function Phase_DayAction()
-  -- Установка фазы и таймера UI
-  -- Активация таймера UI
+  Town_CurrentPhase = 5
+  UiSetPhase(OrderPhaseList[5])
+  UiSetTime(Setting_DayActionTime)
+  -- На этапе способностей и проработки ночи посмотреть тут
+  --StartTimer(nil,Setting_DayActionTime) 
 end
 
 function DayVote()
@@ -553,7 +606,9 @@ function DayVote()
   end
   Town_PlayerVotes = {}
   GamePhase = 2 -- Разрешение на закрытие глаз
-  -- Добавить UI кнопку на закрытие глаз. Отключить функцию закрытия глаз в игре
+  for i=1,#Town_Players do
+    UiShowElement("id-Sleep-Button-"..Town_Players[i].Color) -- Найти способ отключить закрытие глаз в игре от игроков
+  end
 end
 
 function NightProgression()
@@ -571,11 +626,12 @@ function NightProgression()
     return false
   end
   if (!Night_Over) then
+    -- Добавить переход в фазы ночи здесь
     -- Действия ролей
   else
     GamePhase = 1
     -- Подведение итогов ночи
-    -- работа с UI
+    -- работа с UI: обновление списка игроков (сделать позже)
     for i = 1,#Town_Players do
       Player[Town_Players[i].Color].blindfolded = false
     end
@@ -627,10 +683,6 @@ end
 
 --[[
   Сделать:
-  --
-  4. Подсоединить данные к UI
-  5. Сделать функции воздействия на UI списки с кнопками
-  --
   6. Разработать систему эффектов
   7. Проработать ночные фазы
   --
@@ -638,6 +690,9 @@ end
   9. Подсоединить UI к пулу ролей на столе
   10. Тестирование
 
+  Комментарий:
+  1. В билете для голосования сделать 10 кнопок на каждый цвет, скрывать лишние кнопки по требованию
+  2. В списке способностей сделать 5-6 кнопок (3 на предметы и 2-3 на способности для любой фазы)
   Тестирование:
   1. Night_Progression - отсортирован список для пробуждения. У "Мафия" особенное пробуждение с голосованием.
 ]]

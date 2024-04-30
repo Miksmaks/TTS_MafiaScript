@@ -36,10 +36,10 @@
         
 		    <Row width="250">
           <Cell>
-            <Button height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20">Тест функция 1</Button>
+            <Button height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(1)">Тест функция 1</Button>
           </Cell>
           <Cell>
-            <text color="#FFFFFF" fontSize="36">99</text>
+            <text id="id-AbilityMenu-Counter1-White" color="#FFFFFF" fontSize="20">99</text>
           </Cell>
         </Row>
 		
@@ -96,7 +96,7 @@
 	  
         <Row width="250">
           <Cell>
-            <Button height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20">Тест функция 1</Button>
+            <Button height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(1)">Тест функция 1</Button>
           </Cell>
         </Row>
 		
