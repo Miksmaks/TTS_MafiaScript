@@ -8,22 +8,22 @@
   </Row>
   <Row preferredHeight="50">
     <Cell overrideGlobalCellPadding="true" padding="5 5 5 5">
-      <button id="id-PlayerMenu-ButtonDescription-White" color="#0000FF80" textColor="#FFFFFF" width="50" height="50">Описание</button>
+      <button id="id-PlayerMenu-ButtonDescription-White" color="#0000FF80" textColor="#FFFFFF" width="50" height="50" onClick="UI_RoleDesc">Описание</button>
     </Cell>
     <Cell overrideGlobalCellPadding="true" padding="5 5 5 5">
-      <button id="id-PlayerMenu-ButtonChat-White" color="#80808080" textColor="#FFFFFF" width="50" height="50">Чат</button>
+      <button id="id-PlayerMenu-ButtonChat-White" color="#80808080" textColor="#FFFFFF" width="50" height="50" onClick="UI_ChatButton">Чат</button>
     </Cell>
   </Row>
-  <Row visibility="" preferredHeight="200">
+  <Row id="id-PlayerMenu-RowChat-White" visibility="" preferredHeight="200">
     <Cell columnSpan="2">
       <VerticalScrollView>
         <text id="id-PlayerMenu-TextChat-White" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Miksmaks: V_ano долбаеб</text>
       </VerticalScrollView>
     </Cell>
   </Row>
-  <Row visibility="" preferredHeight="40">
+  <Row id="id-PlayerMenu-RowInput-White" visibility="" preferredHeight="40">
     <Cell columnSpan="2" padding="5 5 5 5">
-      <InputField id="id-PlayerMenu-InputChat-White" placeholder="Написать сообщение" lineType="MultiLineSubmit" characterLimit="100"></InputField>
+      <InputField id="id-PlayerMenu-InputChat-White" placeholder="Написать сообщение" lineType="MultiLineSubmit" characterLimit="100" onSubmit="UI_MafiaChat"></InputField>
     </Cell>
   </Row>
 </TableLayout>
@@ -34,7 +34,7 @@
     <Cell>
       <TableLayout id="id-AbilityMenu-InnerTable-White" preferredHeight="50" columnWidths="220 80" childAlignment="UpperCenter" spacing="5" childForceExpandHeight="true">
         
-		<Row width="250">
+		    <Row width="250">
           <Cell>
             <Button height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20">Тест функция 1</Button>
           </Cell>
@@ -46,7 +46,7 @@
       </TableLayout>
     </Cell>
     <Cell>
-        <Button id="id-AbilityMenu-ButtonChange-White" color="#C7158580" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72">►</Button>
+        <Button id="id-AbilityMenu-ButtonChange-White" color="#C7158580" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72" onClick="UI_AbilityShow">►</Button>
     </Cell>
   </Row>
 </TableLayout>
@@ -55,7 +55,7 @@
 <TableLayout id="id-PlayersList-Table-White" offsetXY="700 -100" width="400" height="400" columnWidths="100 300" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >
   <Row preferredHeight="300">
     <Cell>
-        <Button id="id-PlayersList-ButtonChange-White" color="#20B2AA80" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72">◄</Button>
+        <Button id="id-PlayersList-ButtonChange-White" color="#20B2AA80" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72" onClick="UI_PlayersShow">◄</Button>
     </Cell>
     <Cell>
       <VerticalScrollView width="281" height="100">
@@ -66,7 +66,8 @@
 </TableLayout>
 
 <!-- Кнопка сокрытия -->
-<Button id="id-Hide-ButtonChange-White" color="#00FA9A80" offsetXY="900 -250" width="100" height="100" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72">X</Button>
+<Button id="id-Hide-ButtonChange-White" color="#00FA9A80" offsetXY="900 -250" width="100" height="100" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72" onClick="UI_ShowAll">X</Button>
+<Button id="id-Sleep-Button-White" width="600" height="50" offsetXY="0 -410" color="Blue" text="Спать" fontSize="35" visibility="White" onClick="UI_ButtonSleep"></Button>
 
 <!-- Поле фазы и времени -->
 <TableLayout id="id-Time-Table-White" offsetXY="0 350" width="400" height="200" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >

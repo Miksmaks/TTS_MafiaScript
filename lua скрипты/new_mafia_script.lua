@@ -55,17 +55,17 @@ function F(a,F,O,L,Pos,Rot,S,W,H,FS,Color,FColor) -- Конструктор кн
   a.createButton(p)
 end
 
-function wait(F,i)   -- Ожидание
+function wait(F,i) -- Ожидание
   Wait.frames(F, i*60)
 end
 
 function TownTimer()
   if (TimeCounter == 0) then
-    -- UI взаимодействие
+    UiSetTime(tostring(TimeCounter).."сек.")
     broadcastToAll("Время вышло.",{0.627, 0.125, 0.941})
   else
     TimeCounter = TimeCounter - 1
-    -- UI взаимодействие
+    UiSetTime(tostring(TimeCounter).."сек.")
     wait(TownTimer,1)
   end
 end
@@ -156,32 +156,152 @@ function onLoad() -- Основной архив (категорически н�
 end
 
 -- UI поддержка (доработать)
-function ShowElement(id) -- Функция показа объекта
+function UiShowElement(id) -- Функция показа объекта
 	UI.setAttribute(id,"active","true")
 end
   
-function HideElement(id) -- Функция сокрытия объекта
-    UI.setAttribute(id,"active","false")
+function UiHideElement(id) -- Функция сокрытия объекта
+  UI.setAttribute(id,"active","false")
 end
 
-function startUI() -- Показать стартовые объекты для игры
-	--[[
-    for i = 1,#roles do
-      ShowElement(roles[i][2].."Phase1")
-      ShowElement(roles[i][2].."Phase2")
-      ShowElement(roles[i][2].."Time1")
-      ShowElement(roles[i][2].."Time2")
-      ShowElement(roles[i][2].."Role1")
-      ShowElement(roles[i][2].."Role2")
-      ShowElement(roles[i][2].."tabplayers")
-      ShowElement(roles[i][2].."chat")
-      ShowElement(roles[i][2].."tab")
-      ShowElement(roles[i][2].."time")
-      ShowElement(roles[i][2].."role")
-      ShowElement(roles[i][2].."move")
-    end
-	]]
+function UiChangeColor(id,color) -- Функция смены цвета
+  UI.setAttribute(id,"color",color)
 end
+
+function UiGetColor(id)
+  return UI.getAttribute(id,"color")
+end
+
+function UiChangePosition(id,x,y)
+  UI.setAttribute(id,"offsetXY",tostring(x).." "..tostring(y))
+end
+
+function UiGetPosition(id)
+  return UI.getAttribute(id,"offsetXY")
+end
+
+function UiChangeValue(id,value) -- Функция смены значения
+	UI.setValue(id,value)
+end
+
+function UiStart() -- Показать стартовые объекты для игры
+  for i=1,#Town_Players do
+    UiChangeColor("id-Hide-ButtonChange-"..Town_Players[i].Color,"#00FA9A80")
+    UiShowElement("id-Hide-ButtonChange-"..Town_Players[i].Color)
+    UiShowElement("id-PlayerMenu-Table-"..Town_Players[i].Color)
+    UiShowElement("id-AbilityMenu-Table-"..Town_Players[i].Color)
+    UiShowElement("id-PlayersList-Table-"..Town_Players[i].Color)
+    UiShowElement("id-Time-Table-"..Town_Players[i].Color)
+  end
+end
+
+function UiSetPlayersList(text)
+  for i=1,#Town_Players do
+    UiChangeValue("id-PlayersList-TextList-"..Town_Players[i].Color,text)
+  end
+end
+
+function UiSetPhase(text)
+  for i=1,#Town_Players do
+    UiChangeValue("id-Time-TextPhase-"..Town_Players[i].Color,text)
+  end
+end
+
+function UiSetTime(text)
+  for i=1,#Town_Players do
+    UiChangeValue("id-Time-TextTime-"..Town_Players[i].Color,text)
+  end
+end
+
+
+
+-- UI связки
+
+function UI_RoleDesc(player,message,namef)
+  for i=1,#Town_Players do
+    if (Town_Players[i].Color == player.color) then
+      broadcastToColor("---\n"..Town_Players[i].Role.Description.."\n---",player.color,{0.118, 0.53, 1})
+    end
+  end
+end
+
+function UI_ChatButton(player,message,namef)
+  for i=1,#Town_Players do
+    if (Town_Players[i].Color == player.color) then
+      local id = "id-PlayerMenu-ButtonChat-"..player.color
+      if (UiGetColor(id) == "#80808080") then -- проверка того, что кнопка серая
+        UiChangeColor(id,"#800000F0")
+        UiShowElement("id-PlayerMenu-RowChat-"..player.color)
+        UiShowElement("id-PlayerMenu-RowInput-"..player.color)
+      else
+        UiChangeColor(id,"#80808080")
+        UiHideElement("id-PlayerMenu-RowChat-"..player.color)
+        UiHideElement("id-PlayerMenu-RowInput-"..player.color)
+      end
+    end
+  end
+end
+
+function UI_MafiaChat(player,message,namef)
+  for i=1,#Town_Players do
+    if (Town_Players[i].Color == player.color) then
+      table.insert(Town_MafiaChat,{Town_Players[i].Name,message})
+      UI.setAttribute("id-PlayerMenu-InputChat-"..player.color,"text","")
+    end
+  end
+end
+
+function UI_AbilityShow(player,message,namef)
+  for i=1,#Town_Players do
+    if (Town_Players[i].Color == player.color) then
+      local id = "id-AbilityMenu-Table-"..player.color
+      if (UiGetPosition(id) == "-700 -100") then -- проверка того, что открыто
+        UiChangePosition(id,-1120,-100) -- закрытое
+      else
+        UiChangePosition(id,-700,-100) -- открытое
+      end
+    end
+  end
+end
+
+function UI_PlayersShow(player,message,namef)
+  for i=1,#Town_Players do
+    if (Town_Players[i].Color == player.color) then
+      local id = "id-PlayersList-Table-"..player.color
+      if (UiGetPosition(id) == "700 -100") then -- проверка того, что открыто
+        UiChangePosition(id,1120,-100) -- закрытое
+      else
+        UiChangePosition(id,700,-100) -- открытое
+      end
+    end
+  end
+end
+
+function UI_ShowAll(player,message,namef)
+  for i=1,#Town_Players do
+    if (Town_Players[i].Color == player.color) then
+      local id = "id-Hide-ButtonChange-"..player.color
+      if (UiGetColor(id) == "#80808080") then -- проверка того, что кнопка серая
+        UiChangeColor(id,"#00FA9A80")
+        UiShowElement("id-PlayerMenu-Table-"..player.color)
+        UiShowElement("id-AbilityMenu-Table-"..player.color)
+        UiShowElement("id-PlayersList-Table-"..player.color)
+        UiShowElement("id-Time-Table-"..player.color)
+      else
+        UiChangeColor(id,"#80808080")
+        UiHideElement("id-PlayerMenu-Table-"..player.color)
+        UiHideElement("id-AbilityMenu-Table-"..player.color)
+        UiHideElement("id-PlayersList-Table-"..player.color)
+        UiHideElement("id-Time-Table-"..player.color)
+      end
+    end
+  end
+end
+
+function UI_ButtonSleep(player,message,namef)
+  player.blindfolded = true
+end
+
 
 -- Команды чата
 function onChat(message,Player) -- Функция связанная с чатом, а точнее команды
@@ -230,8 +350,7 @@ function onChat(message,Player) -- Функция связанная с чато
 	]]
 end
 
--- Основной триггер
-function onUpdate()  --- Триггер сна
+function onBlindfold(player, blindfolded) --- Триггер сна
   if (GamePhase == 2) then
     if (isAllSleep()) then
       if (Night_Progress == 0) then
@@ -243,6 +362,11 @@ function onUpdate()  --- Триггер сна
       end
     end
   end
+end
+
+-- Основной триггер
+function onUpdate() 
+
 end
 
 function isAllSleep()  --- Проверка сна
@@ -342,10 +466,22 @@ function StartGame()
         player.Role = CreateRole(Roles[i])
         player.IndexStatus = 1
         table.insert(Town_Players,player)
-        -- Добавить UI включение и расстановку
+        UiChangeValue("id-PlayerMenu-TextRole-"..player.Color,player.Role.Name)
       end
     end
-    -- Добавить UI расстановку
+    SortRoleList()
+    -- Доработать тут в виде функции
+    local ListText = "Колода ролей:\n"
+    for i=1,#Town_StartRoles do
+      ListText = ListText .. Town_StartRoles[i].."\n"
+    end
+    ListText = "\nИгроки:\n"
+    for i=1,#Town_Players do
+      ListText = ListText .. Town_Players[i].Name .. "Неизвестно" .."\n"
+    end
+    UiSetPlayersList(ListText)
+    UiStart()
+    -- Добавить UI расстановку способностей
     broadcastToAll("Подготовка к игре завершена",{0.118, 0.53, 1})
     Notes.setNotes("")
     GamePhase = 1
@@ -492,7 +628,6 @@ end
 --[[
   Сделать:
   --
-  3. Разработать UI id для всех элементов (id-main_parent-name-color)
   4. Подсоединить данные к UI
   5. Сделать функции воздействия на UI списки с кнопками
   --
