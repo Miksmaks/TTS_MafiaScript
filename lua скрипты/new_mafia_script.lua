@@ -95,6 +95,7 @@ Class_Target.PlayerName = "PlayerName"
 Class_Ability = {}
 Class_Ability.Name = "Название способности"
 Class_Ability.UseTime = 1
+Class_Ability.Recharge = false
 Class_Ability.IndexPhase = 0
 Class_Ability.Tag = "custom_ability"
 
@@ -102,6 +103,7 @@ Class_Role = {}
 Class_Role.Name = "Название роли"
 Class_Role.Description = "Просто роль..."
 Class_Role.IndexTeam = 0
+Class_Role.isNightSleep = true
 Class_Role.Targets = {}
 Class_Role.Abilities = {}
 
@@ -434,44 +436,97 @@ function FromColorToPlayer(color) -- Read only!
   return nil
 end
 
+function StartAbilities(role)
+  local list = {}
+  if (role == "Мафия") then
+    local a = copy(Class_Ability)
+    a.Name = "Убийство"
+    a.UseTime = 99
+    a.IndexPhase = 3
+    a.Tag = "ability_mafia_kill"
+    table.insert(list,a)
+  elseif (role == "Полицейский") then
+    local a = copy(Class_Ability)
+    a.Name = "Проверка деятельности"
+    a.UseTime = 99
+    a.IndexPhase = 4
+    a.Tag = "ability_police_search"
+    table.insert(list,a)
+  elseif (role == "Доктор") then
+    local a1 = copy(Class_Ability)
+    a1.Name = "Вызов врача"
+    a1.UseTime = 99
+    a1.IndexPhase = 4
+    a1.Tag = "ability_doctor_heal"
+    local a2 = copy(Class_Ability)
+    a2.Name = "Самолечение"
+    a2.UseTime = 1
+    a2.IndexPhase = 4
+    a2.Tag = "ability_doctor_selfheal"
+    table.insert(list,a1)
+    table.insert(list,a2)
+  elseif (role == "Детектив") then
+    local a = copy(Class_Ability)
+    a.Name = "Сбор улик"
+    a.UseTime = 99
+    a.IndexPhase = 4
+    a.Tag = "ability_detective_search"
+    table.insert(list,a)
+  elseif (role == "Серийный убийца") then
+    local a = copy(Class_Ability)
+    a.Name = "Убийство"
+    a.UseTime = 99
+    a.IndexPhase = 4
+    a.Tag = "ability_serialkiller_kill"
+    table.insert(list,a)
+  end
+  return list
+end
+
 function CreateRole(role)
   local r = copy(Class_Role)
   if (role == "Мирный") then
     r.Name = "Мирный"
     r.Description = "У тебя нет особых способностей.Просто...будь мирным)"
     r.IndexTeam = 1
+    r.isNightSleep = true
     r.Targets = {}
-    r.Abilities = {}
+    r.Abilities = StartAbilities(role)
   elseif (role == "Мафия") then
     r.Name = "Мафия"
     r.Description = "Ты принадлежишь клану мафии.Каждую ночь ты голосуешь вместе со своим кланом за убийство мирного игрока.Постарайся, чтобы тебя или твоего союзника не убили мирные."
     r.IndexTeam = 2
+    r.isNightSleep = false
     r.Targets = {}
-    r.Abilities = {}
+    r.Abilities = StartAbilities(role)
   elseif (role == "Полицейский") then
     r.Name = "Полицейский"
     r.Description = "Ты принадлежишь команде мирных.Ночью ты можешь узнать принадлежит ли выбранный игрок клану мафии или нет.Будь аккуратен,ведь у них может быть тот, кто может обмануть твою способность."
     r.IndexTeam = 1
+    r.isNightSleep = false
     r.Targets = {}
-    r.Abilities = {}
+    r.Abilities = StartAbilities(role)
   elseif (role == "Доктор") then
     r.Name = "Доктор"
     r.Description = "Ты принадлежишь команде мирных.Ночью ты можешь спасти игрока от смерти.Выбранный тобою игрок будет спасен от одного убийства в эту ночь.Но себя ты можешь спасти только 1 раз.Будь бдителен, ведь ты тот , кто может спасти и узнать невиновных."
     r.IndexTeam = 1
+    r.isNightSleep = false
     r.Targets = {}
-    r.Abilities = {}
+    r.Abilities = StartAbilities(role)
   elseif (role == "Детектив") then
     r.Name = "Детектив"
     r.Description = "Ты принадлежишь команде мирных.Ночью ты расследуешь дело о клане мафии.Твои расследования каждую ночь приносят информацию о роли , выбранного тобою , игрока.Но аккуратнее, ведь в клане мафии может быть тот, кто может помешать в расследовании."
     r.IndexTeam = 1
+    r.isNightSleep = false
     r.Targets = {}
-    r.Abilities = {}
+    r.Abilities = StartAbilities(role)
   elseif (role == "Серийный убийца") then
     r.Name = "Серийный убийца"
     r.Description = "Ты одинокий хладнокровный убийца...Ты убиваешь,потому что хочешь услышать чистые...крики жертв ... в тишине...Даже мафия боится тебя.Каждую ночь ты убиваешь игрока.Помни: твой главный враг - мафия,поэтому прими помощь жителей,но они тоже должны будут умереть.Ты победишь в этой игре , если всех ,кроме тебя,умрут..."
     r.IndexTeam = 2
+    r.isNightSleep = false
     r.Targets = {}
-    r.Abilities = {}
+    r.Abilities = StartAbilities(role)
   end
   return r
 end
@@ -525,13 +580,12 @@ function StartGame()
     -- Добавить UI расстановку способностей
     broadcastToAll("Подготовка к игре завершена",{0.118, 0.53, 1})
     Notes.setNotes("")
-    GamePhase = 1
-    if (Setting_SkipFirstDay) then
-      -- Если до мафии никого в колоде нет, то фаза ночного голосования, иначе ночное действие
-      -- Решить этот вопрос в функции сна
-    else
+    if (!Setting_SkipFirstDay) then
+      GamePhase = 1
       Town_CurrentPhase = 1 -- Признак начала игры
       PhaseChange() -- Начало дня
+    else
+      GamePhase = 2
     end
   end
 end
@@ -628,6 +682,7 @@ function NightProgression()
   if (!Night_Over) then
     -- Добавить переход в фазы ночи здесь
     -- Действия ролей
+    -- Если до мафии никого в колоде нет, то фаза ночного голосования, иначе ночное действие
   else
     GamePhase = 1
     -- Подведение итогов ночи
