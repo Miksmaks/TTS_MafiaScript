@@ -498,6 +498,10 @@ function FromColorToPlayer(color) -- Read only!
   return nil
 end
 
+function SimulatePlayer()
+  wait(NightProgression,random(10,20))
+end
+
 function StartAbilities(role)
   local list = {}
   if (role == "Мафия") then
@@ -780,6 +784,9 @@ function NightProgression()
     end
     return false
   end
+  if (#Town_StartRoles < Night_Progress) then
+    Night_Over = true
+  end
   if (!Night_Over) then
     if (Town_StartRoles[Night_Progress] == "Мафия") then
       Night_Stop = true
@@ -792,12 +799,17 @@ function NightProgression()
       Phase_NightVote()
       UiVoteBlankShow()
     else
+      local check = false
       Night_Stop = true
       -- подумать про тег фазы
       for i=1,#Town_Players do
         if (Town_Players[i].Role.Name == Town_StartRoles[Night_Progress]) then
           Player[Town_Players[i].Color].blindfolded = false
+          check = true
         end
+      end
+      if (!check) then
+        SimulatePlayer()
       end
       Phase_NightAction()
     end
