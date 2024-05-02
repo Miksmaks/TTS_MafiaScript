@@ -218,7 +218,58 @@ function UiSetTime(text)
   end
 end
 
+function UiVoteBlankShow(currentPlayer) -- аргумент это игрок
+  if (Town_CurrentPhase == 2) then -- Общее дневное голосование
+    for i=1,#Town_Players do
+      for j=1,#OrderColorList do 
+        local plr = FromColorToPlayer(OrderColorList[j])
+        if (plr == nil) then
+          UiHideElement("id-Vote-Row"..tostring(j).."-"..Town_Players[i].Color)
+        elseif (plr.IndexStatus == 2) then
+          UiHideElement("id-Vote-Row"..tostring(j).."-"..Town_Players[i].Color)
+        end
+      end
+      UiShowElement("id-Vote-Table-"..Town_Players[i].Color)
+    end
+  elseif (Town_CurrentPhase == 3) then -- Мафиозное голосование
+    for i=1,#Town_Players do
+      if (Town_Players[i].Role.IndexTeam == 2) then
+        for j=1,#OrderColorList do 
+          local plr = FromColorToPlayer(OrderColorList[j])
+          if (plr == nil) then
+            UiHideElement("id-Vote-Row"..tostring(j).."-"..Town_Players[i].Color)
+          elseif (plr.IndexStatus == 2) then
+            UiHideElement("id-Vote-Row"..tostring(j).."-"..Town_Players[i].Color)
+          end
+        end
+        UiShowElement("id-Vote-Table-"..Town_Players[i].Color)
+      end
+    end
+  elseif (Town_CurrentPhase == 4 or Town_CurrentPhase == 5) then -- Выбор цели
+    for j=1,#OrderColorList do 
+      local plr = FromColorToPlayer(OrderColorList[j])
+      if (plr == nil) then
+        UiHideElement("id-Vote-Row"..tostring(j).."-"..currentPlayer.Color)
+      elseif (plr.IndexStatus == 2 or plr.Name == currentPlayer.Name) then
+        UiHideElement("id-Vote-Row"..tostring(j).."-"..currentPlayer.Color)
+      end
+    end
+    UiShowElement("id-Vote-Table-"..currentPlayer.Color)
+  end
+end
 
+function UiAbilitiesSettings()
+  for i=1,#Town_Players do
+    for j=1,6 do
+      if (Town_Players[i].Role.Abilities[j] == nil) then
+        UiHideElement("id-AbilityMenu-Row"..tostring(j).."-"..Town_Players[i].Color)
+      else
+        UiChangeValue("id-AbilityMenu-Button"..tostring(j).."-"..Town_Players[i].Color,Town_Players[i].Role.Abilities[j].Name)
+        UiChangeValue("id-AbilityMenu-Counter"..tostring(j).."-"..Town_Players[i].Color,Town_Players[i].Role.Abilities[j].UseTime)
+      end
+    end
+  end
+end
 
 -- UI связки
 
@@ -303,9 +354,16 @@ end
 function UI_AbilityMenu(player,message,namef)
   for i=1,#Town_Players do
     if (Town_Players[i].Color == player.color) then
-      -- Определить ограничения в какую фазу было нажато
-      -- По message выбирает способность из списка данного игрока
-      -- При использовании убавить на 1 счетчик использования
+      if (Town_CurrentPhase == Town_Players[i].Role.Abilities[message].IndexPhase and Town_Players[i].Role.Abilities[message].UseTime > 0) then
+        Town_Players[i].Role.Abilities[message].UseTime = Town_Players[i].Role.Abilities[message].UseTime - 1
+        Town_Players[i].Role.Abilities[message].Recharge = true
+        UiChangeValue("id-AbilityMenu-Counter"..tostring(message).."-"..player.color,Town_Players[i].Role.Abilities[message].UseTime)
+        ActivateAbility(Town_Players[i],message)
+      elseif (Town_Players[i].Role.Abilities[message].UseTime <= 0) then
+        broadcastToColor("Эта способность исчерпана!",player.color,{0.627, 0.125, 0.941})
+      else
+        broadcastToColor("Эта способность не действует в текущую фазу!",player.color,{0.627, 0.125, 0.941})
+      end
     end
   end
 end
@@ -335,6 +393,7 @@ function UI_ButtonSleep(player,message,namef)
   player.blindfolded = true
   UiHideElement("id-Sleep-Button-"..player.color)
 end
+
 
 
 -- Команды чата
@@ -543,6 +602,10 @@ function PhaseChange()
   elseif (Town_CurrentPhase == 5) then
     wait(Phase_DayAction,2)
   end
+end
+
+function ActivateAbility(player,indexAbility)  -- Функция только для активации способности (добавить выбор отдельной функцией)
+
 end
 
 function StartGame()

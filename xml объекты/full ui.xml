@@ -34,9 +34,9 @@
     <Cell>
       <TableLayout id="id-AbilityMenu-InnerTable-White" preferredHeight="50" columnWidths="220 80" childAlignment="UpperCenter" spacing="5" childForceExpandHeight="true">
         
-		    <Row width="250">
+		    <Row id="id-AbilityMenu-Row1-White" width="250">
           <Cell>
-            <Button height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(1)">Тест функция 1</Button>
+            <Button id="id-AbilityMenu-Button1-White" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(1)">Тест функция 1</Button>
           </Cell>
           <Cell>
             <text id="id-AbilityMenu-Counter1-White" color="#FFFFFF" fontSize="20">99</text>
@@ -94,9 +94,9 @@
     <Cell padding="1 1 1 1">
       <TableLayout id="id-Vote-InnerTable-White" preferredHeight="50" childAlignment="UpperCenter" spacing="5" childForceExpandHeight="true">
 	  
-        <Row width="250">
+        <Row id="id-Vote-Row1-White" width="250">
           <Cell>
-            <Button height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(1)">Тест функция 1</Button>
+            <Button id="id-Vote-Button1-White" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(1)">Тест функция 1</Button>
           </Cell>
         </Row>
 		
