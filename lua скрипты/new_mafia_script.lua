@@ -715,16 +715,21 @@ function Phase_NightAction()
   Town_CurrentPhase = 4
   UiSetPhase(OrderPhaseList[4])
   UiSetTime(Setting_NightActionTime)
-  -- NightProgression надо сначало сделать, чтобы дальше приписать функцию
-  --StartTimer(nil,Setting_NightActionTime) 
+  StartTimer(function()
+  -- установка тега
+  Night_Stop = false
+  end,
+  Setting_NightActionTime) 
 end
 
 function Phase_DayAction()
   Town_CurrentPhase = 5
   UiSetPhase(OrderPhaseList[5])
   UiSetTime(Setting_DayActionTime)
-  -- На этапе способностей и проработки ночи посмотреть тут
-  --StartTimer(nil,Setting_DayActionTime) 
+  StartTimer(function()
+    -- установка тега
+  end,
+  Setting_DayActionTime) 
 end
 
 function DayVote()
