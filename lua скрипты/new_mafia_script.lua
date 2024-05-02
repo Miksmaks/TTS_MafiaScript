@@ -448,10 +448,10 @@ function onBlindfold(player, blindfolded) --- Триггер сна
     if (isAllSleep()) then
       if (Night_Progress == 0) then
         printToAll("Эта ночь начнется через 5 секунд...",{0.192, 0.701, 0.168})
-        -- Запуск ночных действий через 5 секунд
+        wait(NightProgression,5)
         Night_Over = false
       elseif (Night_Progress != 0 and !Night_Stop) then
-        -- Продолжение ночных действий
+        wait(NightProgression,2)
       end
     end
   end
@@ -629,7 +629,7 @@ function StartGame()
       end
     end
     SortRoleList()
-    -- Доработать тут в виде функции (позднее)
+    -- Доработать тут в виде функции (позднее после тестирования)
     local ListText = "Колода ролей:\n"
     for i=1,#Town_StartRoles do
       ListText = ListText .. Town_StartRoles[i].."\n"
@@ -639,16 +639,16 @@ function StartGame()
       ListText = ListText .. Town_Players[i].Name .. "Неизвестно" .."\n"
     end
     UiSetPlayersList(ListText)
+    UiAbilitiesSettings()
     UiStart()
-    -- Добавить UI расстановку способностей
     broadcastToAll("Подготовка к игре завершена",{0.118, 0.53, 1})
     Notes.setNotes("")
     if (!Setting_SkipFirstDay) then
-      GamePhase = 1
-      Town_CurrentPhase = 1 -- Признак начала игры
+      GamePhase = 1 -- Признак начала игры (день)
+      Town_CurrentPhase = 1 
       PhaseChange() -- Начало дня
     else
-      GamePhase = 2
+      GamePhase = 2 -- Признак перехода к ночным фазам
     end
   end
 end
@@ -749,7 +749,7 @@ function NightProgression()
   else
     GamePhase = 1
     -- Подведение итогов ночи
-    -- работа с UI: обновление списка игроков (сделать позже)
+    -- работа с UI: обновление списка игроков (сделать позже, после тестирования)
     for i = 1,#Town_Players do
       Player[Town_Players[i].Color].blindfolded = false
     end
