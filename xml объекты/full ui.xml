@@ -87,7 +87,7 @@
 <TableLayout id="id-Vote-Table-White" offsetXY="-300 -200" width="300" height="400" useGlobalCellPadding="false" rowBackgroundColor="#80808080" allowDragging="true" returnToOriginalPositionWhenReleased="false">
   <Row preferredHeight="50">
     <Cell>
-        <Text color="#FFFFFF" alignment="MiddleCenter" fontSize="20">Билютень для голосования</Text>
+        <Text id="id-Vote-HeadText-White" color="#FFFFFF" alignment="MiddleCenter" fontSize="20">Билютень для голосования</Text>
     </Cell>
   </Row>
   <Row preferredHeight="350">

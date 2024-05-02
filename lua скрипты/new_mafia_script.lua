@@ -229,6 +229,7 @@ function UiVoteBlankShow(currentPlayer) -- аргумент это игрок
           UiHideElement("id-Vote-Row"..tostring(j).."-"..Town_Players[i].Color)
         end
       end
+      UiChangeValue("id-Vote-HeadText-"..Town_Players[i].Color,"Билет для голосования")
       UiShowElement("id-Vote-Table-"..Town_Players[i].Color)
     end
   elseif (Town_CurrentPhase == 3) then -- Мафиозное голосование
@@ -242,6 +243,7 @@ function UiVoteBlankShow(currentPlayer) -- аргумент это игрок
             UiHideElement("id-Vote-Row"..tostring(j).."-"..Town_Players[i].Color)
           end
         end
+        UiChangeValue("id-Vote-HeadText-"..Town_Players[i].Color,"Убить игрока")
         UiShowElement("id-Vote-Table-"..Town_Players[i].Color)
       end
     end
@@ -254,6 +256,7 @@ function UiVoteBlankShow(currentPlayer) -- аргумент это игрок
         UiHideElement("id-Vote-Row"..tostring(j).."-"..currentPlayer.Color)
       end
     end
+    UiChangeValue("id-Vote-HeadText-"..currentPlayer.Color,"Выбор цели")
     UiShowElement("id-Vote-Table-"..currentPlayer.Color)
   end
 end
@@ -397,7 +400,7 @@ end
 
 
 -- Команды чата
-function onChat(message,Player) -- Функция связанная с чатом, а точнее команды
+function onChat(message,Player) -- Функция связанная с чатом, а точнее команды (занять после тестирования)
 	--[[
     if message == "@admin" and Player.admin == true and admin == 0 then -- Вкл/выкл режим админа
       broadcastToAll("ВНИМАНИЕ: "..tostring(Player.color).." активировал режим админа!",{0.627, 0.125, 0.941})
@@ -458,7 +461,7 @@ function onBlindfold(player, blindfolded) --- Триггер сна
 end
 
 -- Основной триггер
-function onUpdate() 
+function onUpdate() -- оставить пустым на потом
 
 end
 
@@ -608,6 +611,36 @@ function ActivateAbility(player,indexAbility)  -- Функция только д
 
 end
 
+function AddKill(player)
+  table.insert(player.Color,Town_KillList)
+end
+
+function AddDead(player)
+  player.IndexStatus = 2
+  table.insert(player.Name,Town_DeadList)
+  Player[player.Color].team = "Spades"
+  Player[player.Color].changeColor("Grey")
+end
+
+function KillToDead()
+  for i=1,#Town_KillList do
+    for j=1,#Town_Players do
+      if (Town_KillList[i] == Town_Players[j].Color and Town_Players[j].IndexStatus == 1) then
+        AddDead(Town_Players[j])
+      end
+    end
+  end
+end
+
+function DeleteKill(player) -- подумать про удобство аргумента (после тестирования)
+  for i=1,#Town_KillList do
+    if (Town_KillList[i] == player.Color) then
+      Town_KillList[i] = Town_KillList[#Town_KillList]
+      Town_KillList[#Town_KillList] = nil
+    end
+  end
+end
+
 function StartGame()
   Town_NumberOfLivingPeople = #Player.getPlayers()
   if (Town_NumberOfLivingPeople < 3) then
@@ -716,8 +749,13 @@ function DayVote()
   end
   if (#finishVote == 1) then
     printToAll("Голосование прошло успешно!",{0.129, 0.694, 0.607})
-    -- Фаза дня - Действие на 5 секунд для активации способности, если игрок пожелает нажать в текущее время
-    -- Убить игрока если действие не отменило казнь
+    for i=1,#Town_Players do
+      if (Town_Players[i].Name == finishVote[1][1]) then
+        AddKill(Town_Players[i])
+      end
+    end
+    -- подумать над тегом
+    Phase_DayAction() -- Дается 5 секунд на отмену с помощью способности. Убить игрока если действие не отменило казнь
   else
     printToAll("Равное кол-во голосов.Голосование заканчивается.Наступает ночь.",{0.856, 0.1, 0.094})
   end
@@ -743,19 +781,37 @@ function NightProgression()
     return false
   end
   if (!Night_Over) then
-    -- Добавить переход в фазы ночи здесь
-    -- Действия ролей
-    -- Если до мафии никого в колоде нет, то фаза ночного голосования, иначе ночное действие
+    if (Town_StartRoles[Night_Progress] == "Мафия") then
+      Night_Stop = true
+      -- подумать про тег фазы
+      for i=1,#Town_Players do
+        if (Town_Players[i].Role.IndexTeam == 2) then
+          Player[Town_Players[i].Color].blindfolded = false
+        end
+      end
+      Phase_NightVote()
+      UiVoteBlankShow()
+    else
+      Night_Stop = true
+      -- подумать про тег фазы
+      for i=1,#Town_Players do
+        if (Town_Players[i].Role.Name == Town_StartRoles[Night_Progress]) then
+          Player[Town_Players[i].Color].blindfolded = false
+        end
+      end
+      Phase_NightAction()
+    end
+    Night_Progress = Night_Progress + 1
   else
     GamePhase = 1
-    -- Подведение итогов ночи
+    -- Подведение итогов ночи (сделать позже, после тестирования)
     -- работа с UI: обновление списка игроков (сделать позже, после тестирования)
     for i = 1,#Town_Players do
       Player[Town_Players[i].Color].blindfolded = false
     end
     printToAll("Ночь №"..tostring(Town_CounterNights).." окончена",{0.192, 0.701, 0.168})
     printToAll("Итог ночи:",{0.956, 0.392, 0.113})
-    -- Перевод списка убийств в смерти
+    KillToDead() -- Перевод списка убийств в смерти
     broadcastToAll("День начинается!",{0.118, 0.53, 1})
     Town_CurrentPhase = 1 -- Перевод в день обсуждения
     PhaseChange() -- Начало дня
@@ -788,29 +844,42 @@ function NightVote()
   end
   if (#finishVote == 1) then
     printToAll("Голосование прошло успешно!",{0.129, 0.694, 0.607})
-    -- Добавить игрока в список убийств
+    for i=1,#Town_Players do
+      if (Town_Players[i].Name == finishVote[1][1]) then
+        AddKill(Town_Players[i])
+      end
+    end
   else
     printToAll("Голосование прошло успешно!",{0.129, 0.694, 0.607})
-    -- Голосование не прошло успешно. 
+    -- Голосование не прошло успешно. Но жителям не надо знать.
   end
   Night_Stop = false
   Town_MafiaVotes = {}
-  -- Добавить Night_Progression когда разберемся с порядком
+  for i=1,#Town_Players do
+    if (Town_Players[i].Role.IndexTeam == 2) then
+      UiShowElement("id-Sleep-Button-"..Town_Players[i].Color)
+    end
+  end
 end
 
 
 --[[
   Сделать:
-  6. Разработать систему эффектов
-  7. Проработать ночные фазы
-  --
-  8. Подсоединить UI к эффектам
-  9. Подсоединить UI к пулу ролей на столе
-  10. Тестирование
+  1. Проработать систему тегов, связанную с фазами и способностями. Особенно DayAction и NightAction. Их надо закончить.
+  2. Разработать систему эффектов
+  ---
+  3. Разработать эффекты способностей
+  4. Результаты выбора подключить к реализации способности
+  ---
+  5. UI пула ролей на столе. Реализовать
+  6. Подключить добавление ролей в пул и настройку игры
+  ---
+  7. Тестирование
 
   Комментарий:
   1. В билете для голосования сделать 10 кнопок на каждый цвет, скрывать лишние кнопки по требованию
   2. В списке способностей сделать 5-6 кнопок (3 на предметы и 2-3 на способности для любой фазы)
+  3. С учетом смертей, надо учитывать это в функциях проверки. Чтоб мертвецы не влияли на живых.
   Тестирование:
   1. Night_Progression - отсортирован список для пробуждения. У "Мафия" особенное пробуждение с голосованием.
 ]]
