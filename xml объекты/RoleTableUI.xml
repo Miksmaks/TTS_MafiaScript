@@ -1,0 +1,94 @@
+<Button scale="1.5" fontSize="72" width="1000" height="80" offsetXY="0 1450" onClick="Global/StartGame">Начать игру</Button>
+<TableLayout scale="1.5" width="2000" height="1800" rowBackgroundColor="#00000080">
+  <Row preferredHeight="1500">
+    <Cell>
+      <TableLayout>
+        <Row preferredHeight="50"> <!-- Роль -->
+          <Cell>
+            <TableLayout width="200" height="50" useGlobalCellPadding="false" columnWidths="565 50 50">
+              <Row preferredHeight="50">
+                <Cell><Text Color="#FF0000" fontSize="36">Мафия</Text></Cell>
+                <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_AddRolePool(0)">+</Button></Cell>
+                <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_DelRolePool(0)">-</Button></Cell>
+              </Row>
+            </TableLayout>
+          </Cell>
+        </Row> <!-- Роль -->
+      </TableLayout>
+    </Cell>
+    <Cell>
+      <TableLayout>
+        <Row preferredHeight="50"> <!-- Роль -->
+          <Cell>
+            <TableLayout width="200" height="50" useGlobalCellPadding="false" columnWidths="565 50 50">
+              <Row preferredHeight="50">
+                <Cell><Text Color="#554DFF" fontSize="36">Полицейский</Text></Cell>
+                <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_AddRolePool(0)">+</Button></Cell>
+                <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_DelRolePool(0)">-</Button></Cell>
+              </Row>
+            </TableLayout>
+          </Cell>
+        </Row> <!-- Роль -->
+      </TableLayout>
+    </Cell>
+    <Cell>
+      <TableLayout>
+        <Row preferredHeight="50"> <!-- Роль -->
+          <Cell>
+            <TableLayout width="200" height="50" useGlobalCellPadding="false" columnWidths="565 50 50">
+              <Row preferredHeight="50">
+                <Cell><Text Color="#FCFA58" fontSize="36">Серийный убийца</Text></Cell>
+                <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_AddRolePool(0)">+</Button></Cell>
+                <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_DelRolePool(0)">-</Button></Cell>
+              </Row>
+            </TableLayout>
+          </Cell>
+        </Row> <!-- Роль -->
+      </TableLayout>
+    </Cell>
+  </Row>
+</TableLayout>
+<TableLayout scale="2" padding="600 0 0 0" width="2000" height="50" offsetXY="0 -1000" useGlobalCellPadding="false" columnWidths="610 50 100 50">
+  <Row preferredHeight="50" width="200">
+    <Cell><Text Color="#FCFA58" fontSize="36">Время обсуждения:</Text></Cell>
+    <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_Settings(1p)">+</Button></Cell>
+    <Cell><Text id="id_setting_daytime" Color="#FCFA58" fontSize="36">180</Text></Cell>
+    <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_Settings(1m)">-</Button></Cell>
+  </Row>
+  <Row preferredHeight="50" width="200">
+    <Cell><Text Color="#FCFA58" fontSize="36">Время голосования:</Text></Cell>
+    <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_Settings(2p)">+</Button></Cell>
+    <Cell><Text id="id_setting_dayvotetime" Color="#FCFA58" fontSize="36">20</Text></Cell>
+    <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_Settings(2m)">-</Button></Cell>
+  </Row>
+  <Row preferredHeight="50" width="200">
+    <Cell><Text Color="#FCFA58" fontSize="36">Время ночного голосования:</Text></Cell>
+    <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_Settings(3p)">+</Button></Cell>
+    <Cell><Text id="id_setting_nightvotetime" Color="#FCFA58" fontSize="36">30</Text></Cell>
+    <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_Settings(3m)">-</Button></Cell>
+  </Row>
+  <Row preferredHeight="50" width="200">
+    <Cell><Text Color="#FCFA58" fontSize="36">Время ночного действия:</Text></Cell>
+    <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_Settings(4p)">+</Button></Cell>
+    <Cell><Text id="id_setting_nightactiontime" Color="#FCFA58" fontSize="36">10</Text></Cell>
+    <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_Settings(4m)">-</Button></Cell>
+  </Row>
+  <Row preferredHeight="50" width="200">
+    <Cell><Text Color="#FCFA58" fontSize="36">Время реакции:</Text></Cell>
+    <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_Settings(5p)">+</Button></Cell>
+    <Cell><Text id="id_setting_dayactiontime" Color="#FCFA58" fontSize="36">5</Text></Cell>
+    <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_Settings(5m)">-</Button></Cell>
+  </Row>
+  <Row preferredHeight="50" width="200">
+    <Cell><Text Color="#FCFA58" fontSize="36">Пропустить первый день?</Text></Cell>
+    <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_Settings(6p)">+</Button></Cell>
+    <Cell><Text id="id_setting_skipfirstday" Color="#FCFA58" fontSize="36">Нет</Text></Cell>
+    <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_Settings(6m)">-</Button></Cell>
+  </Row>
+  <Row preferredHeight="50" width="200">
+    <Cell><Text Color="#FCFA58" fontSize="36">Включить стандартную колоду?</Text></Cell>
+    <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_Settings(7p)">+</Button></Cell>
+    <Cell><Text id="id_setting_standartcards" Color="#FCFA58" fontSize="36">Нет</Text></Cell>
+    <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_Settings(7m)">-</Button></Cell>
+  </Row>
+</TableLayout>

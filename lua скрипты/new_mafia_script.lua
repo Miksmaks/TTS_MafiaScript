@@ -38,22 +38,16 @@ function find(obj,arr) -- Содержится ли объект в массив
   return k
 end
 
-
-function F(a,F,O,L,Pos,Rot,S,W,H,FS,Color,FColor) -- Конструктор кнопок
-	local p = {}
-  p.click_function = F
-  p.function_owner = O
-  p.label = L
-  p.position = Pos
-  p.rotation = Rot
-  p.scale = S
-  p.width = W
-  p.height = H
-  p.font_size = FS
-  p.color = Color
-  p.font_color = FColor
-  a.createButton(p)
+function count(obj,arr) -- Сколько таких объектов содержиться в массиве?
+  local k = 0
+  for i = 1,#arr do
+    if (arr[i] == obj) then
+      k = k + 1
+    end
+  end
+  return k
 end
+
 
 function wait(F,i) -- Ожидание
   Wait.frames(F, i*60)
@@ -80,7 +74,7 @@ end
 Class_Effect = {}
 Class_Effect.Name = "Название эффекта"
 Class_Effect.Owner = "PlayerName"
-Class_Effect.Time = 0
+Class_Effect.Time = 0 -- +1 за каждую День или Ночь (промежуточные не учитываются)
 Class_Effect.Tag = "custom_effect"
 
 Class_Item = {}
@@ -113,7 +107,7 @@ Class_Player.Color = "Grey"
 Class_Player.Role = nil
 Class_Player.IndexStatus = 0
 Class_Player.Inventory = {}
-Class_Player.Effects = {}
+Class_Player.Effects = {} -- эффекты наложенные на игрока
 
 -- База загрузки
 function onLoad() -- Основной архив (категорически не трогать!)
@@ -128,6 +122,7 @@ function onLoad() -- Основной архив (категорически н�
   OrderPhaseList = {"День: Обсуждение","День: Голосование","Ночь: Голосование","Ночь: Действие","День: Действие"}
   OrderTeamList = {"Мирные","Мафия","Третья сторона"}
   OrderStatusList = {"Жив","Мертв"}
+  MaxMafia = 3
   -- Данные города
   Town_NumberOfLivingPeople = 0
   Town_StartRoles = {} -- по названиям
@@ -141,7 +136,7 @@ function onLoad() -- Основной архив (категорически н�
   Town_MafiaVotes = {}-- Каждый элемент это Владелец голоса и Голос
   Town_KillList = {} -- По цветам (ибо могут меняться)
   Town_DeadList = {} -- По именам
-  Town_Effects = {}
+  Town_Effects = {} -- Эффекты наложенные на город, а не на игрока
   GamePhase = 0
   PhaseActionTag = "" -- Это тег текущего действия для UI. Если охотник ,например, стреляет, то выборка цели будет с таким тегом
   Night_Progress = 0
@@ -150,14 +145,15 @@ function onLoad() -- Основной архив (категорически н�
   TimeCounter = 0
   -- Настройки
   Setting_SkipFirstDay = false
-  Setting_NightTimer = 60
-  Setting_DayTimer = 60
+  Setting_StandartMode = false
+  Setting_NightTimer = 30
+  Setting_DayTimer = 180
   Setting_VoteTimer = 20
   Setting_NightActionTime = 10
   Setting_DayActionTime = 5
   Setting_GreyTalk = false
   Setting_AdminMode = false
-  F(startObj,"StartGame",self,"Начать игру",{4, 0.25, 1.7},{0.00, 0.00, 0.00},{2, 2, 2},500,300,70,{1, 1, 1},{0.25, 0.25, 0.25})
+  StartObj = getObjectFromGUID("")
 end
 
 -- UI поддержка (доработать)
@@ -397,7 +393,99 @@ function UI_ButtonSleep(player,message,namef)
   UiHideElement("id-Sleep-Button-"..player.color)
 end
 
+function UI_Settings(player,message,namef)
+  if (player.admin) then
+    if (message == "1p") then
+      if (Setting_DayTimer < 300) then
+        Setting_DayTimer = Setting_DayTimer + 30
+        StartObj.UI.setValue("id_setting_daytime",Setting_DayTimer)
+      end
+    elseif (message == "1m") then
+      if (Setting_DayTimer > 60) then
+        Setting_DayTimer = Setting_DayTimer - 30
+        StartObj.UI.setValue("id_setting_daytime",Setting_DayTimer)
+      end
+    elseif (message == "2p") then
+      if (Setting_VoteTimer < 60) then
+        Setting_VoteTimer = Setting_VoteTimer + 10
+        StartObj.UI.setValue("id_setting_dayvotetime",Setting_VoteTimer)
+      end
+    elseif (message == "2m") then
+      if (Setting_VoteTimer > 10) then
+        Setting_VoteTimer = Setting_VoteTimer - 10
+        StartObj.UI.setValue("id_setting_dayvotetime",Setting_VoteTimer)
+      end
+    elseif (message == "3p") then
+      if (Setting_NightTimer < 30) then
+        Setting_NightTimer = Setting_NightTimer + 5
+        StartObj.UI.setValue("id_setting_nightvotetime",Setting_NightTimer)
+      end
+    elseif (message == "3m") then
+      if (Setting_NightTimer > 5) then
+        Setting_NightTimer = Setting_NightTimer - 5
+        StartObj.UI.setValue("id_setting_nightvotetime",Setting_NightTimer)
+      end
+    elseif (message == "4p") then
+      if (Setting_NightActionTime < 20) then
+        Setting_NightActionTime = Setting_NightActionTime + 2
+        StartObj.UI.setValue("id_setting_nightactiontime",Setting_NightActionTime)
+      end
+    elseif (message == "4m") then
+      if (Setting_NightActionTime > 8) then
+        Setting_NightActionTime = Setting_NightActionTime - 2
+        StartObj.UI.setValue("id_setting_nightactiontime",Setting_NightActionTime)
+      end
+    elseif (message == "5p") then
+      if (Setting_DayActionTime < 8) then
+        Setting_DayActionTime = Setting_DayActionTime + 1
+        StartObj.UI.setValue("id_setting_dayactiontime",Setting_DayActionTime)
+      end
+    elseif (message == "5m") then
+      if (Setting_DayActionTime > 3) then
+        Setting_DayActionTime = Setting_DayActionTime - 1
+        StartObj.UI.setValue("id_setting_dayactiontime",Setting_DayActionTime)
+      end
+    elseif (message == "6p") then
+      Setting_SkipFirstDay = true
+      StartObj.UI.setValue("id_setting_skipfirstday","Да")
+    elseif (message == "6m") then
+      Setting_SkipFirstDay = false
+      StartObj.UI.setValue("id_setting_skipfirstday","Нет")
+    elseif (message == "7p") then
+      Setting_StandartMode = true
+      StartObj.UI.setValue("id_setting_standartcards","Да")
+    elseif (message == "7m") then
+      Setting_StandartMode = false
+      StartObj.UI.setValue("id_setting_standartcards","Нет")
+    end
+  else
+    broadcastToColor("Настройку могут производить только админы!",player.color,{0.627, 0.125, 0.941})
+  end
+end
 
+function UI_AddRolePool(player,message,namef)
+  if (player.admin) then
+    local k = tonumber(message)
+    if (count(OrderRoleList[k],Town_StartRoles) <= MaxMafia) then
+      table.insert(Town_StartRoles,OrderRoleList[k])
+    end
+  else
+    broadcastToColor("Настройку могут производить только админы!",player.color,{0.627, 0.125, 0.941})
+  end
+end
+
+function UI_DelRolePool(player,message,namef)
+  if (player.admin) then
+    local k = tonumber(message)
+    local index = find(OrderRoleList[k],Town_StartRoles) 
+    if (index != 0) then
+      Town_StartRoles[index] = Town_StartRoles[#Town_StartRoles]
+      Town_StartRoles[#Town_StartRoles] = nil
+    end
+  else
+    broadcastToColor("Настройку могут производить только админы!",player.color,{0.627, 0.125, 0.941})
+  end
+end
 
 -- Команды чата
 function onChat(message,Player) -- Функция связанная с чатом, а точнее команды (занять после тестирования)
@@ -692,6 +780,7 @@ end
 
 function Phase_DaySpeech()
   Town_CurrentPhase = 1
+  PhaseActionTag = "tag_phase_day"
   UiSetPhase(OrderPhaseList[1])
   UiSetTime(Setting_DayTimer)
   StartTimer(Phase_DayVote,Setting_DayTimer)
@@ -699,6 +788,7 @@ end
 
 function Phase_DayVote()
   Town_CurrentPhase = 2
+  PhaseActionTag = "tag_phase_dayvote"
   UiSetPhase(OrderPhaseList[2])
   UiSetTime(Setting_VoteTimer)
   StartTimer(DayVote,Setting_VoteTimer)
@@ -706,6 +796,7 @@ end
 
 function Phase_NightVote()
   Town_CurrentPhase = 3
+  PhaseActionTag = "tag_phase_nightvote"
   UiSetPhase(OrderPhaseList[3])
   UiSetTime(Setting_VoteTimer)
   StartTimer(NightVote,Setting_VoteTimer)
@@ -713,10 +804,11 @@ end
 
 function Phase_NightAction()
   Town_CurrentPhase = 4
+  PhaseActionTag = "tag_phase_nightaction"
   UiSetPhase(OrderPhaseList[4])
   UiSetTime(Setting_NightActionTime)
   StartTimer(function()
-  -- установка тега
+  PhaseActionTag = "tag_phase_night"
   Night_Stop = false
   end,
   Setting_NightActionTime) 
@@ -724,10 +816,12 @@ end
 
 function Phase_DayAction()
   Town_CurrentPhase = 5
+  PhaseActionTag = "tag_phase_dayaction"
   UiSetPhase(OrderPhaseList[5])
   UiSetTime(Setting_DayActionTime)
   StartTimer(function()
-    -- установка тега
+  KillToDead()
+  PhaseActionTag = "tag_phase_day"
   end,
   Setting_DayActionTime) 
 end
@@ -763,7 +857,6 @@ function DayVote()
         AddKill(Town_Players[i])
       end
     end
-    -- подумать над тегом
     Phase_DayAction() -- Дается 5 секунд на отмену с помощью способности. Убить игрока если действие не отменило казнь
   else
     printToAll("Равное кол-во голосов.Голосование заканчивается.Наступает ночь.",{0.856, 0.1, 0.094})
@@ -795,7 +888,6 @@ function NightProgression()
   if (!Night_Over) then
     if (Town_StartRoles[Night_Progress] == "Мафия") then
       Night_Stop = true
-      -- подумать про тег фазы
       for i=1,#Town_Players do
         if (Town_Players[i].Role.IndexTeam == 2) then
           Player[Town_Players[i].Color].blindfolded = false
@@ -806,7 +898,6 @@ function NightProgression()
     else
       local check = false
       Night_Stop = true
-      -- подумать про тег фазы
       for i=1,#Town_Players do
         if (Town_Players[i].Role.Name == Town_StartRoles[Night_Progress]) then
           Player[Town_Players[i].Color].blindfolded = false
@@ -882,14 +973,8 @@ end
 
 --[[
   Сделать:
-  1. Проработать систему тегов, связанную с фазами и способностями. Особенно DayAction и NightAction. Их надо закончить.
-  2. Разработать систему эффектов
-  ---
   3. Разработать эффекты способностей
   4. Результаты выбора подключить к реализации способности
-  ---
-  5. UI пула ролей на столе. Реализовать
-  6. Подключить добавление ролей в пул и настройку игры
   ---
   7. Тестирование
 
@@ -897,6 +982,18 @@ end
   1. В билете для голосования сделать 10 кнопок на каждый цвет, скрывать лишние кнопки по требованию
   2. В списке способностей сделать 5-6 кнопок (3 на предметы и 2-3 на способности для любой фазы)
   3. С учетом смертей, надо учитывать это в функциях проверки. Чтоб мертвецы не влияли на живых.
+  4. Учитывать прирывание в таймере, когда кто то использует способность.
+  5. Доработать систему тегов
   Тестирование:
   1. Night_Progression - отсортирован список для пробуждения. У "Мафия" особенное пробуждение с голосованием.
+]]
+
+--[[
+  Список эффектов для стандартного пула:
+  Доктор - effect_heal
+  Защищенный - effect_armor
+
+  Политик - effect_blocknight
+  Подтасовщик улик - effect_mafiamask
+  Адвокат - effect_blockactions
 ]]
