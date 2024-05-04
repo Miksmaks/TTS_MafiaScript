@@ -70,6 +70,7 @@ function StartTimer(func,delay) -- Основной таймер
   wait(func,TimeCounter+1)
 end
 
+
 -- Классы (доработать)
 Class_Effect = {}
 Class_Effect.Name = "Название эффекта"
@@ -117,6 +118,7 @@ function onLoad() -- Основной архив (категорически н�
   TOther = {"Серийный убийца","Ведьма","Крот","Лидер культа","Поджигатель","Оборотень","Забывчивый","Санта Клаус","Выживающий","Пират"}
   ]]
   -- Константы и порядки
+  -- перепроверить список (после тестирования)
   OrderRoleList = {"Политик","Пассажир","Пьяница","Проститутка","Тюремщик","Водитель","Шофер","Ведьма","Телохранитель","Вышибала","Мастер-на-все-руки","Адвокат","Подтасовщик улик","Портной","Мафия","Крот","Лидер культа","Поджигатель","Оборотень","Забывчивый","Детектив","Полицейский","Заместитель","Шпион","Санта Клаус","Эльф","Кузнец","Пекарь","Репортер","Оружейник","Вор","Сосед","Священник","Букмекер","Уборщик","Следователь","Отравитель","Химик","Саботер","Террорист","Мститель","Серийный убийца","Выживающий","Пират","Сообщник","Смотритель","Выслеживатель","Новичок","Доктор","Медсестра","Тест","Мирный","Охотник","Защищенный"}
   OrderColorList = {"White","Brown","Red","Orange","Yellow","Green","Teal","Blue","Purple","Pink"}
   OrderPhaseList = {"День: Обсуждение","День: Голосование","Ночь: Голосование","Ночь: Действие","День: Действие"}
@@ -196,9 +198,21 @@ function UiStart() -- Показать стартовые объекты для 
   end
 end
 
-function UiSetPlayersList(text)
+function UiSetPlayersList()
+  local ListText = "Колода ролей:\n"
+  for i=1,#Town_StartRoles do
+    ListText = ListText .. Town_StartRoles[i].."\n"
+  end
+  ListText = ListText .. "\nИгроки:\n"
   for i=1,#Town_Players do
-    UiChangeValue("id-PlayersList-TextList-"..Town_Players[i].Color,text)
+    if (Town_Players[i].IndexStatus == 1) then
+      ListText = ListText .. Town_Players[i].Name .. " - " .. "Неизвестно" .."\n"
+    else
+      ListText = ListText .. Town_Players[i].Name .. " - " .. Town_Players[i].Role.Name .."\n"
+    end
+  end
+  for i=1,#Town_Players do
+    UiChangeValue("id-PlayersList-TextList-"..Town_Players[i].Color,ListText)
   end
 end
 
@@ -268,6 +282,16 @@ function UiAbilitiesSettings()
       end
     end
   end
+end
+
+function SetNoteRolePool()
+  local ListText =  "Колода ролей:\n"
+  for i=1,#OrderRoleList do
+    if (find(OrderRoleList[i],Town_StartRoles) != 0) then
+      ListText = ListText .. OrderRoleList[i] .. " - " .. count(OrderRoleList[i],Town_StartRoles) .. "шт.\n"
+    end
+  end
+  Notes.setNotes(ListText)
 end
 
 -- UI связки
@@ -340,10 +364,7 @@ function UI_VoteBlank(player,message,namef) -- message передает инде
       elseif (Town_CurrentPhase == 3) then -- ночное голосование
         table.insert(Town_MafiaVotes,{Town_Players[i].Name,FromColorToPlayer(OrderColorList[message]).Name})
       elseif (Town_CurrentPhase == 4 or Town_CurrentPhase == 5) then -- ночной и дневной выбор
-        local target = copy(Class_Target)
-        target.nameTag = PhaseActionTag
-        target.PlayerName = FromColorToPlayer(OrderColorList[message]).Name
-        table.insert(Town_Players[i].Role.Targets,target)
+        TwoStepActivateAbility(FromColorToPlayer(OrderColorList[message]),FromColorToPlayer(player.color),PhaseActionTag)
       end
       UiHideElement("id-Vote-Table-"..player.color)
     end
@@ -353,11 +374,13 @@ end
 function UI_AbilityMenu(player,message,namef)
   for i=1,#Town_Players do
     if (Town_Players[i].Color == player.color) then
-      if (Town_CurrentPhase == Town_Players[i].Role.Abilities[message].IndexPhase and Town_Players[i].Role.Abilities[message].UseTime > 0) then
+      if (Town_CurrentPhase == Town_Players[i].Role.Abilities[message].IndexPhase and Town_Players[i].Role.Abilities[message].UseTime > 0 and !Town_Players[i].Role.Abilities[message].Recharge) then
         Town_Players[i].Role.Abilities[message].UseTime = Town_Players[i].Role.Abilities[message].UseTime - 1
         Town_Players[i].Role.Abilities[message].Recharge = true
         UiChangeValue("id-AbilityMenu-Counter"..tostring(message).."-"..player.color,Town_Players[i].Role.Abilities[message].UseTime)
         ActivateAbility(Town_Players[i],message)
+      elseif (Town_Players[i].Role.Abilities[message].Recharge) then
+        broadcastToColor("Вы уже использовали эту способность!",player.color,{0.627, 0.125, 0.941})
       elseif (Town_Players[i].Role.Abilities[message].UseTime <= 0) then
         broadcastToColor("Эта способность исчерпана!",player.color,{0.627, 0.125, 0.941})
       else
@@ -468,6 +491,7 @@ function UI_AddRolePool(player,message,namef)
     local k = tonumber(message)
     if (count(OrderRoleList[k],Town_StartRoles) <= MaxMafia) then
       table.insert(Town_StartRoles,OrderRoleList[k])
+      SetNoteRolePool()
     end
   else
     broadcastToColor("Настройку могут производить только админы!",player.color,{0.627, 0.125, 0.941})
@@ -481,6 +505,7 @@ function UI_DelRolePool(player,message,namef)
     if (index != 0) then
       Town_StartRoles[index] = Town_StartRoles[#Town_StartRoles]
       Town_StartRoles[#Town_StartRoles] = nil
+      SetNoteRolePool()
     end
   else
     broadcastToColor("Настройку могут производить только админы!",player.color,{0.627, 0.125, 0.941})
@@ -592,14 +617,14 @@ end
 
 function StartAbilities(role)
   local list = {}
-  if (role == "Мафия") then
+  --[[if (role == "Мафия") then
     local a = copy(Class_Ability)
     a.Name = "Убийство"
     a.UseTime = 99
     a.IndexPhase = 3
     a.Tag = "ability_mafia_kill"
-    table.insert(list,a)
-  elseif (role == "Полицейский") then
+    table.insert(list,a)]]
+  if (role == "Полицейский") then
     local a = copy(Class_Ability)
     a.Name = "Проверка деятельности"
     a.UseTime = 99
@@ -632,6 +657,27 @@ function StartAbilities(role)
     a.UseTime = 99
     a.IndexPhase = 4
     a.Tag = "ability_serialkiller_kill"
+    table.insert(list,a)
+  elseif (role == "Политик") then
+    local a = copy(Class_Ability)
+    a.Name = "Саботаж ночи"
+    a.UseTime = 1
+    a.IndexPhase = 4
+    a.Tag = "ability_politic_sabotage"
+    table.insert(list,a)
+  elseif (role == "Подтасовщик улик") then
+    local a = copy(Class_Ability)
+    a.Name = "Подкинуть улики"
+    a.UseTime = 99
+    a.IndexPhase = 4
+    a.Tag = "ability_framer_sabotage"
+    table.insert(list,a)
+  elseif (role == "Адвокат") then
+    local a = copy(Class_Ability)
+    a.Name = "Защитить права"
+    a.UseTime = 99
+    a.IndexPhase = 4
+    a.Tag = "ability_lawyer_sabotage"
     table.insert(list,a)
   end
   return list
@@ -699,8 +745,52 @@ function PhaseChange()
   end
 end
 
-function ActivateAbility(player,indexAbility)  -- Функция только для активации способности (добавить выбор отдельной функцией)
+function ActivateAbility(player,indexAbility)  -- Функция только для активации способности
+  if (player.Role.Abilities[indexAbility].Tag == "ability_police_search") then
+    PhaseActionTag = "ability_police_search"
+    UiVoteBlankShow(player)
+  elseif (player.Role.Abilities[indexAbility].Tag == "ability_doctor_heal") then
+    PhaseActionTag = "ability_doctor_heal"
+    UiVoteBlankShow(player)
+  elseif (player.Role.Abilities[indexAbility].Tag == "ability_doctor_selfheal") then
+    Effect_HealPlayer(player,player)
+  elseif (player.Role.Abilities[indexAbility].Tag == "ability_detective_search") then
+    PhaseActionTag = "ability_detective_search"
+    UiVoteBlankShow(player)
+  elseif (player.Role.Abilities[indexAbility].Tag == "ability_serialkiller_kill") then
+    PhaseActionTag = "ability_serialkiller_kill"
+    UiVoteBlankShow(player)
+  elseif (player.Role.Abilities[indexAbility].Tag == "ability_politic_sabotage") then
+    Effect_BlockNight(player)
+  elseif (player.Role.Abilities[indexAbility].Tag == "ability_framer_sabotage") then
+    PhaseActionTag = "ability_framer_sabotage"
+    UiVoteBlankShow(player)
+  elseif (player.Role.Abilities[indexAbility].Tag == "ability_lawyer_sabotage") then
+    PhaseActionTag = "ability_lawyer_sabotage"
+    UiVoteBlankShow(player)
+  end
+end
 
+function TwoStepActivateAbility(target_player,owner_player,ability_tag) -- Функция активации способности, где ранее был выбор
+  if (ability_tag == "ability_police_search") then
+    Effect_InvestigateSide(target_player,owner_player)
+    PhaseActionTag = "tag_phase_night"
+  elseif (ability_tag == "ability_doctor_heal") then
+    Effect_HealPlayer(target_player,owner_player)
+    PhaseActionTag = "tag_phase_night"
+  elseif (ability_tag == "ability_detective_search") then
+    Effect_InvestigateRole(target_player,owner_player)
+    PhaseActionTag = "tag_phase_night"
+  elseif (ability_tag == "ability_serialkiller_kill") then
+    Effect_KillPlayer(target_player,owner_player)
+    PhaseActionTag = "tag_phase_night"
+  elseif (ability_tag == "ability_framer_sabotage") then
+    Effect_GiveRoleMask(target_player,owner_player,"Мафия")
+    PhaseActionTag = "tag_phase_night"
+  elseif (ability_tag == "ability_lawyer_sabotage") then
+    Effect_BlockAction(target_player,owner_player)
+    PhaseActionTag = "tag_phase_night"
+  end
 end
 
 function AddKill(player)
@@ -754,16 +844,7 @@ function StartGame()
       end
     end
     SortRoleList()
-    -- Доработать тут в виде функции (позднее после тестирования)
-    local ListText = "Колода ролей:\n"
-    for i=1,#Town_StartRoles do
-      ListText = ListText .. Town_StartRoles[i].."\n"
-    end
-    ListText = "\nИгроки:\n"
-    for i=1,#Town_Players do
-      ListText = ListText .. Town_Players[i].Name .. "Неизвестно" .."\n"
-    end
-    UiSetPlayersList(ListText)
+    UiSetPlayersList()
     UiAbilitiesSettings()
     UiStart()
     broadcastToAll("Подготовка к игре завершена",{0.118, 0.53, 1})
@@ -973,10 +1054,10 @@ end
 
 --[[
   Сделать:
-  3. Разработать эффекты способностей
-  4. Результаты выбора подключить к реализации способности
+  2. Разработать начальные эффекты
+  3. Сделать триггеры для активации эффектов (города, игроков, взаимодействия между способностями)
   ---
-  7. Тестирование
+  4. Тестирование
 
   Комментарий:
   1. В билете для голосования сделать 10 кнопок на каждый цвет, скрывать лишние кнопки по требованию
@@ -997,3 +1078,33 @@ end
   Подтасовщик улик - effect_mafiamask
   Адвокат - effect_blockactions
 ]]
+
+-- Функции всех эффектов
+
+function Effect_InvestigateRole(player_target,player_owner)
+
+end
+
+function Effect_InvestigateSide(player_target,player_owner)
+
+end
+
+function Effect_HealPlayer(player_target,player_owner)
+
+end
+
+function Effect_KillPlayer(player_target,player_owner)
+
+end
+
+function Effect_BlockNight(player_owner)
+
+end
+
+function Effect_GiveRoleMask(player_target,player_owner, mask)
+
+end
+
+function Effect_BlockAction(player_target,player_owner)
+
+end
