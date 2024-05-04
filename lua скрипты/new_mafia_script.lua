@@ -944,6 +944,7 @@ function DayVote()
   end
   Town_PlayerVotes = {}
   GamePhase = 2 -- Разрешение на закрытие глаз
+  UpdateEffects()
   for i=1,#Town_Players do
     UiShowElement("id-Sleep-Button-"..Town_Players[i].Color) -- Найти способ отключить закрытие глаз в игре от игроков
   end
@@ -993,13 +994,15 @@ function NightProgression()
     Night_Progress = Night_Progress + 1
   else
     GamePhase = 1
+    Town_CounterNights = Town_CounterNights + 1
     -- Подведение итогов ночи (сделать позже, после тестирования)
     -- работа с UI: обновление списка игроков (сделать позже, после тестирования)
     for i = 1,#Town_Players do
       Player[Town_Players[i].Color].blindfolded = false
     end
     printToAll("Ночь №"..tostring(Town_CounterNights).." окончена",{0.192, 0.701, 0.168})
-    printToAll("Итог ночи:",{0.956, 0.392, 0.113})
+    --printToAll("Итог ночи:",{0.956, 0.392, 0.113})
+    UpdateEffects()
     KillToDead() -- Перевод списка убийств в смерти
     broadcastToAll("День начинается!",{0.118, 0.53, 1})
     Town_CurrentPhase = 1 -- Перевод в день обсуждения
@@ -1051,13 +1054,43 @@ function NightVote()
   end
 end
 
+function UpdateEffects()
+  local k = 1
+  while (k <= #Town_Effects) do
+    if (Town_Effects[k].Time == 1) then
+      AfterEffects(Town_Effects[k].Tag,nil)
+      Town_Effects[k] = Town_Effects[#Town_Effects]
+      Town_Effects[#Town_Effects] = nil
+    else
+      Town_Effects[k].Time = Town_Effects[k].Time - 1
+      k = k + 1
+    end
+  end
+  for i=1,#Town_Players do
+    local k = 1
+    while (k <= #Town_Players[i].Effects[k]) do
+      if (Town_Players[i].Effects[k].Time == 1) then
+        AfterEffects(Town_Players[i].Effects[k].Tag,Town_Players[i])
+        Town_Players[i].Effects[k] = Town_Players[i].Effects[#Town_Players[i].Effects]
+        Town_Players[i].Effects[#Town_Players[i].Effects] = nil
+      else
+        Town_Players[i].Effects[k].Time = Town_Players[i].Effects[k].Time - 1
+        k = k + 1
+      end
+    end
+  end
+end
+
+function AfterEffects(tag,owner_player)
+  --- Эффекты после спада эффекта
+end
+
 
 --[[
   Сделать:
-  2. Разработать начальные эффекты
-  3. Сделать триггеры для активации эффектов (города, игроков, взаимодействия между способностями)
+  1. Пересмотреть взаимодействие между способностями (смерть, хил, блок ночи, броня)
   ---
-  4. Тестирование
+  2. Тестирование
 
   Комментарий:
   1. В билете для голосования сделать 10 кнопок на каждый цвет, скрывать лишние кнопки по требованию
@@ -1065,46 +1098,91 @@ end
   3. С учетом смертей, надо учитывать это в функциях проверки. Чтоб мертвецы не влияли на живых.
   4. Учитывать прирывание в таймере, когда кто то использует способность.
   5. Доработать систему тегов
+  6. Пересмотреть эффекты после спада эффекта
+  7. Добавить недостающие роли в активный список. Защищенному дать эффект брони.
   Тестирование:
   1. Night_Progression - отсортирован список для пробуждения. У "Мафия" особенное пробуждение с голосованием.
 ]]
 
 --[[
-  Список эффектов для стандартного пула:
-  Доктор - effect_heal
-  Защищенный - effect_armor
 
-  Политик - effect_blocknight
-  Подтасовщик улик - effect_mafiamask
-  Адвокат - effect_blockactions
 ]]
 
 -- Функции всех эффектов
 
 function Effect_InvestigateRole(player_target,player_owner)
-
+  local change = 0
+  for i=1,#player_target.Effects do
+    if (player_target.Effects[i].Tag == "effect_blockactions") then
+      change = 1
+    end
+  end
+  if (change == 1) then
+    printToColor("Вы уже собрались поискать улики, но адвокат запретил вам приближаться к подозреваемому",player_owner.Color, {0.129, 0.694, 0.607})
+  else
+    printToColor("Вы нашли улики, указывающие, что [8B48F0]" .. player_target.Name .. "[-] является [8B48F0]"..player_target.Role.Name.."[-]",player_owner.Color, {0.129, 0.694, 0.607})
+  end
 end
 
 function Effect_InvestigateSide(player_target,player_owner)
-
+  local change = 0
+  for i=1,#player_target.Effects do
+    if (player_target.Effects[i].Tag == "effect_mask_mafia") then
+      change = 1
+    end
+  end
+  if (change == 1) then
+    printToColor("Вы опросили свидетелей, указывающих что [8B48F0]" .. player_target.Name .. "[-] принадлежит к группе [8B48F0]".."Мафия".."[-]",player_owner.Color, {0.129, 0.694, 0.607})
+  else
+    printToColor("Вы опросили свидетелей, указывающих что [8B48F0]" .. player_target.Name .. "[-] принадлежит к группе [8B48F0]"..OrderTeamList[player_target.Role.IndexTeam].."[-]",player_owner.Color, {0.129, 0.694, 0.607})
+  end
 end
 
 function Effect_HealPlayer(player_target,player_owner)
+  local effect = copy(Class_Effect)
+  effect.Name = "Лечение"
+  effect.Owner = player_owner.Name
+  effect.Time = 1
+  effect.Tag = "effect_heal"
+  table.insert(player_target.Effects, effect)
+end
 
+function Effect_WearArmor(player_target,player_owner)
+  local effect = copy(Class_Effect)
+  effect.Name = "Броня"
+  effect.Owner = player_owner.Name
+  effect.Time = 99
+  effect.Tag = "effect_armor"
+  table.insert(player_target.Effects, effect)
 end
 
 function Effect_KillPlayer(player_target,player_owner)
-
+  AddKill(player_target.Color)
 end
 
 function Effect_BlockNight(player_owner)
-
+  local effect = copy(Class_Effect)
+  effect.Name = "Отмена ночи"
+  effect.Owner = player_owner.Name
+  effect.Time = 1
+  effect.Tag = "effect_blocknight"
+  table.insert(Town_Effects, effect)
 end
 
 function Effect_GiveRoleMask(player_target,player_owner, mask)
-
+  local effect = copy(Class_Effect)
+  effect.Name = "Маска"
+  effect.Owner = player_owner.Name
+  effect.Time = 1
+  effect.Tag = "effect_mask_"..mask
+  table.insert(player_target.Effects, effect)
 end
 
 function Effect_BlockAction(player_target,player_owner)
-
+  local effect = copy(Class_Effect)
+  effect.Name = "Блок действий"
+  effect.Owner = player_owner.Name
+  effect.Time = 1
+  effect.Tag = "effect_blockactions"
+  table.insert(player_target.Effects, effect)
 end
