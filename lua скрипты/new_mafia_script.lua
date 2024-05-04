@@ -731,7 +731,7 @@ function CreateRole(role)
   return r
 end
 
-function PhaseChange()
+function PhaseChange() -- Ошибка: Функция не используется. Оставлена на будущее.
   if (Town_CurrentPhase == 1) then
     wait(Phase_DaySpeech,2)
   elseif (Town_CurrentPhase== 2) then
@@ -851,8 +851,7 @@ function StartGame()
     Notes.setNotes("")
     if (!Setting_SkipFirstDay) then
       GamePhase = 1 -- Признак начала игры (день)
-      Town_CurrentPhase = 1 
-      PhaseChange() -- Начало дня
+      Phase_DaySpeech()
     else
       GamePhase = 2 -- Признак перехода к ночным фазам
     end
@@ -943,8 +942,8 @@ function DayVote()
     printToAll("Равное кол-во голосов.Голосование заканчивается.Наступает ночь.",{0.856, 0.1, 0.094})
   end
   Town_PlayerVotes = {}
-  GamePhase = 2 -- Разрешение на закрытие глаз
   UpdateEffects()
+  GamePhase = 2 -- Разрешение на закрытие глаз
   for i=1,#Town_Players do
     UiShowElement("id-Sleep-Button-"..Town_Players[i].Color) -- Найти способ отключить закрытие глаз в игре от игроков
   end
@@ -993,6 +992,7 @@ function NightProgression()
     end
     Night_Progress = Night_Progress + 1
   else
+    UpdateEffects()
     GamePhase = 1
     Town_CounterNights = Town_CounterNights + 1
     -- Подведение итогов ночи (сделать позже, после тестирования)
@@ -1002,11 +1002,9 @@ function NightProgression()
     end
     printToAll("Ночь №"..tostring(Town_CounterNights).." окончена",{0.192, 0.701, 0.168})
     --printToAll("Итог ночи:",{0.956, 0.392, 0.113})
-    UpdateEffects()
     KillToDead() -- Перевод списка убийств в смерти
     broadcastToAll("День начинается!",{0.118, 0.53, 1})
-    Town_CurrentPhase = 1 -- Перевод в день обсуждения
-    PhaseChange() -- Начало дня
+    Phase_DaySpeech()
   end
 end
 
@@ -1055,6 +1053,7 @@ function NightVote()
 end
 
 function UpdateEffects()
+  EffectsActivation()
   local k = 1
   while (k <= #Town_Effects) do
     if (Town_Effects[k].Time == 1) then
@@ -1085,21 +1084,42 @@ function AfterEffects(tag,owner_player)
   --- Эффекты после спада эффекта
 end
 
+function EffectsActivation()
+  for i=1,#Town_Effects do
+    if (Town_Effects[i].Tag == "effect_blocknight" and GamePhase == 2) then
+      Night_Over = true
+      Town_Effects[i] = Town_Effects[#Town_Effects]
+      Town_Effects[#Town_Effects] = nil
+    end
+  end
+  for i=1,#Town_Players do
+    for j=1,#Town_Players[i].Effects do
+      if (Town_Players[i].Effects[j].Tag == "effect_heal" and find(Town_Players[i].Color,Town_KillList) != 0 and GamePhase == 2) then
+        local index = find(Town_Players[i].Color,Town_KillList)
+        Town_KillList[index] = Town_KillList[#Town_KillList]
+        Town_KillList[#Town_KillList] = nil
+        Town_Players[i].Effects[j] = Town_Players[i].Effects[#Town_Players[i].Effects]
+        Town_Players[i].Effects[#Town_Players[i].Effects] = nil
+      elseif (Town_Players[i].Effects[j].Tag == "effect_armor" and find(Town_Players[i].Color,Town_KillList) != 0 and GamePhase == 2) then
+        Town_KillList[index] = Town_KillList[#Town_KillList]
+        Town_KillList[#Town_KillList] = nil
+        Town_Players[i].Effects[j] = Town_Players[i].Effects[#Town_Players[i].Effects]
+        Town_Players[i].Effects[#Town_Players[i].Effects] = nil
+      end
+    end
+  end
+end
+
 
 --[[
   Сделать:
-  1. Пересмотреть взаимодействие между способностями (смерть, хил, блок ночи, броня)
-  ---
+  1. Дополнить весь UI по видимости и ввести все кнопки и все цвета (10 кнопок в голосовании и 6 кнопок в способностях) + Сделать стол 
   2. Тестирование
+  3. Мертвецы не должны влиять на живых
+  4. Проверить теги еще раз, чтобы другой человек не активировал, когда уже есть эффект. Или чтоб только в определенную фазу.
+  5. Добавить недостающие роли в активный список.Защищенному дать эффект брони.
 
-  Комментарий:
-  1. В билете для голосования сделать 10 кнопок на каждый цвет, скрывать лишние кнопки по требованию
-  2. В списке способностей сделать 5-6 кнопок (3 на предметы и 2-3 на способности для любой фазы)
-  3. С учетом смертей, надо учитывать это в функциях проверки. Чтоб мертвецы не влияли на живых.
-  4. Учитывать прирывание в таймере, когда кто то использует способность.
-  5. Доработать систему тегов
-  6. Пересмотреть эффекты после спада эффекта
-  7. Добавить недостающие роли в активный список. Защищенному дать эффект брони.
+  Комментарий: -
   Тестирование:
   1. Night_Progression - отсортирован список для пробуждения. У "Мафия" особенное пробуждение с голосованием.
 ]]
@@ -1129,10 +1149,14 @@ function Effect_InvestigateSide(player_target,player_owner)
   for i=1,#player_target.Effects do
     if (player_target.Effects[i].Tag == "effect_mask_mafia") then
       change = 1
+    elseif (player_target.Effects[i].Tag == "effect_blockactions") then
+      change = 2
     end
   end
   if (change == 1) then
     printToColor("Вы опросили свидетелей, указывающих что [8B48F0]" .. player_target.Name .. "[-] принадлежит к группе [8B48F0]".."Мафия".."[-]",player_owner.Color, {0.129, 0.694, 0.607})
+  elseif (change == 2) then
+    printToColor("Вы уже хотели опрашивать свидетелей, но адвокат запретил вам приближаться к подозреваемому",player_owner.Color, {0.129, 0.694, 0.607})
   else
     printToColor("Вы опросили свидетелей, указывающих что [8B48F0]" .. player_target.Name .. "[-] принадлежит к группе [8B48F0]"..OrderTeamList[player_target.Role.IndexTeam].."[-]",player_owner.Color, {0.129, 0.694, 0.607})
   end
