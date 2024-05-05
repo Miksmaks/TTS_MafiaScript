@@ -67,7 +67,7 @@ end
 function StartTimer(func,delay) -- Основной таймер
   TimeCounter = delay
   TownTimer() -- Запуск таймера
-  wait(func,TimeCounter+1)
+  wait(func,TimeCounter+2)
 end
 
 
@@ -187,12 +187,18 @@ function UiChangeValue(id,value) -- Функция смены значения
 	UI.setValue(id,value)
 end
 
+function UiChangeText(id,value)
+  UI.setAttribute(id,"text",value)
+end
+
 function UiStart() -- Показать стартовые объекты для игры
   for i=1,#Town_Players do
     UiChangeColor("id-Hide-ButtonChange-"..Town_Players[i].Color,"#00FA9A80")
     UiShowElement("id-Hide-ButtonChange-"..Town_Players[i].Color)
     UiShowElement("id-PlayerMenu-Table-"..Town_Players[i].Color)
+    UiChangePosition("id-AbilityMenu-Table-"..Town_Players[i].Color,-700,-100)
     UiShowElement("id-AbilityMenu-Table-"..Town_Players[i].Color)
+    UiChangePosition("id-PlayersList-Table-"..Town_Players[i].Color,700,-100)
     UiShowElement("id-PlayersList-Table-"..Town_Players[i].Color)
     UiShowElement("id-Time-Table-"..Town_Players[i].Color)
   end
@@ -200,8 +206,10 @@ end
 
 function UiSetPlayersList()
   local ListText = "Колода ролей:\n"
-  for i=1,#Town_StartRoles do
-    ListText = ListText .. Town_StartRoles[i].."\n"
+  for i=1,#OrderRoleList do
+    if (find(OrderRoleList[i],Town_StartRoles) != 0) then
+      ListText = ListText .. OrderRoleList[i].." ("..count(OrderRoleList[i],Town_StartRoles).." шт.)".."\n"
+    end
   end
   ListText = ListText .. "\nИгроки:\n"
   for i=1,#Town_Players do
@@ -212,19 +220,19 @@ function UiSetPlayersList()
     end
   end
   for i=1,#Town_Players do
-    UiChangeValue("id-PlayersList-TextList-"..Town_Players[i].Color,ListText)
+    UiChangeText("id-PlayersList-TextList-"..Town_Players[i].Color,ListText)
   end
 end
 
 function UiSetPhase(text)
   for i=1,#Town_Players do
-    UiChangeValue("id-Time-TextPhase-"..Town_Players[i].Color,text)
+    UiChangeText("id-Time-TextPhase-"..Town_Players[i].Color,text)
   end
 end
 
 function UiSetTime(text)
   for i=1,#Town_Players do
-    UiChangeValue("id-Time-TextTime-"..Town_Players[i].Color,text)
+    UiChangeText("id-Time-TextTime-"..Town_Players[i].Color,text)
   end
 end
 
@@ -237,9 +245,12 @@ function UiVoteBlankShow(currentPlayer) -- аргумент это игрок
           UiHideElement("id-Vote-Row"..tostring(j).."-"..Town_Players[i].Color)
         elseif (plr.IndexStatus == 2) then
           UiHideElement("id-Vote-Row"..tostring(j).."-"..Town_Players[i].Color)
+        else
+          UiChangeText("id-Vote-Button"..tostring(j).."-"..Town_Players[i].Color,plr.Name)
+          -- Добавить функцию для цветовых кнопок: UiChangeColor("id-Vote-Button"..tostring(j).."-"..Town_Players[i].Color,plr.Color)
         end
       end
-      UiChangeValue("id-Vote-HeadText-"..Town_Players[i].Color,"Билет для голосования")
+      UiChangeText("id-Vote-HeadText-"..Town_Players[i].Color,"Билет для голосования")
       UiShowElement("id-Vote-Table-"..Town_Players[i].Color)
     end
   elseif (Town_CurrentPhase == 3) then -- Мафиозное голосование
@@ -251,9 +262,12 @@ function UiVoteBlankShow(currentPlayer) -- аргумент это игрок
             UiHideElement("id-Vote-Row"..tostring(j).."-"..Town_Players[i].Color)
           elseif (plr.IndexStatus == 2) then
             UiHideElement("id-Vote-Row"..tostring(j).."-"..Town_Players[i].Color)
+          else
+            UiChangeText("id-Vote-Button"..tostring(j).."-"..Town_Players[i].Color,plr.Name)
+            -- Добавить функцию для цветовых кнопок: UiChangeColor("id-Vote-Button"..tostring(j).."-"..Town_Players[i].Color,plr.Color)
           end
         end
-        UiChangeValue("id-Vote-HeadText-"..Town_Players[i].Color,"Убить игрока")
+        UiChangeText("id-Vote-HeadText-"..Town_Players[i].Color,"Убить игрока")
         UiShowElement("id-Vote-Table-"..Town_Players[i].Color)
       end
     end
@@ -264,9 +278,12 @@ function UiVoteBlankShow(currentPlayer) -- аргумент это игрок
         UiHideElement("id-Vote-Row"..tostring(j).."-"..currentPlayer.Color)
       elseif (plr.IndexStatus == 2 or plr.Name == currentPlayer.Name) then
         UiHideElement("id-Vote-Row"..tostring(j).."-"..currentPlayer.Color)
+      else
+        UiChangeText("id-Vote-Button"..tostring(j).."-"..currentPlayer.Color,plr.Name)
+        -- Добавить функцию для цветовых кнопок: UiChangeColor("id-Vote-Button"..tostring(j).."-"..Town_Players[i].Color,plr.Color)
       end
     end
-    UiChangeValue("id-Vote-HeadText-"..currentPlayer.Color,"Выбор цели")
+    UiChangeText("id-Vote-HeadText-"..currentPlayer.Color,"Выбор цели")
     UiShowElement("id-Vote-Table-"..currentPlayer.Color)
   end
 end
@@ -277,8 +294,9 @@ function UiAbilitiesSettings()
       if (Town_Players[i].Role.Abilities[j] == nil) then
         UiHideElement("id-AbilityMenu-Row"..tostring(j).."-"..Town_Players[i].Color)
       else
-        UiChangeValue("id-AbilityMenu-Button"..tostring(j).."-"..Town_Players[i].Color,Town_Players[i].Role.Abilities[j].Name)
-        UiChangeValue("id-AbilityMenu-Counter"..tostring(j).."-"..Town_Players[i].Color,Town_Players[i].Role.Abilities[j].UseTime)
+        -- Не работает: UiChangeValue("id-AbilityMenu-Button"..tostring(j).."-"..Town_Players[i].Color,Town_Players[i].Role.Abilities[j].Name)
+        UiChangeText("id-AbilityMenu-Button"..tostring(j).."-"..Town_Players[i].Color,Town_Players[i].Role.Abilities[j].Name)
+        UiChangeText("id-AbilityMenu-Counter"..tostring(j).."-"..Town_Players[i].Color,Town_Players[i].Role.Abilities[j].UseTime)
       end
     end
   end
@@ -357,6 +375,7 @@ function UI_PlayersShow(player,message,namef)
 end
 
 function UI_VoteBlank(player,message,namef) -- message передает индекс в порядке цветов
+  local message = tonumber(message)
   for i=1,#Town_Players do
     if (Town_Players[i].Color == player.color) then
       if (Town_CurrentPhase == 2) then -- дневное голосование
@@ -374,10 +393,11 @@ end
 function UI_AbilityMenu(player,message,namef)
   for i=1,#Town_Players do
     if (Town_Players[i].Color == player.color) then
+      local message = tonumber(message)
       if (Town_CurrentPhase == Town_Players[i].Role.Abilities[message].IndexPhase and Town_Players[i].Role.Abilities[message].UseTime > 0 and not Town_Players[i].Role.Abilities[message].Recharge) then
         Town_Players[i].Role.Abilities[message].UseTime = Town_Players[i].Role.Abilities[message].UseTime - 1
         Town_Players[i].Role.Abilities[message].Recharge = true
-        UiChangeValue("id-AbilityMenu-Counter"..tostring(message).."-"..player.color,Town_Players[i].Role.Abilities[message].UseTime)
+        UiChangeText("id-AbilityMenu-Counter"..tostring(message).."-"..player.color,Town_Players[i].Role.Abilities[message].UseTime)
         ActivateAbility(Town_Players[i],message)
       elseif (Town_Players[i].Role.Abilities[message].Recharge) then
         broadcastToColor("Вы уже использовали эту способность!",player.color,{0.627, 0.125, 0.941})
@@ -489,7 +509,10 @@ end
 function UI_AddRolePool(player,message,namef)
   if (player.admin) then
     local k = tonumber(message)
-    if (count(OrderRoleList[k],Town_StartRoles) <= MaxMafia) then
+    if (count(OrderRoleList[k],Town_StartRoles) < MaxMafia and OrderRoleList[k] == "Мафия") then
+      table.insert(Town_StartRoles,OrderRoleList[k])
+      SetNoteRolePool()
+    elseif (count(OrderRoleList[k],Town_StartRoles) < 1) then
       table.insert(Town_StartRoles,OrderRoleList[k])
       SetNoteRolePool()
     end
@@ -564,6 +587,7 @@ function onBlindfold(player, blindfolded) --- Триггер сна
     if (isAllSleep()) then
       if (Night_Progress == 0) then
         printToAll("Эта ночь начнется через 5 секунд...",{0.192, 0.701, 0.168})
+        Night_Progress = 1
         wait(NightProgression,5)
         Night_Over = false
       elseif (Night_Progress != 0 and not Night_Stop) then
@@ -582,7 +606,7 @@ function isAllSleep()  --- Проверка сна
   local check = true
   for i = 1,#Town_Players do
     if Player[Town_Players[i].Color] != nil then
-      if Player[Town_Players[i].Color].blindfolded == false and find(Town_Players[i].Name) == 0 then
+      if Player[Town_Players[i].Color].blindfolded == false and find(Town_Players[i].Name,Town_DeadList) == 0 then
         check = false
       end
     end
@@ -794,12 +818,12 @@ function TwoStepActivateAbility(target_player,owner_player,ability_tag) -- Фу�
 end
 
 function AddKill(player)
-  table.insert(player.Color,Town_KillList)
+  table.insert(Town_KillList,player.Color)
 end
 
 function AddDead(player)
   player.IndexStatus = 2
-  table.insert(player.Name,Town_DeadList)
+  table.insert(Town_DeadList,player.Name)
   Player[player.Color].team = "Spades"
   Player[player.Color].changeColor("Grey")
 end
@@ -823,6 +847,14 @@ function DeleteKill(player) -- подумать про удобство аргу
   end
 end
 
+function SendMessageToAllMafia(message)
+  for i=1,#Town_Players do
+    if (Town_Players[i].Role.IndexTeam == 2 and Town_Players[i].IndexStatus == 1) then
+      printToColor(message,Town_Players[i].Color, {0.129, 0.694, 0.607})
+    end
+  end
+end
+
 function StartGame()
   Town_NumberOfLivingPeople = #Player.getPlayers()
   if (Town_NumberOfLivingPeople < 3) then
@@ -830,21 +862,22 @@ function StartGame()
   elseif (Town_NumberOfLivingPeople < #Town_StartRoles) then
     broadcastToAll("Пул ролей превышает текущее количество игроков. Уберите лишние.",{0.856, 0.1, 0.094})
   else
+    StartObj.destruct()
     local arr = Player.getPlayers()
     local Roles = RandomShuffleRole(Town_StartRoles,  Town_NumberOfLivingPeople)
     for i = 1, Town_NumberOfLivingPeople do
       if (arr[i].seated == true and arr[i].color != "Grey") then
         local player = copy(Class_Player)
-        player.Name = arr[i].name
+        player.Name = arr[i].steam_name
         player.Color = arr[i].color
         player.Role = CreateRole(Roles[i])
         player.IndexStatus = 1
         table.insert(Town_Players,player)
-        UiChangeValue("id-PlayerMenu-TextRole-"..player.Color,player.Role.Name)
+        UiChangeText("id-PlayerMenu-TextRole-"..player.Color,player.Role.Name)
       end
     end
-    SortRoleList()
     UiSetPlayersList()
+    SortRoleList()
     UiAbilitiesSettings()
     UiStart()
     broadcastToAll("Подготовка к игре завершена",{0.118, 0.53, 1})
@@ -853,7 +886,11 @@ function StartGame()
       GamePhase = 1 -- Признак начала игры (день)
       Phase_DaySpeech()
     else
+      UiSetPhase("Пропуск дня")
       GamePhase = 2 -- Признак перехода к ночным фазам
+      for i=1,#Town_Players do
+        UiShowElement("id-Sleep-Button-"..Town_Players[i].Color) -- Найти способ отключить закрытие глаз в игре от игроков
+      end
     end
   end
 end
@@ -869,6 +906,7 @@ end
 function Phase_DayVote()
   Town_CurrentPhase = 2
   PhaseActionTag = "tag_phase_dayvote"
+  UiVoteBlankShow()
   UiSetPhase(OrderPhaseList[2])
   UiSetTime(Setting_VoteTimer)
   StartTimer(DayVote,Setting_VoteTimer)
@@ -907,6 +945,9 @@ function Phase_DayAction()
 end
 
 function DayVote()
+  for i=1,#Town_Players do
+    UiHideElement("id-Vote-Table-"..Town_Players[i].Color)
+  end
   local votes = {}
   local counter = {}
   local maxCount = 0
@@ -974,6 +1015,7 @@ function NightProgression()
           Player[Town_Players[i].Color].blindfolded = false
         end
       end
+      printToAll("Мафия проводит голосование!",{0.129, 0.694, 0.607})
       Phase_NightVote()
       UiVoteBlankShow()
     else
@@ -985,6 +1027,7 @@ function NightProgression()
           check = true
         end
       end
+      printToAll("Просыпается "..Town_StartRoles[Night_Progress],{0.129, 0.694, 0.607})
       if (not check) then
         SimulatePlayer()
       end
@@ -1009,6 +1052,11 @@ function NightProgression()
 end
 
 function NightVote()
+  for i=1,#Town_Players do
+    if (Town_Players[i].Role.IndexTeam == 2) then
+      UiHideElement("id-Vote-Table-"..Town_Players[i].Color)
+    end
+  end
   local votes = {}
   local counter = {}
   local maxCount = 0
@@ -1039,9 +1087,10 @@ function NightVote()
         AddKill(Town_Players[i])
       end
     end
+    SendMessageToAllMafia("Мафии: Путем голосования решили убить "..finishVote[1][1])
   else
     printToAll("Голосование прошло успешно!",{0.129, 0.694, 0.607})
-    -- Голосование не прошло успешно. Но жителям не надо знать.
+    SendMessageToAllMafia("Мафии: Вы не смогли договориться об убийстве игрока")
   end
   Night_Stop = false
   Town_MafiaVotes = {}
@@ -1067,7 +1116,7 @@ function UpdateEffects()
   end
   for i=1,#Town_Players do
     local k = 1
-    while (k <= #Town_Players[i].Effects[k]) do
+    while (k <= #Town_Players[i].Effects) do
       if (Town_Players[i].Effects[k].Time == 1) then
         AfterEffects(Town_Players[i].Effects[k].Tag,Town_Players[i])
         Town_Players[i].Effects[k] = Town_Players[i].Effects[#Town_Players[i].Effects]
