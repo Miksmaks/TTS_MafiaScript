@@ -30,7 +30,7 @@ function find(obj,arr) -- Содержится ли объект в массив
   local k = 0
   local stop = false
   for i = 1,#arr do
-    if (arr[i] == obj and !stop) then
+    if (arr[i] == obj and not stop) then
       k = i
       stop = true
     end
@@ -155,7 +155,7 @@ function onLoad() -- Основной архив (категорически н�
   Setting_DayActionTime = 5
   Setting_GreyTalk = false
   Setting_AdminMode = false
-  StartObj = getObjectFromGUID("")
+  StartObj = getObjectFromGUID("2b55dc")
 end
 
 -- UI поддержка (доработать)
@@ -374,7 +374,7 @@ end
 function UI_AbilityMenu(player,message,namef)
   for i=1,#Town_Players do
     if (Town_Players[i].Color == player.color) then
-      if (Town_CurrentPhase == Town_Players[i].Role.Abilities[message].IndexPhase and Town_Players[i].Role.Abilities[message].UseTime > 0 and !Town_Players[i].Role.Abilities[message].Recharge) then
+      if (Town_CurrentPhase == Town_Players[i].Role.Abilities[message].IndexPhase and Town_Players[i].Role.Abilities[message].UseTime > 0 and not Town_Players[i].Role.Abilities[message].Recharge) then
         Town_Players[i].Role.Abilities[message].UseTime = Town_Players[i].Role.Abilities[message].UseTime - 1
         Town_Players[i].Role.Abilities[message].Recharge = true
         UiChangeValue("id-AbilityMenu-Counter"..tostring(message).."-"..player.color,Town_Players[i].Role.Abilities[message].UseTime)
@@ -566,7 +566,7 @@ function onBlindfold(player, blindfolded) --- Триггер сна
         printToAll("Эта ночь начнется через 5 секунд...",{0.192, 0.701, 0.168})
         wait(NightProgression,5)
         Night_Over = false
-      elseif (Night_Progress != 0 and !Night_Stop) then
+      elseif (Night_Progress != 0 and not Night_Stop) then
         wait(NightProgression,2)
       end
     end
@@ -849,7 +849,7 @@ function StartGame()
     UiStart()
     broadcastToAll("Подготовка к игре завершена",{0.118, 0.53, 1})
     Notes.setNotes("")
-    if (!Setting_SkipFirstDay) then
+    if (not Setting_SkipFirstDay) then
       GamePhase = 1 -- Признак начала игры (день)
       Phase_DaySpeech()
     else
@@ -950,7 +950,7 @@ function DayVote()
 end
 
 function NightProgression()
-  if (!isAllSleep()) then 
+  if (not isAllSleep()) then 
     Night_Over = true
     broadcastToAll("Ночь отменена!",{0.856, 0.1, 0.094})
     printToAll("Ночь отменена игроками:",{0.856, 0.1, 0.094})
@@ -966,7 +966,7 @@ function NightProgression()
   if (#Town_StartRoles < Night_Progress) then
     Night_Over = true
   end
-  if (!Night_Over) then
+  if (not Night_Over) then
     if (Town_StartRoles[Night_Progress] == "Мафия") then
       Night_Stop = true
       for i=1,#Town_Players do
@@ -985,7 +985,7 @@ function NightProgression()
           check = true
         end
       end
-      if (!check) then
+      if (not check) then
         SimulatePlayer()
       end
       Phase_NightAction()
@@ -1113,7 +1113,6 @@ end
 
 --[[
   Сделать:
-  1. Дополнить весь UI по видимости и ввести все кнопки и все цвета (10 кнопок в голосовании и 6 кнопок в способностях) + Сделать стол 
   2. Тестирование
   3. Мертвецы не должны влиять на живых
   4. Проверить теги еще раз, чтобы другой человек не активировал, когда уже есть эффект. Или чтоб только в определенную фазу.

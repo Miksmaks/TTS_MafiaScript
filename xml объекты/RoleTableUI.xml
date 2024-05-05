@@ -8,8 +8,41 @@
             <TableLayout width="200" height="50" useGlobalCellPadding="false" columnWidths="565 50 50">
               <Row preferredHeight="50">
                 <Cell><Text Color="#FF0000" fontSize="36">Мафия</Text></Cell>
-                <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_AddRolePool(0)">+</Button></Cell>
-                <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_DelRolePool(0)">-</Button></Cell>
+                <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_AddRolePool(15)">+</Button></Cell>
+                <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_DelRolePool(15)">-</Button></Cell>
+              </Row>
+            </TableLayout>
+          </Cell>
+        </Row> <!-- Роль -->
+        <Row preferredHeight="50"> <!-- Роль -->
+          <Cell>
+            <TableLayout width="200" height="50" useGlobalCellPadding="false" columnWidths="565 50 50">
+              <Row preferredHeight="50">
+                <Cell><Text Color="#FF0000" fontSize="36">Политик</Text></Cell>
+                <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_AddRolePool(1)">+</Button></Cell>
+                <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_DelRolePool(1)">-</Button></Cell>
+              </Row>
+            </TableLayout>
+          </Cell>
+        </Row> <!-- Роль -->
+        <Row preferredHeight="50"> <!-- Роль -->
+          <Cell>
+            <TableLayout width="200" height="50" useGlobalCellPadding="false" columnWidths="565 50 50">
+              <Row preferredHeight="50">
+                <Cell><Text Color="#FF0000" fontSize="36">Подтасовщик улик</Text></Cell>
+                <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_AddRolePool(13)">+</Button></Cell>
+                <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_DelRolePool(13)">-</Button></Cell>
+              </Row>
+            </TableLayout>
+          </Cell>
+        </Row> <!-- Роль -->
+        <Row preferredHeight="50"> <!-- Роль -->
+          <Cell>
+            <TableLayout width="200" height="50" useGlobalCellPadding="false" columnWidths="565 50 50">
+              <Row preferredHeight="50">
+                <Cell><Text Color="#FF0000" fontSize="36">Адвокат</Text></Cell>
+                <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_AddRolePool(12)">+</Button></Cell>
+                <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_DelRolePool(12)">-</Button></Cell>
               </Row>
             </TableLayout>
           </Cell>
@@ -23,8 +56,41 @@
             <TableLayout width="200" height="50" useGlobalCellPadding="false" columnWidths="565 50 50">
               <Row preferredHeight="50">
                 <Cell><Text Color="#554DFF" fontSize="36">Полицейский</Text></Cell>
-                <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_AddRolePool(0)">+</Button></Cell>
-                <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_DelRolePool(0)">-</Button></Cell>
+                <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_AddRolePool(22)">+</Button></Cell>
+                <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_DelRolePool(22)">-</Button></Cell>
+              </Row>
+            </TableLayout>
+          </Cell>
+        </Row> <!-- Роль -->
+        <Row preferredHeight="50"> <!-- Роль -->
+          <Cell>
+            <TableLayout width="200" height="50" useGlobalCellPadding="false" columnWidths="565 50 50">
+              <Row preferredHeight="50">
+                <Cell><Text Color="#554DFF" fontSize="36">Детектив</Text></Cell>
+                <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_AddRolePool(21)">+</Button></Cell>
+                <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_DelRolePool(21)">-</Button></Cell>
+              </Row>
+            </TableLayout>
+          </Cell>
+        </Row> <!-- Роль -->
+        <Row preferredHeight="50"> <!-- Роль -->
+          <Cell>
+            <TableLayout width="200" height="50" useGlobalCellPadding="false" columnWidths="565 50 50">
+              <Row preferredHeight="50">
+                <Cell><Text Color="#554DFF" fontSize="36">Доктор</Text></Cell>
+                <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_AddRolePool(49)">+</Button></Cell>
+                <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_DelRolePool(49)">-</Button></Cell>
+              </Row>
+            </TableLayout>
+          </Cell>
+        </Row> <!-- Роль -->
+        <Row preferredHeight="50"> <!-- Роль -->
+          <Cell>
+            <TableLayout width="200" height="50" useGlobalCellPadding="false" columnWidths="565 50 50">
+              <Row preferredHeight="50">
+                <Cell><Text Color="#554DFF" fontSize="36">Защищенный</Text></Cell>
+                <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_AddRolePool(54)">+</Button></Cell>
+                <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_DelRolePool(54)">-</Button></Cell>
               </Row>
             </TableLayout>
           </Cell>
@@ -38,8 +104,8 @@
             <TableLayout width="200" height="50" useGlobalCellPadding="false" columnWidths="565 50 50">
               <Row preferredHeight="50">
                 <Cell><Text Color="#FCFA58" fontSize="36">Серийный убийца</Text></Cell>
-                <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_AddRolePool(0)">+</Button></Cell>
-                <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_DelRolePool(0)">-</Button></Cell>
+                <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_AddRolePool(42)">+</Button></Cell>
+                <Cell overrideGlobalCellPadding="true" padding="0 0 0 0" ><Button fontSize="36" onClick="Global/UI_DelRolePool(42)">-</Button></Cell>
               </Row>
             </TableLayout>
           </Cell>

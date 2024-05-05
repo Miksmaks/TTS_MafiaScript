@@ -1,6 +1,6 @@
 <!-- Цвет: Белый -->
 <!-- Менюшка игрока -->
-<TableLayout id="id-PlayerMenu-Table-White" offsetXY="-600 250" width="300" height="340" useGlobalCellPadding="false" rowBackgroundColor="#80808080" allowDragging="true" returnToOriginalPositionWhenReleased="false">
+<TableLayout id="id-PlayerMenu-Table-White" active="false" visibility="White" offsetXY="-600 250" width="300" height="340" useGlobalCellPadding="false" rowBackgroundColor="#80808080" allowDragging="true" returnToOriginalPositionWhenReleased="false">
   <Row preferredHeight="50">
     <Cell columnSpan="2" overrideGlobalCellPadding="true" padding="10 0 0 0">
       <text id="id-PlayerMenu-TextRole-White" color="#FFFFFF" alignment="MiddleLeft" fontSize="24">Роль: ...</text>
@@ -29,7 +29,7 @@
 </TableLayout>
 
 <!-- Меню способностей -->
-<TableLayout id="id-AbilityMenu-Table-White" offsetXY="-700 -100" width="400" height="200" columnWidths="300 100" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >
+<TableLayout id="id-AbilityMenu-Table-White" active="false" visibility="White" offsetXY="-700 -100" width="400" height="200" columnWidths="300 100" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >
   <Row preferredHeight="150">
     <Cell>
       <TableLayout id="id-AbilityMenu-InnerTable-White" preferredHeight="50" columnWidths="220 80" childAlignment="UpperCenter" spacing="5" childForceExpandHeight="true">
@@ -39,7 +39,47 @@
             <Button id="id-AbilityMenu-Button1-White" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(1)">Тест функция 1</Button>
           </Cell>
           <Cell>
-            <text id="id-AbilityMenu-Counter1-White" color="#FFFFFF" fontSize="20">99</text>
+            <text id="id-AbilityMenu-Counter1-White" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+        <Row id="id-AbilityMenu-Row2-White" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button2-White" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(2)">Тест функция 2</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter2-White" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+      	<Row id="id-AbilityMenu-Row3-White" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button3-White" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(3)">Тест функция 3</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter3-White" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+        <Row id="id-AbilityMenu-Row4-White" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button4-White" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(4)">Тест функция 4</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter4-White" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+        <Row id="id-AbilityMenu-Row5-White" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button5-White" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(5)">Тест функция 5</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter5-White" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+      	<Row id="id-AbilityMenu-Row6-White" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button6-White" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(6)">Тест функция 6</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter6-White" color="#FFFFFF" fontSize="20">0</text>
           </Cell>
         </Row>
 		
@@ -52,42 +92,42 @@
 </TableLayout>
 
 <!-- Меню игроков -->
-<TableLayout id="id-PlayersList-Table-White" offsetXY="700 -100" width="400" height="400" columnWidths="100 300" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >
+<TableLayout id="id-PlayersList-Table-White" active="false" visibility="White" offsetXY="700 -100" width="400" height="400" columnWidths="100 300" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >
   <Row preferredHeight="300">
     <Cell>
         <Button id="id-PlayersList-ButtonChange-White" color="#20B2AA80" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72" onClick="UI_PlayersShow">◄</Button>
     </Cell>
     <Cell>
       <VerticalScrollView width="281" height="100">
-        <Text id="id-PlayersList-TextList-White" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Игрок 1</Text>
+        <Text id="id-PlayersList-TextList-White" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">---</Text>
       </VerticalScrollView>
     </Cell>
   </Row>
 </TableLayout>
 
 <!-- Кнопка сокрытия -->
-<Button id="id-Hide-ButtonChange-White" color="#00FA9A80" offsetXY="900 -250" width="100" height="100" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72" onClick="UI_ShowAll">X</Button>
-<Button id="id-Sleep-Button-White" width="600" height="50" offsetXY="0 -410" color="Blue" text="Спать" fontSize="35" visibility="White" onClick="UI_ButtonSleep"></Button>
+<Button id="id-Hide-ButtonChange-White" active="false" visibility="White" color="#00FA9A80" offsetXY="900 -250" width="100" height="100" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72" onClick="UI_ShowAll">X</Button>
+<Button id="id-Sleep-Button-White" active="false" visibility="White" width="600" height="50" offsetXY="0 -410" color="Blue" text="Спать" fontSize="35" onClick="UI_ButtonSleep"></Button>
 
 <!-- Поле фазы и времени -->
-<TableLayout id="id-Time-Table-White" offsetXY="0 350" width="400" height="200" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >
+<TableLayout id="id-Time-Table-White" active="false" visibility="White" offsetXY="0 350" width="400" height="200" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >
   <Row preferredHeight="50">
     <Cell>
-        <Text id="id-Time-TextPhase-White" color="#FFFFFF" alignment="MiddleCenter" fontSize="36">Обсуждение</Text>
+        <Text id="id-Time-TextPhase-White" color="#FFFFFF" alignment="MiddleCenter" fontSize="36">Фаза</Text>
     </Cell>
   </Row>
   <Row preferredHeight="50">
     <Cell>
-        <Text id="id-Time-TextTime-White" color="#FFFFFF" alignment="MiddleCenter" fontSize="36">180 сек</Text>
+        <Text id="id-Time-TextTime-White" color="#FFFFFF" alignment="MiddleCenter" fontSize="36">0 сек</Text>
     </Cell>
   </Row>
 </TableLayout>
 
 <!-- Билютень голосования -->
-<TableLayout id="id-Vote-Table-White" offsetXY="-300 -200" width="300" height="400" useGlobalCellPadding="false" rowBackgroundColor="#80808080" allowDragging="true" returnToOriginalPositionWhenReleased="false">
+<TableLayout id="id-Vote-Table-White" active="false" visibility="White" offsetXY="-300 -200" width="300" height="400" useGlobalCellPadding="false" rowBackgroundColor="#80808080" allowDragging="true" returnToOriginalPositionWhenReleased="false">
   <Row preferredHeight="50">
     <Cell>
-        <Text id="id-Vote-HeadText-White" color="#FFFFFF" alignment="MiddleCenter" fontSize="20">Билютень для голосования</Text>
+        <Text id="id-Vote-HeadText-White" color="#FFFFFF" alignment="MiddleCenter" fontSize="20">Билет</Text>
     </Cell>
   </Row>
   <Row preferredHeight="350">
@@ -97,6 +137,1779 @@
         <Row id="id-Vote-Row1-White" width="250">
           <Cell>
             <Button id="id-Vote-Button1-White" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(1)">Тест функция 1</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row2-White" width="250">
+          <Cell>
+            <Button id="id-Vote-Button2-White" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(2)">Тест функция 2</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row3-White" width="250">
+          <Cell>
+            <Button id="id-Vote-Button3-White" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(3)">Тест функция 3</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row4-White" width="250">
+          <Cell>
+            <Button id="id-Vote-Button4-White" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(4)">Тест функция 4</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row5-White" width="250">
+          <Cell>
+            <Button id="id-Vote-Button5-White" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(5)">Тест функция 5</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row6-White" width="250">
+          <Cell>
+            <Button id="id-Vote-Button6-White" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(6)">Тест функция 6</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row7-White" width="250">
+          <Cell>
+            <Button id="id-Vote-Button7-White" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(7)">Тест функция 7</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row8-White" width="250">
+          <Cell>
+            <Button id="id-Vote-Button8-White" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(8)">Тест функция 8</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row9-White" width="250">
+          <Cell>
+            <Button id="id-Vote-Button9-White" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(9)">Тест функция 9</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row10-White" width="250">
+          <Cell>
+            <Button id="id-Vote-Button10-White" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(10)">Тест функция 10</Button>
+          </Cell>
+        </Row>
+		
+      </TableLayout>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Цвет: Коричневый -->
+<!-- Менюшка игрока -->
+<TableLayout id="id-PlayerMenu-Table-Brown" active="false" visibility="Brown" offsetXY="-600 250" width="300" height="340" useGlobalCellPadding="false" rowBackgroundColor="#80808080" allowDragging="true" returnToOriginalPositionWhenReleased="false">
+  <Row preferredHeight="50">
+    <Cell columnSpan="2" overrideGlobalCellPadding="true" padding="10 0 0 0">
+      <text id="id-PlayerMenu-TextRole-Brown" color="#FFFFFF" alignment="MiddleLeft" fontSize="24">Роль: ...</text>
+    </Cell>
+  </Row>
+  <Row preferredHeight="50">
+    <Cell overrideGlobalCellPadding="true" padding="5 5 5 5">
+      <button id="id-PlayerMenu-ButtonDescription-Brown" color="#0000FF80" textColor="#FFFFFF" width="50" height="50" onClick="UI_RoleDesc">Описание</button>
+    </Cell>
+    <Cell overrideGlobalCellPadding="true" padding="5 5 5 5">
+      <button id="id-PlayerMenu-ButtonChat-Brown" color="#80808080" textColor="#FFFFFF" width="50" height="50" onClick="UI_ChatButton">Чат</button>
+    </Cell>
+  </Row>
+  <Row id="id-PlayerMenu-RowChat-Brown" visibility="" preferredHeight="200">
+    <Cell columnSpan="2">
+      <VerticalScrollView>
+        <text id="id-PlayerMenu-TextChat-Brown" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Miksmaks: V_ano долбаеб</text>
+      </VerticalScrollView>
+    </Cell>
+  </Row>
+  <Row id="id-PlayerMenu-RowInput-Brown" visibility="" preferredHeight="40">
+    <Cell columnSpan="2" padding="5 5 5 5">
+      <InputField id="id-PlayerMenu-InputChat-Brown" placeholder="Написать сообщение" lineType="MultiLineSubmit" characterLimit="100" onSubmit="UI_MafiaChat"></InputField>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Меню способностей -->
+<TableLayout id="id-AbilityMenu-Table-Brown" active="false" visibility="Brown" offsetXY="-700 -100" width="400" height="200" columnWidths="300 100" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >
+  <Row preferredHeight="150">
+    <Cell>
+      <TableLayout id="id-AbilityMenu-InnerTable-Brown" preferredHeight="50" columnWidths="220 80" childAlignment="UpperCenter" spacing="5" childForceExpandHeight="true">
+        
+		    <Row id="id-AbilityMenu-Row1-Brown" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button1-Brown" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(1)">Тест функция 1</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter1-Brown" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+        <Row id="id-AbilityMenu-Row2-Brown" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button2-Brown" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(2)">Тест функция 2</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter2-Brown" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+      	<Row id="id-AbilityMenu-Row3-Brown" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button3-Brown" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(3)">Тест функция 3</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter3-Brown" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+        <Row id="id-AbilityMenu-Row4-Brown" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button4-Brown" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(4)">Тест функция 4</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter4-Brown" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+        <Row id="id-AbilityMenu-Row5-Brown" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button5-Brown" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(5)">Тест функция 5</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter5-Brown" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+      	<Row id="id-AbilityMenu-Row6-Brown" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button6-Brown" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(6)">Тест функция 6</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter6-Brown" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+		
+      </TableLayout>
+    </Cell>
+    <Cell>
+        <Button id="id-AbilityMenu-ButtonChange-Brown" color="#C7158580" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72" onClick="UI_AbilityShow">►</Button>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Меню игроков -->
+<TableLayout id="id-PlayersList-Table-Brown" active="false" visibility="Brown" offsetXY="700 -100" width="400" height="400" columnWidths="100 300" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >
+  <Row preferredHeight="300">
+    <Cell>
+        <Button id="id-PlayersList-ButtonChange-Brown" color="#20B2AA80" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72" onClick="UI_PlayersShow">◄</Button>
+    </Cell>
+    <Cell>
+      <VerticalScrollView width="281" height="100">
+        <Text id="id-PlayersList-TextList-Brown" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">---</Text>
+      </VerticalScrollView>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Кнопка сокрытия -->
+<Button id="id-Hide-ButtonChange-Brown" active="false" visibility="Brown" color="#00FA9A80" offsetXY="900 -250" width="100" height="100" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72" onClick="UI_ShowAll">X</Button>
+<Button id="id-Sleep-Button-Brown" active="false" visibility="Brown" width="600" height="50" offsetXY="0 -410" color="Blue" text="Спать" fontSize="35" onClick="UI_ButtonSleep"></Button>
+
+<!-- Поле фазы и времени -->
+<TableLayout id="id-Time-Table-Brown" active="false" visibility="Brown" offsetXY="0 350" width="400" height="200" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >
+  <Row preferredHeight="50">
+    <Cell>
+        <Text id="id-Time-TextPhase-Brown" color="#FFFFFF" alignment="MiddleCenter" fontSize="36">Фаза</Text>
+    </Cell>
+  </Row>
+  <Row preferredHeight="50">
+    <Cell>
+        <Text id="id-Time-TextTime-Brown" color="#FFFFFF" alignment="MiddleCenter" fontSize="36">0 сек</Text>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Билютень голосования -->
+<TableLayout id="id-Vote-Table-Brown" active="false" visibility="Brown" offsetXY="-300 -200" width="300" height="400" useGlobalCellPadding="false" rowBackgroundColor="#80808080" allowDragging="true" returnToOriginalPositionWhenReleased="false">
+  <Row preferredHeight="50">
+    <Cell>
+        <Text id="id-Vote-HeadText-Brown" color="#FFFFFF" alignment="MiddleCenter" fontSize="20">Билет</Text>
+    </Cell>
+  </Row>
+  <Row preferredHeight="350">
+    <Cell padding="1 1 1 1">
+      <TableLayout id="id-Vote-InnerTable-Brown" preferredHeight="50" childAlignment="UpperCenter" spacing="5" childForceExpandHeight="true">
+	  
+        <Row id="id-Vote-Row1-Brown" width="250">
+          <Cell>
+            <Button id="id-Vote-Button1-Brown" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(1)">Тест функция 1</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row2-Brown" width="250">
+          <Cell>
+            <Button id="id-Vote-Button2-Brown" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(2)">Тест функция 2</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row3-Brown" width="250">
+          <Cell>
+            <Button id="id-Vote-Button3-Brown" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(3)">Тест функция 3</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row4-Brown" width="250">
+          <Cell>
+            <Button id="id-Vote-Button4-Brown" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(4)">Тест функция 4</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row5-Brown" width="250">
+          <Cell>
+            <Button id="id-Vote-Button5-Brown" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(5)">Тест функция 5</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row6-Brown" width="250">
+          <Cell>
+            <Button id="id-Vote-Button6-Brown" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(6)">Тест функция 6</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row7-Brown" width="250">
+          <Cell>
+            <Button id="id-Vote-Button7-Brown" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(7)">Тест функция 7</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row8-Brown" width="250">
+          <Cell>
+            <Button id="id-Vote-Button8-Brown" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(8)">Тест функция 8</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row9-Brown" width="250">
+          <Cell>
+            <Button id="id-Vote-Button9-Brown" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(9)">Тест функция 9</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row10-Brown" width="250">
+          <Cell>
+            <Button id="id-Vote-Button10-Brown" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(10)">Тест функция 10</Button>
+          </Cell>
+        </Row>
+		
+      </TableLayout>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Цвет: Красный -->
+<!-- Менюшка игрока -->
+<TableLayout id="id-PlayerMenu-Table-Red" active="false" visibility="Red" offsetXY="-600 250" width="300" height="340" useGlobalCellPadding="false" rowBackgroundColor="#80808080" allowDragging="true" returnToOriginalPositionWhenReleased="false">
+  <Row preferredHeight="50">
+    <Cell columnSpan="2" overrideGlobalCellPadding="true" padding="10 0 0 0">
+      <text id="id-PlayerMenu-TextRole-Red" color="#FFFFFF" alignment="MiddleLeft" fontSize="24">Роль: ...</text>
+    </Cell>
+  </Row>
+  <Row preferredHeight="50">
+    <Cell overrideGlobalCellPadding="true" padding="5 5 5 5">
+      <button id="id-PlayerMenu-ButtonDescription-Red" color="#0000FF80" textColor="#FFFFFF" width="50" height="50" onClick="UI_RoleDesc">Описание</button>
+    </Cell>
+    <Cell overrideGlobalCellPadding="true" padding="5 5 5 5">
+      <button id="id-PlayerMenu-ButtonChat-Red" color="#80808080" textColor="#FFFFFF" width="50" height="50" onClick="UI_ChatButton">Чат</button>
+    </Cell>
+  </Row>
+  <Row id="id-PlayerMenu-RowChat-Red" visibility="" preferredHeight="200">
+    <Cell columnSpan="2">
+      <VerticalScrollView>
+        <text id="id-PlayerMenu-TextChat-Red" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Miksmaks: V_ano долбаеб</text>
+      </VerticalScrollView>
+    </Cell>
+  </Row>
+  <Row id="id-PlayerMenu-RowInput-Red" visibility="" preferredHeight="40">
+    <Cell columnSpan="2" padding="5 5 5 5">
+      <InputField id="id-PlayerMenu-InputChat-Red" placeholder="Написать сообщение" lineType="MultiLineSubmit" characterLimit="100" onSubmit="UI_MafiaChat"></InputField>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Меню способностей -->
+<TableLayout id="id-AbilityMenu-Table-Red" active="false" visibility="Red" offsetXY="-700 -100" width="400" height="200" columnWidths="300 100" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >
+  <Row preferredHeight="150">
+    <Cell>
+      <TableLayout id="id-AbilityMenu-InnerTable-Red" preferredHeight="50" columnWidths="220 80" childAlignment="UpperCenter" spacing="5" childForceExpandHeight="true">
+        
+		    <Row id="id-AbilityMenu-Row1-Red" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button1-Red" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(1)">Тест функция 1</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter1-Red" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+        <Row id="id-AbilityMenu-Row2-Red" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button2-Red" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(2)">Тест функция 2</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter2-Red" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+      	<Row id="id-AbilityMenu-Row3-Red" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button3-Red" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(3)">Тест функция 3</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter3-Red" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+        <Row id="id-AbilityMenu-Row4-Red" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button4-Red" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(4)">Тест функция 4</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter4-Red" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+        <Row id="id-AbilityMenu-Row5-Red" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button5-Red" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(5)">Тест функция 5</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter5-Red" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+      	<Row id="id-AbilityMenu-Row6-Red" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button6-Red" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(6)">Тест функция 6</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter6-Red" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+		
+      </TableLayout>
+    </Cell>
+    <Cell>
+        <Button id="id-AbilityMenu-ButtonChange-Red" color="#C7158580" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72" onClick="UI_AbilityShow">►</Button>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Меню игроков -->
+<TableLayout id="id-PlayersList-Table-Red" active="false" visibility="Red" offsetXY="700 -100" width="400" height="400" columnWidths="100 300" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >
+  <Row preferredHeight="300">
+    <Cell>
+        <Button id="id-PlayersList-ButtonChange-Red" color="#20B2AA80" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72" onClick="UI_PlayersShow">◄</Button>
+    </Cell>
+    <Cell>
+      <VerticalScrollView width="281" height="100">
+        <Text id="id-PlayersList-TextList-Red" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">---</Text>
+      </VerticalScrollView>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Кнопка сокрытия -->
+<Button id="id-Hide-ButtonChange-Red" active="false" visibility="Red" color="#00FA9A80" offsetXY="900 -250" width="100" height="100" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72" onClick="UI_ShowAll">X</Button>
+<Button id="id-Sleep-Button-Red" active="false" visibility="Red" width="600" height="50" offsetXY="0 -410" color="Blue" text="Спать" fontSize="35" onClick="UI_ButtonSleep"></Button>
+
+<!-- Поле фазы и времени -->
+<TableLayout id="id-Time-Table-Red" active="false" visibility="Red" offsetXY="0 350" width="400" height="200" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >
+  <Row preferredHeight="50">
+    <Cell>
+        <Text id="id-Time-TextPhase-Red" color="#FFFFFF" alignment="MiddleCenter" fontSize="36">Фаза</Text>
+    </Cell>
+  </Row>
+  <Row preferredHeight="50">
+    <Cell>
+        <Text id="id-Time-TextTime-Red" color="#FFFFFF" alignment="MiddleCenter" fontSize="36">0 сек</Text>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Билютень голосования -->
+<TableLayout id="id-Vote-Table-Red" active="false" visibility="Red" offsetXY="-300 -200" width="300" height="400" useGlobalCellPadding="false" rowBackgroundColor="#80808080" allowDragging="true" returnToOriginalPositionWhenReleased="false">
+  <Row preferredHeight="50">
+    <Cell>
+        <Text id="id-Vote-HeadText-Red" color="#FFFFFF" alignment="MiddleCenter" fontSize="20">Билет</Text>
+    </Cell>
+  </Row>
+  <Row preferredHeight="350">
+    <Cell padding="1 1 1 1">
+      <TableLayout id="id-Vote-InnerTable-Red" preferredHeight="50" childAlignment="UpperCenter" spacing="5" childForceExpandHeight="true">
+	  
+        <Row id="id-Vote-Row1-Red" width="250">
+          <Cell>
+            <Button id="id-Vote-Button1-Red" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(1)">Тест функция 1</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row2-Red" width="250">
+          <Cell>
+            <Button id="id-Vote-Button2-Red" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(2)">Тест функция 2</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row3-Red" width="250">
+          <Cell>
+            <Button id="id-Vote-Button3-Red" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(3)">Тест функция 3</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row4-Red" width="250">
+          <Cell>
+            <Button id="id-Vote-Button4-Red" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(4)">Тест функция 4</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row5-Red" width="250">
+          <Cell>
+            <Button id="id-Vote-Button5-Red" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(5)">Тест функция 5</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row6-Red" width="250">
+          <Cell>
+            <Button id="id-Vote-Button6-Red" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(6)">Тест функция 6</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row7-Red" width="250">
+          <Cell>
+            <Button id="id-Vote-Button7-Red" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(7)">Тест функция 7</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row8-Red" width="250">
+          <Cell>
+            <Button id="id-Vote-Button8-Red" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(8)">Тест функция 8</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row9-Red" width="250">
+          <Cell>
+            <Button id="id-Vote-Button9-Red" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(9)">Тест функция 9</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row10-Red" width="250">
+          <Cell>
+            <Button id="id-Vote-Button10-Red" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(10)">Тест функция 10</Button>
+          </Cell>
+        </Row>
+		
+      </TableLayout>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Цвет: Оранжевый -->
+<!-- Менюшка игрока -->
+<TableLayout id="id-PlayerMenu-Table-Orange" active="false" visibility="Orange" offsetXY="-600 250" width="300" height="340" useGlobalCellPadding="false" rowBackgroundColor="#80808080" allowDragging="true" returnToOriginalPositionWhenReleased="false">
+  <Row preferredHeight="50">
+    <Cell columnSpan="2" overrideGlobalCellPadding="true" padding="10 0 0 0">
+      <text id="id-PlayerMenu-TextRole-Orange" color="#FFFFFF" alignment="MiddleLeft" fontSize="24">Роль: ...</text>
+    </Cell>
+  </Row>
+  <Row preferredHeight="50">
+    <Cell overrideGlobalCellPadding="true" padding="5 5 5 5">
+      <button id="id-PlayerMenu-ButtonDescription-Orange" color="#0000FF80" textColor="#FFFFFF" width="50" height="50" onClick="UI_RoleDesc">Описание</button>
+    </Cell>
+    <Cell overrideGlobalCellPadding="true" padding="5 5 5 5">
+      <button id="id-PlayerMenu-ButtonChat-Orange" color="#80808080" textColor="#FFFFFF" width="50" height="50" onClick="UI_ChatButton">Чат</button>
+    </Cell>
+  </Row>
+  <Row id="id-PlayerMenu-RowChat-Orange" visibility="" preferredHeight="200">
+    <Cell columnSpan="2">
+      <VerticalScrollView>
+        <text id="id-PlayerMenu-TextChat-Orange" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Miksmaks: V_ano долбаеб</text>
+      </VerticalScrollView>
+    </Cell>
+  </Row>
+  <Row id="id-PlayerMenu-RowInput-Orange" visibility="" preferredHeight="40">
+    <Cell columnSpan="2" padding="5 5 5 5">
+      <InputField id="id-PlayerMenu-InputChat-Orange" placeholder="Написать сообщение" lineType="MultiLineSubmit" characterLimit="100" onSubmit="UI_MafiaChat"></InputField>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Меню способностей -->
+<TableLayout id="id-AbilityMenu-Table-Orange" active="false" visibility="Orange" offsetXY="-700 -100" width="400" height="200" columnWidths="300 100" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >
+  <Row preferredHeight="150">
+    <Cell>
+      <TableLayout id="id-AbilityMenu-InnerTable-Orange" preferredHeight="50" columnWidths="220 80" childAlignment="UpperCenter" spacing="5" childForceExpandHeight="true">
+        
+		    <Row id="id-AbilityMenu-Row1-Orange" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button1-Orange" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(1)">Тест функция 1</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter1-Orange" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+        <Row id="id-AbilityMenu-Row2-Orange" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button2-Orange" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(2)">Тест функция 2</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter2-Orange" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+      	<Row id="id-AbilityMenu-Row3-Orange" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button3-Orange" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(3)">Тест функция 3</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter3-Orange" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+        <Row id="id-AbilityMenu-Row4-Orange" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button4-Orange" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(4)">Тест функция 4</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter4-Orange" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+        <Row id="id-AbilityMenu-Row5-Orange" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button5-Orange" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(5)">Тест функция 5</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter5-Orange" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+      	<Row id="id-AbilityMenu-Row6-Orange" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button6-Orange" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(6)">Тест функция 6</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter6-Orange" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+		
+      </TableLayout>
+    </Cell>
+    <Cell>
+        <Button id="id-AbilityMenu-ButtonChange-Orange" color="#C7158580" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72" onClick="UI_AbilityShow">►</Button>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Меню игроков -->
+<TableLayout id="id-PlayersList-Table-Orange" active="false" visibility="Orange" offsetXY="700 -100" width="400" height="400" columnWidths="100 300" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >
+  <Row preferredHeight="300">
+    <Cell>
+        <Button id="id-PlayersList-ButtonChange-Orange" color="#20B2AA80" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72" onClick="UI_PlayersShow">◄</Button>
+    </Cell>
+    <Cell>
+      <VerticalScrollView width="281" height="100">
+        <Text id="id-PlayersList-TextList-Orange" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">---</Text>
+      </VerticalScrollView>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Кнопка сокрытия -->
+<Button id="id-Hide-ButtonChange-Orange" active="false" visibility="Orange" color="#00FA9A80" offsetXY="900 -250" width="100" height="100" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72" onClick="UI_ShowAll">X</Button>
+<Button id="id-Sleep-Button-Orange" active="false" visibility="Orange" width="600" height="50" offsetXY="0 -410" color="Blue" text="Спать" fontSize="35" onClick="UI_ButtonSleep"></Button>
+
+<!-- Поле фазы и времени -->
+<TableLayout id="id-Time-Table-Orange" active="false" visibility="Orange" offsetXY="0 350" width="400" height="200" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >
+  <Row preferredHeight="50">
+    <Cell>
+        <Text id="id-Time-TextPhase-Orange" color="#FFFFFF" alignment="MiddleCenter" fontSize="36">Фаза</Text>
+    </Cell>
+  </Row>
+  <Row preferredHeight="50">
+    <Cell>
+        <Text id="id-Time-TextTime-Orange" color="#FFFFFF" alignment="MiddleCenter" fontSize="36">0 сек</Text>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Билютень голосования -->
+<TableLayout id="id-Vote-Table-Orange" active="false" visibility="Orange" offsetXY="-300 -200" width="300" height="400" useGlobalCellPadding="false" rowBackgroundColor="#80808080" allowDragging="true" returnToOriginalPositionWhenReleased="false">
+  <Row preferredHeight="50">
+    <Cell>
+        <Text id="id-Vote-HeadText-Orange" color="#FFFFFF" alignment="MiddleCenter" fontSize="20">Билет</Text>
+    </Cell>
+  </Row>
+  <Row preferredHeight="350">
+    <Cell padding="1 1 1 1">
+      <TableLayout id="id-Vote-InnerTable-Orange" preferredHeight="50" childAlignment="UpperCenter" spacing="5" childForceExpandHeight="true">
+	  
+        <Row id="id-Vote-Row1-Orange" width="250">
+          <Cell>
+            <Button id="id-Vote-Button1-Orange" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(1)">Тест функция 1</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row2-Orange" width="250">
+          <Cell>
+            <Button id="id-Vote-Button2-Orange" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(2)">Тест функция 2</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row3-Orange" width="250">
+          <Cell>
+            <Button id="id-Vote-Button3-Orange" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(3)">Тест функция 3</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row4-Orange" width="250">
+          <Cell>
+            <Button id="id-Vote-Button4-Orange" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(4)">Тест функция 4</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row5-Orange" width="250">
+          <Cell>
+            <Button id="id-Vote-Button5-Orange" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(5)">Тест функция 5</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row6-Orange" width="250">
+          <Cell>
+            <Button id="id-Vote-Button6-Orange" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(6)">Тест функция 6</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row7-Orange" width="250">
+          <Cell>
+            <Button id="id-Vote-Button7-Orange" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(7)">Тест функция 7</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row8-Orange" width="250">
+          <Cell>
+            <Button id="id-Vote-Button8-Orange" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(8)">Тест функция 8</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row9-Orange" width="250">
+          <Cell>
+            <Button id="id-Vote-Button9-Orange" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(9)">Тест функция 9</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row10-Orange" width="250">
+          <Cell>
+            <Button id="id-Vote-Button10-Orange" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(10)">Тест функция 10</Button>
+          </Cell>
+        </Row>
+		
+      </TableLayout>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Цвет: Желтый -->
+<!-- Менюшка игрока -->
+<TableLayout id="id-PlayerMenu-Table-Yellow" active="false" visibility="Yellow" offsetXY="-600 250" width="300" height="340" useGlobalCellPadding="false" rowBackgroundColor="#80808080" allowDragging="true" returnToOriginalPositionWhenReleased="false">
+  <Row preferredHeight="50">
+    <Cell columnSpan="2" overrideGlobalCellPadding="true" padding="10 0 0 0">
+      <text id="id-PlayerMenu-TextRole-Yellow" color="#FFFFFF" alignment="MiddleLeft" fontSize="24">Роль: ...</text>
+    </Cell>
+  </Row>
+  <Row preferredHeight="50">
+    <Cell overrideGlobalCellPadding="true" padding="5 5 5 5">
+      <button id="id-PlayerMenu-ButtonDescription-Yellow" color="#0000FF80" textColor="#FFFFFF" width="50" height="50" onClick="UI_RoleDesc">Описание</button>
+    </Cell>
+    <Cell overrideGlobalCellPadding="true" padding="5 5 5 5">
+      <button id="id-PlayerMenu-ButtonChat-Yellow" color="#80808080" textColor="#FFFFFF" width="50" height="50" onClick="UI_ChatButton">Чат</button>
+    </Cell>
+  </Row>
+  <Row id="id-PlayerMenu-RowChat-Yellow" visibility="" preferredHeight="200">
+    <Cell columnSpan="2">
+      <VerticalScrollView>
+        <text id="id-PlayerMenu-TextChat-Yellow" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Miksmaks: V_ano долбаеб</text>
+      </VerticalScrollView>
+    </Cell>
+  </Row>
+  <Row id="id-PlayerMenu-RowInput-Yellow" visibility="" preferredHeight="40">
+    <Cell columnSpan="2" padding="5 5 5 5">
+      <InputField id="id-PlayerMenu-InputChat-Yellow" placeholder="Написать сообщение" lineType="MultiLineSubmit" characterLimit="100" onSubmit="UI_MafiaChat"></InputField>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Меню способностей -->
+<TableLayout id="id-AbilityMenu-Table-Yellow" active="false" visibility="Yellow" offsetXY="-700 -100" width="400" height="200" columnWidths="300 100" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >
+  <Row preferredHeight="150">
+    <Cell>
+      <TableLayout id="id-AbilityMenu-InnerTable-Yellow" preferredHeight="50" columnWidths="220 80" childAlignment="UpperCenter" spacing="5" childForceExpandHeight="true">
+        
+		    <Row id="id-AbilityMenu-Row1-Yellow" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button1-Yellow" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(1)">Тест функция 1</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter1-Yellow" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+        <Row id="id-AbilityMenu-Row2-Yellow" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button2-Yellow" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(2)">Тест функция 2</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter2-Yellow" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+      	<Row id="id-AbilityMenu-Row3-Yellow" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button3-Yellow" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(3)">Тест функция 3</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter3-Yellow" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+        <Row id="id-AbilityMenu-Row4-Yellow" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button4-Yellow" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(4)">Тест функция 4</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter4-Yellow" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+        <Row id="id-AbilityMenu-Row5-Yellow" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button5-Yellow" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(5)">Тест функция 5</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter5-Yellow" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+      	<Row id="id-AbilityMenu-Row6-Yellow" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button6-Yellow" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(6)">Тест функция 6</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter6-Yellow" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+		
+      </TableLayout>
+    </Cell>
+    <Cell>
+        <Button id="id-AbilityMenu-ButtonChange-Yellow" color="#C7158580" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72" onClick="UI_AbilityShow">►</Button>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Меню игроков -->
+<TableLayout id="id-PlayersList-Table-Yellow" active="false" visibility="Yellow" offsetXY="700 -100" width="400" height="400" columnWidths="100 300" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >
+  <Row preferredHeight="300">
+    <Cell>
+        <Button id="id-PlayersList-ButtonChange-Yellow" color="#20B2AA80" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72" onClick="UI_PlayersShow">◄</Button>
+    </Cell>
+    <Cell>
+      <VerticalScrollView width="281" height="100">
+        <Text id="id-PlayersList-TextList-Yellow" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">---</Text>
+      </VerticalScrollView>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Кнопка сокрытия -->
+<Button id="id-Hide-ButtonChange-Yellow" active="false" visibility="Yellow" color="#00FA9A80" offsetXY="900 -250" width="100" height="100" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72" onClick="UI_ShowAll">X</Button>
+<Button id="id-Sleep-Button-Yellow" active="false" visibility="Yellow" width="600" height="50" offsetXY="0 -410" color="Blue" text="Спать" fontSize="35" onClick="UI_ButtonSleep"></Button>
+
+<!-- Поле фазы и времени -->
+<TableLayout id="id-Time-Table-Yellow" active="false" visibility="Yellow" offsetXY="0 350" width="400" height="200" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >
+  <Row preferredHeight="50">
+    <Cell>
+        <Text id="id-Time-TextPhase-Yellow" color="#FFFFFF" alignment="MiddleCenter" fontSize="36">Фаза</Text>
+    </Cell>
+  </Row>
+  <Row preferredHeight="50">
+    <Cell>
+        <Text id="id-Time-TextTime-Yellow" color="#FFFFFF" alignment="MiddleCenter" fontSize="36">0 сек</Text>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Билютень голосования -->
+<TableLayout id="id-Vote-Table-Yellow" active="false" visibility="Yellow" offsetXY="-300 -200" width="300" height="400" useGlobalCellPadding="false" rowBackgroundColor="#80808080" allowDragging="true" returnToOriginalPositionWhenReleased="false">
+  <Row preferredHeight="50">
+    <Cell>
+        <Text id="id-Vote-HeadText-Yellow" color="#FFFFFF" alignment="MiddleCenter" fontSize="20">Билет</Text>
+    </Cell>
+  </Row>
+  <Row preferredHeight="350">
+    <Cell padding="1 1 1 1">
+      <TableLayout id="id-Vote-InnerTable-Yellow" preferredHeight="50" childAlignment="UpperCenter" spacing="5" childForceExpandHeight="true">
+	  
+        <Row id="id-Vote-Row1-Yellow" width="250">
+          <Cell>
+            <Button id="id-Vote-Button1-Yellow" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(1)">Тест функция 1</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row2-Yellow" width="250">
+          <Cell>
+            <Button id="id-Vote-Button2-Yellow" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(2)">Тест функция 2</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row3-Yellow" width="250">
+          <Cell>
+            <Button id="id-Vote-Button3-Yellow" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(3)">Тест функция 3</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row4-Yellow" width="250">
+          <Cell>
+            <Button id="id-Vote-Button4-Yellow" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(4)">Тест функция 4</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row5-Yellow" width="250">
+          <Cell>
+            <Button id="id-Vote-Button5-Yellow" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(5)">Тест функция 5</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row6-Yellow" width="250">
+          <Cell>
+            <Button id="id-Vote-Button6-Yellow" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(6)">Тест функция 6</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row7-Yellow" width="250">
+          <Cell>
+            <Button id="id-Vote-Button7-Yellow" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(7)">Тест функция 7</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row8-Yellow" width="250">
+          <Cell>
+            <Button id="id-Vote-Button8-Yellow" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(8)">Тест функция 8</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row9-Yellow" width="250">
+          <Cell>
+            <Button id="id-Vote-Button9-Yellow" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(9)">Тест функция 9</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row10-Yellow" width="250">
+          <Cell>
+            <Button id="id-Vote-Button10-Yellow" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(10)">Тест функция 10</Button>
+          </Cell>
+        </Row>
+		
+      </TableLayout>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Цвет: Зеленый -->
+<!-- Менюшка игрока -->
+<TableLayout id="id-PlayerMenu-Table-Green" active="false" visibility="Green" offsetXY="-600 250" width="300" height="340" useGlobalCellPadding="false" rowBackgroundColor="#80808080" allowDragging="true" returnToOriginalPositionWhenReleased="false">
+  <Row preferredHeight="50">
+    <Cell columnSpan="2" overrideGlobalCellPadding="true" padding="10 0 0 0">
+      <text id="id-PlayerMenu-TextRole-Green" color="#FFFFFF" alignment="MiddleLeft" fontSize="24">Роль: ...</text>
+    </Cell>
+  </Row>
+  <Row preferredHeight="50">
+    <Cell overrideGlobalCellPadding="true" padding="5 5 5 5">
+      <button id="id-PlayerMenu-ButtonDescription-Green" color="#0000FF80" textColor="#FFFFFF" width="50" height="50" onClick="UI_RoleDesc">Описание</button>
+    </Cell>
+    <Cell overrideGlobalCellPadding="true" padding="5 5 5 5">
+      <button id="id-PlayerMenu-ButtonChat-Green" color="#80808080" textColor="#FFFFFF" width="50" height="50" onClick="UI_ChatButton">Чат</button>
+    </Cell>
+  </Row>
+  <Row id="id-PlayerMenu-RowChat-Green" visibility="" preferredHeight="200">
+    <Cell columnSpan="2">
+      <VerticalScrollView>
+        <text id="id-PlayerMenu-TextChat-Green" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Miksmaks: V_ano долбаеб</text>
+      </VerticalScrollView>
+    </Cell>
+  </Row>
+  <Row id="id-PlayerMenu-RowInput-Green" visibility="" preferredHeight="40">
+    <Cell columnSpan="2" padding="5 5 5 5">
+      <InputField id="id-PlayerMenu-InputChat-Green" placeholder="Написать сообщение" lineType="MultiLineSubmit" characterLimit="100" onSubmit="UI_MafiaChat"></InputField>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Меню способностей -->
+<TableLayout id="id-AbilityMenu-Table-Green" active="false" visibility="Green" offsetXY="-700 -100" width="400" height="200" columnWidths="300 100" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >
+  <Row preferredHeight="150">
+    <Cell>
+      <TableLayout id="id-AbilityMenu-InnerTable-Green" preferredHeight="50" columnWidths="220 80" childAlignment="UpperCenter" spacing="5" childForceExpandHeight="true">
+        
+		    <Row id="id-AbilityMenu-Row1-Green" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button1-Green" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(1)">Тест функция 1</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter1-Green" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+        <Row id="id-AbilityMenu-Row2-Green" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button2-Green" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(2)">Тест функция 2</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter2-Green" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+      	<Row id="id-AbilityMenu-Row3-Green" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button3-Green" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(3)">Тест функция 3</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter3-Green" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+        <Row id="id-AbilityMenu-Row4-Green" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button4-Green" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(4)">Тест функция 4</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter4-Green" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+        <Row id="id-AbilityMenu-Row5-Green" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button5-Green" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(5)">Тест функция 5</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter5-Green" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+      	<Row id="id-AbilityMenu-Row6-Green" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button6-Green" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(6)">Тест функция 6</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter6-Green" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+		
+      </TableLayout>
+    </Cell>
+    <Cell>
+        <Button id="id-AbilityMenu-ButtonChange-Green" color="#C7158580" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72" onClick="UI_AbilityShow">►</Button>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Меню игроков -->
+<TableLayout id="id-PlayersList-Table-Green" active="false" visibility="Green" offsetXY="700 -100" width="400" height="400" columnWidths="100 300" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >
+  <Row preferredHeight="300">
+    <Cell>
+        <Button id="id-PlayersList-ButtonChange-Green" color="#20B2AA80" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72" onClick="UI_PlayersShow">◄</Button>
+    </Cell>
+    <Cell>
+      <VerticalScrollView width="281" height="100">
+        <Text id="id-PlayersList-TextList-Green" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">---</Text>
+      </VerticalScrollView>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Кнопка сокрытия -->
+<Button id="id-Hide-ButtonChange-Green" active="false" visibility="Green" color="#00FA9A80" offsetXY="900 -250" width="100" height="100" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72" onClick="UI_ShowAll">X</Button>
+<Button id="id-Sleep-Button-Green" active="false" visibility="Green" width="600" height="50" offsetXY="0 -410" color="Blue" text="Спать" fontSize="35" onClick="UI_ButtonSleep"></Button>
+
+<!-- Поле фазы и времени -->
+<TableLayout id="id-Time-Table-Green" active="false" visibility="Green" offsetXY="0 350" width="400" height="200" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >
+  <Row preferredHeight="50">
+    <Cell>
+        <Text id="id-Time-TextPhase-Green" color="#FFFFFF" alignment="MiddleCenter" fontSize="36">Фаза</Text>
+    </Cell>
+  </Row>
+  <Row preferredHeight="50">
+    <Cell>
+        <Text id="id-Time-TextTime-Green" color="#FFFFFF" alignment="MiddleCenter" fontSize="36">0 сек</Text>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Билютень голосования -->
+<TableLayout id="id-Vote-Table-Green" active="false" visibility="Green" offsetXY="-300 -200" width="300" height="400" useGlobalCellPadding="false" rowBackgroundColor="#80808080" allowDragging="true" returnToOriginalPositionWhenReleased="false">
+  <Row preferredHeight="50">
+    <Cell>
+        <Text id="id-Vote-HeadText-Green" color="#FFFFFF" alignment="MiddleCenter" fontSize="20">Билет</Text>
+    </Cell>
+  </Row>
+  <Row preferredHeight="350">
+    <Cell padding="1 1 1 1">
+      <TableLayout id="id-Vote-InnerTable-Green" preferredHeight="50" childAlignment="UpperCenter" spacing="5" childForceExpandHeight="true">
+	  
+        <Row id="id-Vote-Row1-Green" width="250">
+          <Cell>
+            <Button id="id-Vote-Button1-Green" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(1)">Тест функция 1</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row2-Green" width="250">
+          <Cell>
+            <Button id="id-Vote-Button2-Green" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(2)">Тест функция 2</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row3-Green" width="250">
+          <Cell>
+            <Button id="id-Vote-Button3-Green" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(3)">Тест функция 3</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row4-Green" width="250">
+          <Cell>
+            <Button id="id-Vote-Button4-Green" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(4)">Тест функция 4</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row5-Green" width="250">
+          <Cell>
+            <Button id="id-Vote-Button5-Green" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(5)">Тест функция 5</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row6-Green" width="250">
+          <Cell>
+            <Button id="id-Vote-Button6-Green" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(6)">Тест функция 6</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row7-Green" width="250">
+          <Cell>
+            <Button id="id-Vote-Button7-Green" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(7)">Тест функция 7</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row8-Green" width="250">
+          <Cell>
+            <Button id="id-Vote-Button8-Green" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(8)">Тест функция 8</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row9-Green" width="250">
+          <Cell>
+            <Button id="id-Vote-Button9-Green" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(9)">Тест функция 9</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row10-Green" width="250">
+          <Cell>
+            <Button id="id-Vote-Button10-Green" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(10)">Тест функция 10</Button>
+          </Cell>
+        </Row>
+		
+      </TableLayout>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Цвет: Бирюзовый -->
+<!-- Менюшка игрока -->
+<TableLayout id="id-PlayerMenu-Table-Teal" active="false" visibility="Teal" offsetXY="-600 250" width="300" height="340" useGlobalCellPadding="false" rowBackgroundColor="#80808080" allowDragging="true" returnToOriginalPositionWhenReleased="false">
+  <Row preferredHeight="50">
+    <Cell columnSpan="2" overrideGlobalCellPadding="true" padding="10 0 0 0">
+      <text id="id-PlayerMenu-TextRole-Teal" color="#FFFFFF" alignment="MiddleLeft" fontSize="24">Роль: ...</text>
+    </Cell>
+  </Row>
+  <Row preferredHeight="50">
+    <Cell overrideGlobalCellPadding="true" padding="5 5 5 5">
+      <button id="id-PlayerMenu-ButtonDescription-Teal" color="#0000FF80" textColor="#FFFFFF" width="50" height="50" onClick="UI_RoleDesc">Описание</button>
+    </Cell>
+    <Cell overrideGlobalCellPadding="true" padding="5 5 5 5">
+      <button id="id-PlayerMenu-ButtonChat-Teal" color="#80808080" textColor="#FFFFFF" width="50" height="50" onClick="UI_ChatButton">Чат</button>
+    </Cell>
+  </Row>
+  <Row id="id-PlayerMenu-RowChat-Teal" visibility="" preferredHeight="200">
+    <Cell columnSpan="2">
+      <VerticalScrollView>
+        <text id="id-PlayerMenu-TextChat-Teal" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Miksmaks: V_ano долбаеб</text>
+      </VerticalScrollView>
+    </Cell>
+  </Row>
+  <Row id="id-PlayerMenu-RowInput-Teal" visibility="" preferredHeight="40">
+    <Cell columnSpan="2" padding="5 5 5 5">
+      <InputField id="id-PlayerMenu-InputChat-Teal" placeholder="Написать сообщение" lineType="MultiLineSubmit" characterLimit="100" onSubmit="UI_MafiaChat"></InputField>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Меню способностей -->
+<TableLayout id="id-AbilityMenu-Table-Teal" active="false" visibility="Teal" offsetXY="-700 -100" width="400" height="200" columnWidths="300 100" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >
+  <Row preferredHeight="150">
+    <Cell>
+      <TableLayout id="id-AbilityMenu-InnerTable-Teal" preferredHeight="50" columnWidths="220 80" childAlignment="UpperCenter" spacing="5" childForceExpandHeight="true">
+        
+		    <Row id="id-AbilityMenu-Row1-Teal" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button1-Teal" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(1)">Тест функция 1</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter1-Teal" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+        <Row id="id-AbilityMenu-Row2-Teal" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button2-Teal" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(2)">Тест функция 2</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter2-Teal" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+      	<Row id="id-AbilityMenu-Row3-Teal" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button3-Teal" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(3)">Тест функция 3</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter3-Teal" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+        <Row id="id-AbilityMenu-Row4-Teal" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button4-Teal" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(4)">Тест функция 4</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter4-Teal" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+        <Row id="id-AbilityMenu-Row5-Teal" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button5-Teal" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(5)">Тест функция 5</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter5-Teal" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+      	<Row id="id-AbilityMenu-Row6-Teal" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button6-Teal" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(6)">Тест функция 6</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter6-Teal" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+		
+      </TableLayout>
+    </Cell>
+    <Cell>
+        <Button id="id-AbilityMenu-ButtonChange-Teal" color="#C7158580" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72" onClick="UI_AbilityShow">►</Button>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Меню игроков -->
+<TableLayout id="id-PlayersList-Table-Teal" active="false" visibility="Teal" offsetXY="700 -100" width="400" height="400" columnWidths="100 300" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >
+  <Row preferredHeight="300">
+    <Cell>
+        <Button id="id-PlayersList-ButtonChange-Teal" color="#20B2AA80" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72" onClick="UI_PlayersShow">◄</Button>
+    </Cell>
+    <Cell>
+      <VerticalScrollView width="281" height="100">
+        <Text id="id-PlayersList-TextList-Teal" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">---</Text>
+      </VerticalScrollView>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Кнопка сокрытия -->
+<Button id="id-Hide-ButtonChange-Teal" active="false" visibility="Teal" color="#00FA9A80" offsetXY="900 -250" width="100" height="100" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72" onClick="UI_ShowAll">X</Button>
+<Button id="id-Sleep-Button-Teal" active="false" visibility="Teal" width="600" height="50" offsetXY="0 -410" color="Blue" text="Спать" fontSize="35" onClick="UI_ButtonSleep"></Button>
+
+<!-- Поле фазы и времени -->
+<TableLayout id="id-Time-Table-Teal" active="false" visibility="Teal" offsetXY="0 350" width="400" height="200" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >
+  <Row preferredHeight="50">
+    <Cell>
+        <Text id="id-Time-TextPhase-Teal" color="#FFFFFF" alignment="MiddleCenter" fontSize="36">Фаза</Text>
+    </Cell>
+  </Row>
+  <Row preferredHeight="50">
+    <Cell>
+        <Text id="id-Time-TextTime-Teal" color="#FFFFFF" alignment="MiddleCenter" fontSize="36">0 сек</Text>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Билютень голосования -->
+<TableLayout id="id-Vote-Table-Teal" active="false" visibility="Teal" offsetXY="-300 -200" width="300" height="400" useGlobalCellPadding="false" rowBackgroundColor="#80808080" allowDragging="true" returnToOriginalPositionWhenReleased="false">
+  <Row preferredHeight="50">
+    <Cell>
+        <Text id="id-Vote-HeadText-Teal" color="#FFFFFF" alignment="MiddleCenter" fontSize="20">Билет</Text>
+    </Cell>
+  </Row>
+  <Row preferredHeight="350">
+    <Cell padding="1 1 1 1">
+      <TableLayout id="id-Vote-InnerTable-Teal" preferredHeight="50" childAlignment="UpperCenter" spacing="5" childForceExpandHeight="true">
+	  
+        <Row id="id-Vote-Row1-Teal" width="250">
+          <Cell>
+            <Button id="id-Vote-Button1-Teal" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(1)">Тест функция 1</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row2-Teal" width="250">
+          <Cell>
+            <Button id="id-Vote-Button2-Teal" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(2)">Тест функция 2</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row3-Teal" width="250">
+          <Cell>
+            <Button id="id-Vote-Button3-Teal" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(3)">Тест функция 3</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row4-Teal" width="250">
+          <Cell>
+            <Button id="id-Vote-Button4-Teal" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(4)">Тест функция 4</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row5-Teal" width="250">
+          <Cell>
+            <Button id="id-Vote-Button5-Teal" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(5)">Тест функция 5</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row6-Teal" width="250">
+          <Cell>
+            <Button id="id-Vote-Button6-Teal" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(6)">Тест функция 6</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row7-Teal" width="250">
+          <Cell>
+            <Button id="id-Vote-Button7-Teal" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(7)">Тест функция 7</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row8-Teal" width="250">
+          <Cell>
+            <Button id="id-Vote-Button8-Teal" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(8)">Тест функция 8</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row9-Teal" width="250">
+          <Cell>
+            <Button id="id-Vote-Button9-Teal" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(9)">Тест функция 9</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row10-Teal" width="250">
+          <Cell>
+            <Button id="id-Vote-Button10-Teal" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(10)">Тест функция 10</Button>
+          </Cell>
+        </Row>
+		
+      </TableLayout>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Цвет: Синий -->
+<!-- Менюшка игрока -->
+<TableLayout id="id-PlayerMenu-Table-Blue" active="false" visibility="Blue" offsetXY="-600 250" width="300" height="340" useGlobalCellPadding="false" rowBackgroundColor="#80808080" allowDragging="true" returnToOriginalPositionWhenReleased="false">
+  <Row preferredHeight="50">
+    <Cell columnSpan="2" overrideGlobalCellPadding="true" padding="10 0 0 0">
+      <text id="id-PlayerMenu-TextRole-Blue" color="#FFFFFF" alignment="MiddleLeft" fontSize="24">Роль: ...</text>
+    </Cell>
+  </Row>
+  <Row preferredHeight="50">
+    <Cell overrideGlobalCellPadding="true" padding="5 5 5 5">
+      <button id="id-PlayerMenu-ButtonDescription-Blue" color="#0000FF80" textColor="#FFFFFF" width="50" height="50" onClick="UI_RoleDesc">Описание</button>
+    </Cell>
+    <Cell overrideGlobalCellPadding="true" padding="5 5 5 5">
+      <button id="id-PlayerMenu-ButtonChat-Blue" color="#80808080" textColor="#FFFFFF" width="50" height="50" onClick="UI_ChatButton">Чат</button>
+    </Cell>
+  </Row>
+  <Row id="id-PlayerMenu-RowChat-Blue" visibility="" preferredHeight="200">
+    <Cell columnSpan="2">
+      <VerticalScrollView>
+        <text id="id-PlayerMenu-TextChat-Blue" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Miksmaks: V_ano долбаеб</text>
+      </VerticalScrollView>
+    </Cell>
+  </Row>
+  <Row id="id-PlayerMenu-RowInput-Blue" visibility="" preferredHeight="40">
+    <Cell columnSpan="2" padding="5 5 5 5">
+      <InputField id="id-PlayerMenu-InputChat-Blue" placeholder="Написать сообщение" lineType="MultiLineSubmit" characterLimit="100" onSubmit="UI_MafiaChat"></InputField>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Меню способностей -->
+<TableLayout id="id-AbilityMenu-Table-Blue" active="false" visibility="Blue" offsetXY="-700 -100" width="400" height="200" columnWidths="300 100" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >
+  <Row preferredHeight="150">
+    <Cell>
+      <TableLayout id="id-AbilityMenu-InnerTable-Blue" preferredHeight="50" columnWidths="220 80" childAlignment="UpperCenter" spacing="5" childForceExpandHeight="true">
+        
+		    <Row id="id-AbilityMenu-Row1-Blue" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button1-Blue" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(1)">Тест функция 1</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter1-Blue" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+        <Row id="id-AbilityMenu-Row2-Blue" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button2-Blue" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(2)">Тест функция 2</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter2-Blue" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+      	<Row id="id-AbilityMenu-Row3-Blue" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button3-Blue" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(3)">Тест функция 3</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter3-Blue" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+        <Row id="id-AbilityMenu-Row4-Blue" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button4-Blue" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(4)">Тест функция 4</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter4-Blue" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+        <Row id="id-AbilityMenu-Row5-Blue" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button5-Blue" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(5)">Тест функция 5</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter5-Blue" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+      	<Row id="id-AbilityMenu-Row6-Blue" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button6-Blue" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(6)">Тест функция 6</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter6-Blue" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+		
+      </TableLayout>
+    </Cell>
+    <Cell>
+        <Button id="id-AbilityMenu-ButtonChange-Blue" color="#C7158580" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72" onClick="UI_AbilityShow">►</Button>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Меню игроков -->
+<TableLayout id="id-PlayersList-Table-Blue" active="false" visibility="Blue" offsetXY="700 -100" width="400" height="400" columnWidths="100 300" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >
+  <Row preferredHeight="300">
+    <Cell>
+        <Button id="id-PlayersList-ButtonChange-Blue" color="#20B2AA80" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72" onClick="UI_PlayersShow">◄</Button>
+    </Cell>
+    <Cell>
+      <VerticalScrollView width="281" height="100">
+        <Text id="id-PlayersList-TextList-Blue" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">---</Text>
+      </VerticalScrollView>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Кнопка сокрытия -->
+<Button id="id-Hide-ButtonChange-Blue" active="false" visibility="Blue" color="#00FA9A80" offsetXY="900 -250" width="100" height="100" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72" onClick="UI_ShowAll">X</Button>
+<Button id="id-Sleep-Button-Blue" active="false" visibility="Blue" width="600" height="50" offsetXY="0 -410" color="Blue" text="Спать" fontSize="35" onClick="UI_ButtonSleep"></Button>
+
+<!-- Поле фазы и времени -->
+<TableLayout id="id-Time-Table-Blue" active="false" visibility="Blue" offsetXY="0 350" width="400" height="200" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >
+  <Row preferredHeight="50">
+    <Cell>
+        <Text id="id-Time-TextPhase-Blue" color="#FFFFFF" alignment="MiddleCenter" fontSize="36">Фаза</Text>
+    </Cell>
+  </Row>
+  <Row preferredHeight="50">
+    <Cell>
+        <Text id="id-Time-TextTime-Blue" color="#FFFFFF" alignment="MiddleCenter" fontSize="36">0 сек</Text>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Билютень голосования -->
+<TableLayout id="id-Vote-Table-Blue" active="false" visibility="Blue" offsetXY="-300 -200" width="300" height="400" useGlobalCellPadding="false" rowBackgroundColor="#80808080" allowDragging="true" returnToOriginalPositionWhenReleased="false">
+  <Row preferredHeight="50">
+    <Cell>
+        <Text id="id-Vote-HeadText-Blue" color="#FFFFFF" alignment="MiddleCenter" fontSize="20">Билет</Text>
+    </Cell>
+  </Row>
+  <Row preferredHeight="350">
+    <Cell padding="1 1 1 1">
+      <TableLayout id="id-Vote-InnerTable-Blue" preferredHeight="50" childAlignment="UpperCenter" spacing="5" childForceExpandHeight="true">
+	  
+        <Row id="id-Vote-Row1-Blue" width="250">
+          <Cell>
+            <Button id="id-Vote-Button1-Blue" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(1)">Тест функция 1</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row2-Blue" width="250">
+          <Cell>
+            <Button id="id-Vote-Button2-Blue" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(2)">Тест функция 2</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row3-Blue" width="250">
+          <Cell>
+            <Button id="id-Vote-Button3-Blue" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(3)">Тест функция 3</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row4-Blue" width="250">
+          <Cell>
+            <Button id="id-Vote-Button4-Blue" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(4)">Тест функция 4</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row5-Blue" width="250">
+          <Cell>
+            <Button id="id-Vote-Button5-Blue" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(5)">Тест функция 5</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row6-Blue" width="250">
+          <Cell>
+            <Button id="id-Vote-Button6-Blue" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(6)">Тест функция 6</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row7-Blue" width="250">
+          <Cell>
+            <Button id="id-Vote-Button7-Blue" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(7)">Тест функция 7</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row8-Blue" width="250">
+          <Cell>
+            <Button id="id-Vote-Button8-Blue" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(8)">Тест функция 8</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row9-Blue" width="250">
+          <Cell>
+            <Button id="id-Vote-Button9-Blue" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(9)">Тест функция 9</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row10-Blue" width="250">
+          <Cell>
+            <Button id="id-Vote-Button10-Blue" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(10)">Тест функция 10</Button>
+          </Cell>
+        </Row>
+		
+      </TableLayout>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Цвет: Фиолетовый -->
+<!-- Менюшка игрока -->
+<TableLayout id="id-PlayerMenu-Table-Purple" active="false" visibility="Purple" offsetXY="-600 250" width="300" height="340" useGlobalCellPadding="false" rowBackgroundColor="#80808080" allowDragging="true" returnToOriginalPositionWhenReleased="false">
+  <Row preferredHeight="50">
+    <Cell columnSpan="2" overrideGlobalCellPadding="true" padding="10 0 0 0">
+      <text id="id-PlayerMenu-TextRole-Purple" color="#FFFFFF" alignment="MiddleLeft" fontSize="24">Роль: ...</text>
+    </Cell>
+  </Row>
+  <Row preferredHeight="50">
+    <Cell overrideGlobalCellPadding="true" padding="5 5 5 5">
+      <button id="id-PlayerMenu-ButtonDescription-Purple" color="#0000FF80" textColor="#FFFFFF" width="50" height="50" onClick="UI_RoleDesc">Описание</button>
+    </Cell>
+    <Cell overrideGlobalCellPadding="true" padding="5 5 5 5">
+      <button id="id-PlayerMenu-ButtonChat-Purple" color="#80808080" textColor="#FFFFFF" width="50" height="50" onClick="UI_ChatButton">Чат</button>
+    </Cell>
+  </Row>
+  <Row id="id-PlayerMenu-RowChat-Purple" visibility="" preferredHeight="200">
+    <Cell columnSpan="2">
+      <VerticalScrollView>
+        <text id="id-PlayerMenu-TextChat-Purple" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Miksmaks: V_ano долбаеб</text>
+      </VerticalScrollView>
+    </Cell>
+  </Row>
+  <Row id="id-PlayerMenu-RowInput-Purple" visibility="" preferredHeight="40">
+    <Cell columnSpan="2" padding="5 5 5 5">
+      <InputField id="id-PlayerMenu-InputChat-Purple" placeholder="Написать сообщение" lineType="MultiLineSubmit" characterLimit="100" onSubmit="UI_MafiaChat"></InputField>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Меню способностей -->
+<TableLayout id="id-AbilityMenu-Table-Purple" active="false" visibility="Purple" offsetXY="-700 -100" width="400" height="200" columnWidths="300 100" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >
+  <Row preferredHeight="150">
+    <Cell>
+      <TableLayout id="id-AbilityMenu-InnerTable-Purple" preferredHeight="50" columnWidths="220 80" childAlignment="UpperCenter" spacing="5" childForceExpandHeight="true">
+        
+		    <Row id="id-AbilityMenu-Row1-Purple" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button1-Purple" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(1)">Тест функция 1</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter1-Purple" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+        <Row id="id-AbilityMenu-Row2-Purple" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button2-Purple" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(2)">Тест функция 2</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter2-Purple" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+      	<Row id="id-AbilityMenu-Row3-Purple" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button3-Purple" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(3)">Тест функция 3</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter3-Purple" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+        <Row id="id-AbilityMenu-Row4-Purple" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button4-Purple" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(4)">Тест функция 4</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter4-Purple" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+        <Row id="id-AbilityMenu-Row5-Purple" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button5-Purple" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(5)">Тест функция 5</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter5-Purple" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+      	<Row id="id-AbilityMenu-Row6-Purple" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button6-Purple" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(6)">Тест функция 6</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter6-Purple" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+		
+      </TableLayout>
+    </Cell>
+    <Cell>
+        <Button id="id-AbilityMenu-ButtonChange-Purple" color="#C7158580" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72" onClick="UI_AbilityShow">►</Button>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Меню игроков -->
+<TableLayout id="id-PlayersList-Table-Purple" active="false" visibility="Purple" offsetXY="700 -100" width="400" height="400" columnWidths="100 300" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >
+  <Row preferredHeight="300">
+    <Cell>
+        <Button id="id-PlayersList-ButtonChange-Purple" color="#20B2AA80" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72" onClick="UI_PlayersShow">◄</Button>
+    </Cell>
+    <Cell>
+      <VerticalScrollView width="281" height="100">
+        <Text id="id-PlayersList-TextList-Purple" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">---</Text>
+      </VerticalScrollView>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Кнопка сокрытия -->
+<Button id="id-Hide-ButtonChange-Purple" active="false" visibility="Purple" color="#00FA9A80" offsetXY="900 -250" width="100" height="100" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72" onClick="UI_ShowAll">X</Button>
+<Button id="id-Sleep-Button-Purple" active="false" visibility="Purple" width="600" height="50" offsetXY="0 -410" color="Blue" text="Спать" fontSize="35" onClick="UI_ButtonSleep"></Button>
+
+<!-- Поле фазы и времени -->
+<TableLayout id="id-Time-Table-Purple" active="false" visibility="Purple" offsetXY="0 350" width="400" height="200" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >
+  <Row preferredHeight="50">
+    <Cell>
+        <Text id="id-Time-TextPhase-Purple" color="#FFFFFF" alignment="MiddleCenter" fontSize="36">Фаза</Text>
+    </Cell>
+  </Row>
+  <Row preferredHeight="50">
+    <Cell>
+        <Text id="id-Time-TextTime-Purple" color="#FFFFFF" alignment="MiddleCenter" fontSize="36">0 сек</Text>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Билютень голосования -->
+<TableLayout id="id-Vote-Table-Purple" active="false" visibility="Purple" offsetXY="-300 -200" width="300" height="400" useGlobalCellPadding="false" rowBackgroundColor="#80808080" allowDragging="true" returnToOriginalPositionWhenReleased="false">
+  <Row preferredHeight="50">
+    <Cell>
+        <Text id="id-Vote-HeadText-Purple" color="#FFFFFF" alignment="MiddleCenter" fontSize="20">Билет</Text>
+    </Cell>
+  </Row>
+  <Row preferredHeight="350">
+    <Cell padding="1 1 1 1">
+      <TableLayout id="id-Vote-InnerTable-Purple" preferredHeight="50" childAlignment="UpperCenter" spacing="5" childForceExpandHeight="true">
+	  
+        <Row id="id-Vote-Row1-Purple" width="250">
+          <Cell>
+            <Button id="id-Vote-Button1-Purple" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(1)">Тест функция 1</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row2-Purple" width="250">
+          <Cell>
+            <Button id="id-Vote-Button2-Purple" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(2)">Тест функция 2</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row3-Purple" width="250">
+          <Cell>
+            <Button id="id-Vote-Button3-Purple" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(3)">Тест функция 3</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row4-Purple" width="250">
+          <Cell>
+            <Button id="id-Vote-Button4-Purple" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(4)">Тест функция 4</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row5-Purple" width="250">
+          <Cell>
+            <Button id="id-Vote-Button5-Purple" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(5)">Тест функция 5</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row6-Purple" width="250">
+          <Cell>
+            <Button id="id-Vote-Button6-Purple" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(6)">Тест функция 6</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row7-Purple" width="250">
+          <Cell>
+            <Button id="id-Vote-Button7-Purple" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(7)">Тест функция 7</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row8-Purple" width="250">
+          <Cell>
+            <Button id="id-Vote-Button8-Purple" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(8)">Тест функция 8</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row9-Purple" width="250">
+          <Cell>
+            <Button id="id-Vote-Button9-Purple" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(9)">Тест функция 9</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row10-Purple" width="250">
+          <Cell>
+            <Button id="id-Vote-Button10-Purple" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(10)">Тест функция 10</Button>
+          </Cell>
+        </Row>
+		
+      </TableLayout>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Цвет: Розовый -->
+<!-- Менюшка игрока -->
+<TableLayout id="id-PlayerMenu-Table-Pink" active="false" visibility="Pink" offsetXY="-600 250" width="300" height="340" useGlobalCellPadding="false" rowBackgroundColor="#80808080" allowDragging="true" returnToOriginalPositionWhenReleased="false">
+  <Row preferredHeight="50">
+    <Cell columnSpan="2" overrideGlobalCellPadding="true" padding="10 0 0 0">
+      <text id="id-PlayerMenu-TextRole-Pink" color="#FFFFFF" alignment="MiddleLeft" fontSize="24">Роль: ...</text>
+    </Cell>
+  </Row>
+  <Row preferredHeight="50">
+    <Cell overrideGlobalCellPadding="true" padding="5 5 5 5">
+      <button id="id-PlayerMenu-ButtonDescription-Pink" color="#0000FF80" textColor="#FFFFFF" width="50" height="50" onClick="UI_RoleDesc">Описание</button>
+    </Cell>
+    <Cell overrideGlobalCellPadding="true" padding="5 5 5 5">
+      <button id="id-PlayerMenu-ButtonChat-Pink" color="#80808080" textColor="#FFFFFF" width="50" height="50" onClick="UI_ChatButton">Чат</button>
+    </Cell>
+  </Row>
+  <Row id="id-PlayerMenu-RowChat-Pink" visibility="" preferredHeight="200">
+    <Cell columnSpan="2">
+      <VerticalScrollView>
+        <text id="id-PlayerMenu-TextChat-Pink" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Miksmaks: V_ano долбаеб</text>
+      </VerticalScrollView>
+    </Cell>
+  </Row>
+  <Row id="id-PlayerMenu-RowInput-Pink" visibility="" preferredHeight="40">
+    <Cell columnSpan="2" padding="5 5 5 5">
+      <InputField id="id-PlayerMenu-InputChat-Pink" placeholder="Написать сообщение" lineType="MultiLineSubmit" characterLimit="100" onSubmit="UI_MafiaChat"></InputField>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Меню способностей -->
+<TableLayout id="id-AbilityMenu-Table-Pink" active="false" visibility="Pink" offsetXY="-700 -100" width="400" height="200" columnWidths="300 100" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >
+  <Row preferredHeight="150">
+    <Cell>
+      <TableLayout id="id-AbilityMenu-InnerTable-Pink" preferredHeight="50" columnWidths="220 80" childAlignment="UpperCenter" spacing="5" childForceExpandHeight="true">
+        
+		    <Row id="id-AbilityMenu-Row1-Pink" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button1-Pink" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(1)">Тест функция 1</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter1-Pink" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+        <Row id="id-AbilityMenu-Row2-Pink" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button2-Pink" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(2)">Тест функция 2</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter2-Pink" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+      	<Row id="id-AbilityMenu-Row3-Pink" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button3-Pink" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(3)">Тест функция 3</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter3-Pink" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+        <Row id="id-AbilityMenu-Row4-Pink" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button4-Pink" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(4)">Тест функция 4</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter4-Pink" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+        <Row id="id-AbilityMenu-Row5-Pink" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button5-Pink" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(5)">Тест функция 5</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter5-Pink" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+      	<Row id="id-AbilityMenu-Row6-Pink" width="250">
+          <Cell>
+            <Button id="id-AbilityMenu-Button6-Pink" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_AbilityMenu(6)">Тест функция 6</Button>
+          </Cell>
+          <Cell>
+            <text id="id-AbilityMenu-Counter6-Pink" color="#FFFFFF" fontSize="20">0</text>
+          </Cell>
+        </Row>
+		
+      </TableLayout>
+    </Cell>
+    <Cell>
+        <Button id="id-AbilityMenu-ButtonChange-Pink" color="#C7158580" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72" onClick="UI_AbilityShow">►</Button>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Меню игроков -->
+<TableLayout id="id-PlayersList-Table-Pink" active="false" visibility="Pink" offsetXY="700 -100" width="400" height="400" columnWidths="100 300" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >
+  <Row preferredHeight="300">
+    <Cell>
+        <Button id="id-PlayersList-ButtonChange-Pink" color="#20B2AA80" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72" onClick="UI_PlayersShow">◄</Button>
+    </Cell>
+    <Cell>
+      <VerticalScrollView width="281" height="100">
+        <Text id="id-PlayersList-TextList-Pink" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">---</Text>
+      </VerticalScrollView>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Кнопка сокрытия -->
+<Button id="id-Hide-ButtonChange-Pink" active="false" visibility="Pink" color="#00FA9A80" offsetXY="900 -250" width="100" height="100" fontColor="#FFFFFF" alignment="MiddleCenter" fontSize="72" onClick="UI_ShowAll">X</Button>
+<Button id="id-Sleep-Button-Pink" active="false" visibility="Pink" width="600" height="50" offsetXY="0 -410" color="Blue" text="Спать" fontSize="35" onClick="UI_ButtonSleep"></Button>
+
+<!-- Поле фазы и времени -->
+<TableLayout id="id-Time-Table-Pink" active="false" visibility="Pink" offsetXY="0 350" width="400" height="200" useGlobalCellPadding="false" rowBackgroundColor="#80808080" >
+  <Row preferredHeight="50">
+    <Cell>
+        <Text id="id-Time-TextPhase-Pink" color="#FFFFFF" alignment="MiddleCenter" fontSize="36">Фаза</Text>
+    </Cell>
+  </Row>
+  <Row preferredHeight="50">
+    <Cell>
+        <Text id="id-Time-TextTime-Pink" color="#FFFFFF" alignment="MiddleCenter" fontSize="36">0 сек</Text>
+    </Cell>
+  </Row>
+</TableLayout>
+
+<!-- Билютень голосования -->
+<TableLayout id="id-Vote-Table-Pink" active="false" visibility="Pink" offsetXY="-300 -200" width="300" height="400" useGlobalCellPadding="false" rowBackgroundColor="#80808080" allowDragging="true" returnToOriginalPositionWhenReleased="false">
+  <Row preferredHeight="50">
+    <Cell>
+        <Text id="id-Vote-HeadText-Pink" color="#FFFFFF" alignment="MiddleCenter" fontSize="20">Билет</Text>
+    </Cell>
+  </Row>
+  <Row preferredHeight="350">
+    <Cell padding="1 1 1 1">
+      <TableLayout id="id-Vote-InnerTable-Pink" preferredHeight="50" childAlignment="UpperCenter" spacing="5" childForceExpandHeight="true">
+	  
+        <Row id="id-Vote-Row1-Pink" width="250">
+          <Cell>
+            <Button id="id-Vote-Button1-Pink" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(1)">Тест функция 1</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row2-Pink" width="250">
+          <Cell>
+            <Button id="id-Vote-Button2-Pink" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(2)">Тест функция 2</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row3-Pink" width="250">
+          <Cell>
+            <Button id="id-Vote-Button3-Pink" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(3)">Тест функция 3</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row4-Pink" width="250">
+          <Cell>
+            <Button id="id-Vote-Button4-Pink" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(4)">Тест функция 4</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row5-Pink" width="250">
+          <Cell>
+            <Button id="id-Vote-Button5-Pink" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(5)">Тест функция 5</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row6-Pink" width="250">
+          <Cell>
+            <Button id="id-Vote-Button6-Pink" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(6)">Тест функция 6</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row7-Pink" width="250">
+          <Cell>
+            <Button id="id-Vote-Button7-Pink" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(7)">Тест функция 7</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row8-Pink" width="250">
+          <Cell>
+            <Button id="id-Vote-Button8-Pink" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(8)">Тест функция 8</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row9-Pink" width="250">
+          <Cell>
+            <Button id="id-Vote-Button9-Pink" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(9)">Тест функция 9</Button>
+          </Cell>
+        </Row>
+        <Row id="id-Vote-Row10-Pink" width="250">
+          <Cell>
+            <Button id="id-Vote-Button10-Pink" height="40" color="#00800080" fontColor="#FFFFFF" width="280" fontSize="20" onClick="UI_VoteBlank(10)">Тест функция 10</Button>
           </Cell>
         </Row>
 		
