@@ -14,14 +14,14 @@
       <button id="id-PlayerMenu-ButtonChat-White" color="#80808080" textColor="#FFFFFF" width="50" height="50" onClick="UI_ChatButton">Чат</button>
     </Cell>
   </Row>
-  <Row id="id-PlayerMenu-RowChat-White" visibility="" preferredHeight="200">
+  <Row id="id-PlayerMenu-RowChat-White" active="false" visibility="" preferredHeight="200">
     <Cell columnSpan="2">
       <VerticalScrollView>
-        <text id="id-PlayerMenu-TextChat-White" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Miksmaks: V_ano долбаеб</text>
+        <text id="id-PlayerMenu-TextChat-White" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Пусто</text>
       </VerticalScrollView>
     </Cell>
   </Row>
-  <Row id="id-PlayerMenu-RowInput-White" visibility="" preferredHeight="40">
+  <Row id="id-PlayerMenu-RowInput-White" active="false" visibility="" preferredHeight="40">
     <Cell columnSpan="2" padding="5 5 5 5">
       <InputField id="id-PlayerMenu-InputChat-White" placeholder="Написать сообщение" lineType="MultiLineSubmit" characterLimit="100" onSubmit="UI_MafiaChat"></InputField>
     </Cell>
@@ -206,14 +206,14 @@
       <button id="id-PlayerMenu-ButtonChat-Brown" color="#80808080" textColor="#FFFFFF" width="50" height="50" onClick="UI_ChatButton">Чат</button>
     </Cell>
   </Row>
-  <Row id="id-PlayerMenu-RowChat-Brown" visibility="" preferredHeight="200">
+  <Row id="id-PlayerMenu-RowChat-Brown" active="false" visibility="" preferredHeight="200">
     <Cell columnSpan="2">
       <VerticalScrollView>
-        <text id="id-PlayerMenu-TextChat-Brown" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Miksmaks: V_ano долбаеб</text>
+        <text id="id-PlayerMenu-TextChat-Brown" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Пусто</text>
       </VerticalScrollView>
     </Cell>
   </Row>
-  <Row id="id-PlayerMenu-RowInput-Brown" visibility="" preferredHeight="40">
+  <Row id="id-PlayerMenu-RowInput-Brown" active="false" visibility="" preferredHeight="40">
     <Cell columnSpan="2" padding="5 5 5 5">
       <InputField id="id-PlayerMenu-InputChat-Brown" placeholder="Написать сообщение" lineType="MultiLineSubmit" characterLimit="100" onSubmit="UI_MafiaChat"></InputField>
     </Cell>
@@ -398,14 +398,14 @@
       <button id="id-PlayerMenu-ButtonChat-Red" color="#80808080" textColor="#FFFFFF" width="50" height="50" onClick="UI_ChatButton">Чат</button>
     </Cell>
   </Row>
-  <Row id="id-PlayerMenu-RowChat-Red" visibility="" preferredHeight="200">
+  <Row id="id-PlayerMenu-RowChat-Red" active="false" visibility="" preferredHeight="200">
     <Cell columnSpan="2">
       <VerticalScrollView>
-        <text id="id-PlayerMenu-TextChat-Red" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Miksmaks: V_ano долбаеб</text>
+        <text id="id-PlayerMenu-TextChat-Red" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Пусто</text>
       </VerticalScrollView>
     </Cell>
   </Row>
-  <Row id="id-PlayerMenu-RowInput-Red" visibility="" preferredHeight="40">
+  <Row id="id-PlayerMenu-RowInput-Red" active="false" visibility="" preferredHeight="40">
     <Cell columnSpan="2" padding="5 5 5 5">
       <InputField id="id-PlayerMenu-InputChat-Red" placeholder="Написать сообщение" lineType="MultiLineSubmit" characterLimit="100" onSubmit="UI_MafiaChat"></InputField>
     </Cell>
@@ -590,14 +590,14 @@
       <button id="id-PlayerMenu-ButtonChat-Orange" color="#80808080" textColor="#FFFFFF" width="50" height="50" onClick="UI_ChatButton">Чат</button>
     </Cell>
   </Row>
-  <Row id="id-PlayerMenu-RowChat-Orange" visibility="" preferredHeight="200">
+  <Row id="id-PlayerMenu-RowChat-Orange" active="false" visibility="" preferredHeight="200">
     <Cell columnSpan="2">
       <VerticalScrollView>
-        <text id="id-PlayerMenu-TextChat-Orange" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Miksmaks: V_ano долбаеб</text>
+        <text id="id-PlayerMenu-TextChat-Orange" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Пусто</text>
       </VerticalScrollView>
     </Cell>
   </Row>
-  <Row id="id-PlayerMenu-RowInput-Orange" visibility="" preferredHeight="40">
+  <Row id="id-PlayerMenu-RowInput-Orange" active="false" visibility="" preferredHeight="40">
     <Cell columnSpan="2" padding="5 5 5 5">
       <InputField id="id-PlayerMenu-InputChat-Orange" placeholder="Написать сообщение" lineType="MultiLineSubmit" characterLimit="100" onSubmit="UI_MafiaChat"></InputField>
     </Cell>
@@ -782,14 +782,14 @@
       <button id="id-PlayerMenu-ButtonChat-Yellow" color="#80808080" textColor="#FFFFFF" width="50" height="50" onClick="UI_ChatButton">Чат</button>
     </Cell>
   </Row>
-  <Row id="id-PlayerMenu-RowChat-Yellow" visibility="" preferredHeight="200">
+  <Row id="id-PlayerMenu-RowChat-Yellow" active="false" visibility="" preferredHeight="200">
     <Cell columnSpan="2">
       <VerticalScrollView>
-        <text id="id-PlayerMenu-TextChat-Yellow" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Miksmaks: V_ano долбаеб</text>
+        <text id="id-PlayerMenu-TextChat-Yellow" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Пусто</text>
       </VerticalScrollView>
     </Cell>
   </Row>
-  <Row id="id-PlayerMenu-RowInput-Yellow" visibility="" preferredHeight="40">
+  <Row id="id-PlayerMenu-RowInput-Yellow" active="false" visibility="" preferredHeight="40">
     <Cell columnSpan="2" padding="5 5 5 5">
       <InputField id="id-PlayerMenu-InputChat-Yellow" placeholder="Написать сообщение" lineType="MultiLineSubmit" characterLimit="100" onSubmit="UI_MafiaChat"></InputField>
     </Cell>
@@ -974,14 +974,14 @@
       <button id="id-PlayerMenu-ButtonChat-Green" color="#80808080" textColor="#FFFFFF" width="50" height="50" onClick="UI_ChatButton">Чат</button>
     </Cell>
   </Row>
-  <Row id="id-PlayerMenu-RowChat-Green" visibility="" preferredHeight="200">
+  <Row id="id-PlayerMenu-RowChat-Green" active="false" visibility="" preferredHeight="200">
     <Cell columnSpan="2">
       <VerticalScrollView>
-        <text id="id-PlayerMenu-TextChat-Green" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Miksmaks: V_ano долбаеб</text>
+        <text id="id-PlayerMenu-TextChat-Green" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Пусто</text>
       </VerticalScrollView>
     </Cell>
   </Row>
-  <Row id="id-PlayerMenu-RowInput-Green" visibility="" preferredHeight="40">
+  <Row id="id-PlayerMenu-RowInput-Green" active="false" visibility="" preferredHeight="40">
     <Cell columnSpan="2" padding="5 5 5 5">
       <InputField id="id-PlayerMenu-InputChat-Green" placeholder="Написать сообщение" lineType="MultiLineSubmit" characterLimit="100" onSubmit="UI_MafiaChat"></InputField>
     </Cell>
@@ -1166,14 +1166,14 @@
       <button id="id-PlayerMenu-ButtonChat-Teal" color="#80808080" textColor="#FFFFFF" width="50" height="50" onClick="UI_ChatButton">Чат</button>
     </Cell>
   </Row>
-  <Row id="id-PlayerMenu-RowChat-Teal" visibility="" preferredHeight="200">
+  <Row id="id-PlayerMenu-RowChat-Teal" active="false" visibility="" preferredHeight="200">
     <Cell columnSpan="2">
       <VerticalScrollView>
-        <text id="id-PlayerMenu-TextChat-Teal" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Miksmaks: V_ano долбаеб</text>
+        <text id="id-PlayerMenu-TextChat-Teal" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Пусто</text>
       </VerticalScrollView>
     </Cell>
   </Row>
-  <Row id="id-PlayerMenu-RowInput-Teal" visibility="" preferredHeight="40">
+  <Row id="id-PlayerMenu-RowInput-Teal" active="false" visibility="" preferredHeight="40">
     <Cell columnSpan="2" padding="5 5 5 5">
       <InputField id="id-PlayerMenu-InputChat-Teal" placeholder="Написать сообщение" lineType="MultiLineSubmit" characterLimit="100" onSubmit="UI_MafiaChat"></InputField>
     </Cell>
@@ -1358,14 +1358,14 @@
       <button id="id-PlayerMenu-ButtonChat-Blue" color="#80808080" textColor="#FFFFFF" width="50" height="50" onClick="UI_ChatButton">Чат</button>
     </Cell>
   </Row>
-  <Row id="id-PlayerMenu-RowChat-Blue" visibility="" preferredHeight="200">
+  <Row id="id-PlayerMenu-RowChat-Blue" active="false" visibility="" preferredHeight="200">
     <Cell columnSpan="2">
       <VerticalScrollView>
-        <text id="id-PlayerMenu-TextChat-Blue" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Miksmaks: V_ano долбаеб</text>
+        <text id="id-PlayerMenu-TextChat-Blue" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Пусто</text>
       </VerticalScrollView>
     </Cell>
   </Row>
-  <Row id="id-PlayerMenu-RowInput-Blue" visibility="" preferredHeight="40">
+  <Row id="id-PlayerMenu-RowInput-Blue" active="false" visibility="" preferredHeight="40">
     <Cell columnSpan="2" padding="5 5 5 5">
       <InputField id="id-PlayerMenu-InputChat-Blue" placeholder="Написать сообщение" lineType="MultiLineSubmit" characterLimit="100" onSubmit="UI_MafiaChat"></InputField>
     </Cell>
@@ -1550,14 +1550,14 @@
       <button id="id-PlayerMenu-ButtonChat-Purple" color="#80808080" textColor="#FFFFFF" width="50" height="50" onClick="UI_ChatButton">Чат</button>
     </Cell>
   </Row>
-  <Row id="id-PlayerMenu-RowChat-Purple" visibility="" preferredHeight="200">
+  <Row id="id-PlayerMenu-RowChat-Purple" active="false" visibility="" preferredHeight="200">
     <Cell columnSpan="2">
       <VerticalScrollView>
-        <text id="id-PlayerMenu-TextChat-Purple" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Miksmaks: V_ano долбаеб</text>
+        <text id="id-PlayerMenu-TextChat-Purple" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Пусто</text>
       </VerticalScrollView>
     </Cell>
   </Row>
-  <Row id="id-PlayerMenu-RowInput-Purple" visibility="" preferredHeight="40">
+  <Row id="id-PlayerMenu-RowInput-Purple" active="false" visibility="" preferredHeight="40">
     <Cell columnSpan="2" padding="5 5 5 5">
       <InputField id="id-PlayerMenu-InputChat-Purple" placeholder="Написать сообщение" lineType="MultiLineSubmit" characterLimit="100" onSubmit="UI_MafiaChat"></InputField>
     </Cell>
@@ -1742,14 +1742,14 @@
       <button id="id-PlayerMenu-ButtonChat-Pink" color="#80808080" textColor="#FFFFFF" width="50" height="50" onClick="UI_ChatButton">Чат</button>
     </Cell>
   </Row>
-  <Row id="id-PlayerMenu-RowChat-Pink" visibility="" preferredHeight="200">
+  <Row id="id-PlayerMenu-RowChat-Pink" active="false" visibility="" preferredHeight="200">
     <Cell columnSpan="2">
       <VerticalScrollView>
-        <text id="id-PlayerMenu-TextChat-Pink" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Miksmaks: V_ano долбаеб</text>
+        <text id="id-PlayerMenu-TextChat-Pink" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Пусто</text>
       </VerticalScrollView>
     </Cell>
   </Row>
-  <Row id="id-PlayerMenu-RowInput-Pink" visibility="" preferredHeight="40">
+  <Row id="id-PlayerMenu-RowInput-Pink" active="false" visibility="" preferredHeight="40">
     <Cell columnSpan="2" padding="5 5 5 5">
       <InputField id="id-PlayerMenu-InputChat-Pink" placeholder="Написать сообщение" lineType="MultiLineSubmit" characterLimit="100" onSubmit="UI_MafiaChat"></InputField>
     </Cell>

@@ -324,7 +324,7 @@ end
 
 function UI_ChatButton(player,message,namef)
   for i=1,#Town_Players do
-    if (Town_Players[i].Color == player.color) then
+    if (Town_Players[i].Color == player.color and Town_Players[i].Role.IndexTeam == 2) then
       local id = "id-PlayerMenu-ButtonChat-"..player.color
       if (UiGetColor(id) == "#80808080") then -- проверка того, что кнопка серая
         UiChangeColor(id,"#800000F0")
