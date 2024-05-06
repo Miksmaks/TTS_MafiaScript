@@ -48,6 +48,32 @@ function count(obj,arr) -- Сколько таких объектов содер
   return k
 end
 
+function FromStringColorToColor(color)
+  if (color == "White") then
+    return {1, 1, 1}
+  elseif (color == "Brown") then
+    return {0.443, 0.231, 0.09}
+  elseif (color == "Red") then
+    return {0.856, 0.1, 0.094}
+  elseif (color == "Orange") then
+    return {0.956, 0.392, 0.113}
+  elseif (color == "Yellow") then
+    return {0.905, 0.898, 0.172}
+  elseif (color == "Green") then
+    return {0.192, 0.701, 0.168}
+  elseif (color == "Teal") then
+    return {0.129, 0.694, 0.607}
+  elseif (color == "Blue") then
+    return {0.118, 0.53, 1}
+  elseif (color == "Purple") then
+    return {0.627, 0.125, 0.941}
+  elseif (color == "Pink") then
+    return {0.96, 0.439, 0.807}
+  else
+    return {0.5,0.5,0.5}
+  end
+end
+
 
 function wait(F,i) -- Ожидание
   Wait.frames(F, i*60)
@@ -243,11 +269,11 @@ function UiVoteBlankShow(currentPlayer) -- аргумент это игрок
         local plr = FromColorToPlayer(OrderColorList[j])
         if (plr == nil) then
           UiHideElement("id-Vote-Row"..tostring(j).."-"..Town_Players[i].Color)
-        elseif (plr.IndexStatus == 2) then
+        elseif (plr.IndexStatus == 2 or Town_Players[i].Name == plr.Name) then
           UiHideElement("id-Vote-Row"..tostring(j).."-"..Town_Players[i].Color)
         else
           UiChangeText("id-Vote-Button"..tostring(j).."-"..Town_Players[i].Color,plr.Name)
-          -- Добавить функцию для цветовых кнопок: UiChangeColor("id-Vote-Button"..tostring(j).."-"..Town_Players[i].Color,plr.Color)
+          UiChangeColor("id-Vote-Button"..tostring(j).."-"..Town_Players[i].Color,FromStringColorToColor(plr.Color))
         end
       end
       UiChangeText("id-Vote-HeadText-"..Town_Players[i].Color,"Билет для голосования")
@@ -264,7 +290,7 @@ function UiVoteBlankShow(currentPlayer) -- аргумент это игрок
             UiHideElement("id-Vote-Row"..tostring(j).."-"..Town_Players[i].Color)
           else
             UiChangeText("id-Vote-Button"..tostring(j).."-"..Town_Players[i].Color,plr.Name)
-            -- Добавить функцию для цветовых кнопок: UiChangeColor("id-Vote-Button"..tostring(j).."-"..Town_Players[i].Color,plr.Color)
+            UiChangeColor("id-Vote-Button"..tostring(j).."-"..Town_Players[i].Color,FromStringColorToColor(plr.Color))
           end
         end
         UiChangeText("id-Vote-HeadText-"..Town_Players[i].Color,"Убить игрока")
@@ -280,7 +306,7 @@ function UiVoteBlankShow(currentPlayer) -- аргумент это игрок
         UiHideElement("id-Vote-Row"..tostring(j).."-"..currentPlayer.Color)
       else
         UiChangeText("id-Vote-Button"..tostring(j).."-"..currentPlayer.Color,plr.Name)
-        -- Добавить функцию для цветовых кнопок: UiChangeColor("id-Vote-Button"..tostring(j).."-"..Town_Players[i].Color,plr.Color)
+        UiChangeColor("id-Vote-Button"..tostring(j).."-"..currentPlayer.Color,FromStringColorToColor(plr.Color))
       end
     end
     UiChangeText("id-Vote-HeadText-"..currentPlayer.Color,"Выбор цели")
@@ -316,7 +342,7 @@ end
 
 function UI_RoleDesc(player,message,namef)
   for i=1,#Town_Players do
-    if (Town_Players[i].Color == player.color) then
+    if (Town_Players[i].Color == player.color and Town_Players[i].IndexStatus == 2) then
       broadcastToColor("---\n"..Town_Players[i].Role.Description.."\n---",player.color,{0.118, 0.53, 1})
     end
   end
@@ -377,7 +403,7 @@ end
 function UI_VoteBlank(player,message,namef) -- message передает индекс в порядке цветов
   local message = tonumber(message)
   for i=1,#Town_Players do
-    if (Town_Players[i].Color == player.color) then
+    if (Town_Players[i].Color == player.color and Town_Players[i].IndexStatus == 2) then
       if (Town_CurrentPhase == 2) then -- дневное голосование
         table.insert(Town_PlayerVotes,{Town_Players[i].Name,FromColorToPlayer(OrderColorList[message]).Name})
       elseif (Town_CurrentPhase == 3) then -- ночное голосование
@@ -392,7 +418,7 @@ end
 
 function UI_AbilityMenu(player,message,namef)
   for i=1,#Town_Players do
-    if (Town_Players[i].Color == player.color) then
+    if (Town_Players[i].Color == player.color and Town_Players[i].IndexStatus == 2) then
       local message = tonumber(message)
       if (Town_CurrentPhase == Town_Players[i].Role.Abilities[message].IndexPhase and Town_Players[i].Role.Abilities[message].UseTime > 0 and not Town_Players[i].Role.Abilities[message].Recharge) then
         Town_Players[i].Role.Abilities[message].UseTime = Town_Players[i].Role.Abilities[message].UseTime - 1
@@ -606,7 +632,7 @@ function isAllSleep()  --- Проверка сна
   local check = true
   for i = 1,#Town_Players do
     if Player[Town_Players[i].Color] != nil then
-      if Player[Town_Players[i].Color].blindfolded == false and find(Town_Players[i].Name,Town_DeadList) == 0 then
+      if Player[Town_Players[i].Color].blindfolded == false and Town_Players[i].IndexStatus == 1 then
         check = false
       end
     end
@@ -635,8 +661,19 @@ function FromColorToPlayer(color) -- Read only!
   return nil
 end
 
+function DelInvetoryItem(player,item_tag)
+  local done = false
+  for i=1,#player.Inventory do
+    if (player.Inventory[i].Tag == item_tag and done == false) then
+      done = true
+      player.Inventory[i] = player.Inventory[#player.Inventory]
+      player.Inventory[#player.Inventory] = nil
+    end
+  end
+end
+
 function SimulatePlayer()
-  wait(NightProgression,random(10,20))
+  wait(NightProgression,random(Setting_NightActionTime,Setting_NightActionTime + 5))
 end
 
 function StartAbilities(role)
@@ -703,6 +740,13 @@ function StartAbilities(role)
     a.IndexPhase = 4
     a.Tag = "ability_lawyer_sabotage"
     table.insert(list,a)
+  elseif (role == "Защищенный") then
+    local a = copy(Class_Ability)
+    a.Name = "Одеть бронежелет"
+    a.UseTime = 1
+    a.IndexPhase = 1
+    a.Tag = "ability_bulletproof_wear"
+    table.insert(list,a)
   end
   return list
 end
@@ -747,26 +791,40 @@ function CreateRole(role)
   elseif (role == "Серийный убийца") then
     r.Name = "Серийный убийца"
     r.Description = "Ты одинокий хладнокровный убийца...Ты убиваешь,потому что хочешь услышать чистые...крики жертв ... в тишине...Даже мафия боится тебя.Каждую ночь ты убиваешь игрока.Помни: твой главный враг - мафия,поэтому прими помощь жителей,но они тоже должны будут умереть.Ты победишь в этой игре , если всех ,кроме тебя,умрут..."
+    r.IndexTeam = 3
+    r.isNightSleep = false
+    r.Targets = {}
+    r.Abilities = StartAbilities(role)
+  elseif (role == "Адвокат") then
+    r.Name = "Адвокат"
+    r.Description = "Ты принадлежишь клану мафии.Каждую ночь ты посещаешь игрока и даешь ему свои услуги.Любознательный детектив не сможет проверить этого игрока.Так можно защитить от проверки.Но помни: это очень подозрительно."
     r.IndexTeam = 2
     r.isNightSleep = false
     r.Targets = {}
     r.Abilities = StartAbilities(role)
+  elseif (role == "Подтасовщик улик") then
+    r.Name = "Подтасовщик улик"
+    r.Description = "Ты принадлежишь клану мафии.Каждую ночь ты посещаешь игрока и подкидываешь ложные улики.Любой любознательный полицейский примет его , как одного из клана мафии.Таким образом можно подставить невиновного.Воспользуйся этим."
+    r.IndexTeam = 2
+    r.isNightSleep = false
+    r.Targets = {}
+    r.Abilities = StartAbilities(role)
+  elseif (role == "Политик") then
+    r.Name = "Политик"
+    r.Description = "Ты принадлежишь клану мафии.Ты коррупционер,поэтому находишься среди мафии.В бюрократии никто не силен,поэтому никто из жителей слова не скажет.Один раз за игру ты можешь заблокировать ночные события, чтобы никто не помешал вашим планам.Такой трюк рискованный,потому что мафия тоже не сможет действовать."
+    r.IndexTeam = 2
+    r.isNightSleep = false
+    r.Targets = {}
+    r.Abilities = StartAbilities(role)
+  elseif (role == "Защищенный") then
+    r.Name = "Защищенный"
+    r.Description = "Ты принадлежишь команде мирных.Ты любишь быть в безопасности,поэтому надел свой счастливый бронежилет.Он спасет тебя от 1 выстрела.На большее он не способен.Хотя...ты веришь в удачу?"
+    r.IndexTeam = 1
+    r.isNightSleep = true
+    r.Targets = {}
+    r.Abilities = StartAbilities(role)
   end
   return r
-end
-
-function PhaseChange() -- Ошибка: Функция не используется. Оставлена на будущее.
-  if (Town_CurrentPhase == 1) then
-    wait(Phase_DaySpeech,2)
-  elseif (Town_CurrentPhase== 2) then
-    wait(Phase_DayVote,2)
-  elseif (Town_CurrentPhase == 3) then
-    wait(Phase_NightVote,2)
-  elseif (Town_CurrentPhase == 4) then
-    wait(Phase_NightAction,2)
-  elseif (Town_CurrentPhase == 5) then
-    wait(Phase_DayAction,2)
-  end
 end
 
 function ActivateAbility(player,indexAbility)  -- Функция только для активации способности
@@ -791,7 +849,9 @@ function ActivateAbility(player,indexAbility)  -- Функция только д
     UiVoteBlankShow(player)
   elseif (player.Role.Abilities[indexAbility].Tag == "ability_lawyer_sabotage") then
     PhaseActionTag = "ability_lawyer_sabotage"
-    UiVoteBlankShow(player)
+    UiVoteBlankShow(player) 
+  elseif (player.Role.Abilities[indexAbility].Tag == "ability_bulletproof_wear") then
+    Effect_GiveArmor(player,player)
   end
 end
 
@@ -1011,7 +1071,7 @@ function NightProgression()
     if (Town_StartRoles[Night_Progress] == "Мафия") then
       Night_Stop = true
       for i=1,#Town_Players do
-        if (Town_Players[i].Role.IndexTeam == 2) then
+        if (Town_Players[i].Role.IndexTeam == 2 and Town_Players[i].IndexStatus == 1) then
           Player[Town_Players[i].Color].blindfolded = false
         end
       end
@@ -1022,7 +1082,7 @@ function NightProgression()
       local check = false
       Night_Stop = true
       for i=1,#Town_Players do
-        if (Town_Players[i].Role.Name == Town_StartRoles[Night_Progress]) then
+        if (Town_Players[i].Role.Name == Town_StartRoles[Night_Progress] and Town_Players[i].IndexStatus == 1) then
           Player[Town_Players[i].Color].blindfolded = false
           check = true
         end
@@ -1053,7 +1113,7 @@ end
 
 function NightVote()
   for i=1,#Town_Players do
-    if (Town_Players[i].Role.IndexTeam == 2) then
+    if (Town_Players[i].Role.IndexTeam == 2 and Town_Players[i].IndexStatus == 1) then
       UiHideElement("id-Vote-Table-"..Town_Players[i].Color)
     end
   end
@@ -1095,7 +1155,7 @@ function NightVote()
   Night_Stop = false
   Town_MafiaVotes = {}
   for i=1,#Town_Players do
-    if (Town_Players[i].Role.IndexTeam == 2) then
+    if (Town_Players[i].Role.IndexTeam == 2 and Town_Players[i].IndexStatus == 1) then
       UiShowElement("id-Sleep-Button-"..Town_Players[i].Color)
     end
   end
@@ -1154,6 +1214,7 @@ function EffectsActivation()
         Town_KillList[#Town_KillList] = nil
         Town_Players[i].Effects[j] = Town_Players[i].Effects[#Town_Players[i].Effects]
         Town_Players[i].Effects[#Town_Players[i].Effects] = nil
+        DelInvetoryItem(Town_Players[i],"item_armor")
       end
     end
   end
@@ -1162,14 +1223,12 @@ end
 
 --[[
   Сделать:
-  2. Тестирование
-  3. Мертвецы не должны влиять на живых
-  4. Проверить теги еще раз, чтобы другой человек не активировал, когда уже есть эффект. Или чтоб только в определенную фазу.
-  5. Добавить недостающие роли в активный список.Защищенному дать эффект брони.
-
+  1. Проверить теги еще раз, чтобы другой человек не активировал, когда уже есть эффект. Или чтоб только в определенную фазу.
+  2. Тестирование 2
   Комментарий: -
   Тестирование:
-  1. Night_Progression - отсортирован список для пробуждения. У "Мафия" особенное пробуждение с голосованием.
+  1. Влияние мертвецов.
+  2. Влияние других игроков на эффекты других
 ]]
 
 --[[
@@ -1257,4 +1316,18 @@ function Effect_BlockAction(player_target,player_owner)
   effect.Time = 1
   effect.Tag = "effect_blockactions"
   table.insert(player_target.Effects, effect)
+end
+
+function Effect_GiveArmor(player_target,player_owner)
+  local effect = copy(Class_Effect)
+  effect.Name = "Бронежилет"
+  effect.Owner = player_owner.Name
+  effect.Time = 99
+  effect.Tag = "effect_armor"
+  table.insert(player_target.Effects, effect)
+  local item = copy(Class_Item)
+  item.Name = "Бронежилет"
+  item.Description = "Этот бронижелет защищает тебя от ночной атаки. Но он одноразовый."
+  item.Tag = "item_armor"
+  table.insert(player_target.Inventory, item)
 end
