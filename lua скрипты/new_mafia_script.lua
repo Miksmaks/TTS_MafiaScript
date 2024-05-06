@@ -127,6 +127,7 @@ Class_Role.IndexTeam = 0
 Class_Role.isNightSleep = true
 Class_Role.Targets = {}
 Class_Role.Abilities = {}
+Class_Role.TagPhase = "custom_tag"
 
 Class_Player = {}
 Class_Player.Name = "PlayerName"
@@ -403,7 +404,7 @@ end
 function UI_VoteBlank(player,message,namef) -- message передает индекс в порядке цветов
   local message = tonumber(message)
   for i=1,#Town_Players do
-    if (Town_Players[i].Color == player.color and Town_Players[i].IndexStatus == 2) then
+    if (Town_Players[i].Color == player.color and Town_Players[i].IndexStatus == 1) then
       if (Town_CurrentPhase == 2) then -- дневное голосование
         table.insert(Town_PlayerVotes,{Town_Players[i].Name,FromColorToPlayer(OrderColorList[message]).Name})
       elseif (Town_CurrentPhase == 3) then -- ночное голосование
@@ -421,10 +422,15 @@ function UI_AbilityMenu(player,message,namef)
     if (Town_Players[i].Color == player.color and Town_Players[i].IndexStatus == 2) then
       local message = tonumber(message)
       if (Town_CurrentPhase == Town_Players[i].Role.Abilities[message].IndexPhase and Town_Players[i].Role.Abilities[message].UseTime > 0 and not Town_Players[i].Role.Abilities[message].Recharge) then
-        Town_Players[i].Role.Abilities[message].UseTime = Town_Players[i].Role.Abilities[message].UseTime - 1
-        Town_Players[i].Role.Abilities[message].Recharge = true
-        UiChangeText("id-AbilityMenu-Counter"..tostring(message).."-"..player.color,Town_Players[i].Role.Abilities[message].UseTime)
-        ActivateAbility(Town_Players[i],message)
+        if ((Town_Players[i].Role.TagPhase == PhaseActionTag) or Town_CurrentPhase == 1) then
+          Town_Players[i].Role.Abilities[message].UseTime = Town_Players[i].Role.Abilities[message].UseTime - 1
+          Town_Players[i].Role.Abilities[message].Recharge = true
+          UiChangeText("id-AbilityMenu-Counter"..tostring(message).."-"..player.color,Town_Players[i].Role.Abilities[message].UseTime)
+          ActivateAbility(Town_Players[i],message)
+        -- Здесь могут быть исключения. Добавлять сюда исключения, если будет необходимость
+        else
+          broadcastToColor("В данный момент работает чужая способность!",player.color,{0.627, 0.125, 0.941})
+        end
       elseif (Town_Players[i].Role.Abilities[message].Recharge) then
         broadcastToColor("Вы уже использовали эту способность!",player.color,{0.627, 0.125, 0.941})
       elseif (Town_Players[i].Role.Abilities[message].UseTime <= 0) then
@@ -757,6 +763,7 @@ function CreateRole(role)
     r.Name = "Мирный"
     r.Description = "У тебя нет особых способностей.Просто...будь мирным)"
     r.IndexTeam = 1
+    r.TagPhase = "tag_phase_citizen"
     r.isNightSleep = true
     r.Targets = {}
     r.Abilities = StartAbilities(role)
@@ -764,6 +771,7 @@ function CreateRole(role)
     r.Name = "Мафия"
     r.Description = "Ты принадлежишь клану мафии.Каждую ночь ты голосуешь вместе со своим кланом за убийство мирного игрока.Постарайся, чтобы тебя или твоего союзника не убили мирные."
     r.IndexTeam = 2
+    r.TagPhase = "tag_phase_mafia"
     r.isNightSleep = false
     r.Targets = {}
     r.Abilities = StartAbilities(role)
@@ -771,6 +779,7 @@ function CreateRole(role)
     r.Name = "Полицейский"
     r.Description = "Ты принадлежишь команде мирных.Ночью ты можешь узнать принадлежит ли выбранный игрок клану мафии или нет.Будь аккуратен,ведь у них может быть тот, кто может обмануть твою способность."
     r.IndexTeam = 1
+    r.TagPhase = "tag_phase_policeman"
     r.isNightSleep = false
     r.Targets = {}
     r.Abilities = StartAbilities(role)
@@ -778,6 +787,7 @@ function CreateRole(role)
     r.Name = "Доктор"
     r.Description = "Ты принадлежишь команде мирных.Ночью ты можешь спасти игрока от смерти.Выбранный тобою игрок будет спасен от одного убийства в эту ночь.Но себя ты можешь спасти только 1 раз.Будь бдителен, ведь ты тот , кто может спасти и узнать невиновных."
     r.IndexTeam = 1
+    r.TagPhase = "tag_phase_doctor"
     r.isNightSleep = false
     r.Targets = {}
     r.Abilities = StartAbilities(role)
@@ -785,6 +795,7 @@ function CreateRole(role)
     r.Name = "Детектив"
     r.Description = "Ты принадлежишь команде мирных.Ночью ты расследуешь дело о клане мафии.Твои расследования каждую ночь приносят информацию о роли , выбранного тобою , игрока.Но аккуратнее, ведь в клане мафии может быть тот, кто может помешать в расследовании."
     r.IndexTeam = 1
+    r.TagPhase = "tag_phase_detective"
     r.isNightSleep = false
     r.Targets = {}
     r.Abilities = StartAbilities(role)
@@ -792,6 +803,7 @@ function CreateRole(role)
     r.Name = "Серийный убийца"
     r.Description = "Ты одинокий хладнокровный убийца...Ты убиваешь,потому что хочешь услышать чистые...крики жертв ... в тишине...Даже мафия боится тебя.Каждую ночь ты убиваешь игрока.Помни: твой главный враг - мафия,поэтому прими помощь жителей,но они тоже должны будут умереть.Ты победишь в этой игре , если всех ,кроме тебя,умрут..."
     r.IndexTeam = 3
+    r.TagPhase = "tag_phase_serialkiller"
     r.isNightSleep = false
     r.Targets = {}
     r.Abilities = StartAbilities(role)
@@ -799,6 +811,7 @@ function CreateRole(role)
     r.Name = "Адвокат"
     r.Description = "Ты принадлежишь клану мафии.Каждую ночь ты посещаешь игрока и даешь ему свои услуги.Любознательный детектив не сможет проверить этого игрока.Так можно защитить от проверки.Но помни: это очень подозрительно."
     r.IndexTeam = 2
+    r.TagPhase = "tag_phase_lawyer"
     r.isNightSleep = false
     r.Targets = {}
     r.Abilities = StartAbilities(role)
@@ -806,6 +819,7 @@ function CreateRole(role)
     r.Name = "Подтасовщик улик"
     r.Description = "Ты принадлежишь клану мафии.Каждую ночь ты посещаешь игрока и подкидываешь ложные улики.Любой любознательный полицейский примет его , как одного из клана мафии.Таким образом можно подставить невиновного.Воспользуйся этим."
     r.IndexTeam = 2
+    r.TagPhase = "tag_phase_framer"
     r.isNightSleep = false
     r.Targets = {}
     r.Abilities = StartAbilities(role)
@@ -813,6 +827,7 @@ function CreateRole(role)
     r.Name = "Политик"
     r.Description = "Ты принадлежишь клану мафии.Ты коррупционер,поэтому находишься среди мафии.В бюрократии никто не силен,поэтому никто из жителей слова не скажет.Один раз за игру ты можешь заблокировать ночные события, чтобы никто не помешал вашим планам.Такой трюк рискованный,потому что мафия тоже не сможет действовать."
     r.IndexTeam = 2
+    r.TagPhase = "tag_phase_politic"
     r.isNightSleep = false
     r.Targets = {}
     r.Abilities = StartAbilities(role)
@@ -820,6 +835,7 @@ function CreateRole(role)
     r.Name = "Защищенный"
     r.Description = "Ты принадлежишь команде мирных.Ты любишь быть в безопасности,поэтому надел свой счастливый бронежилет.Он спасет тебя от 1 выстрела.На большее он не способен.Хотя...ты веришь в удачу?"
     r.IndexTeam = 1
+    r.TagPhase = "tag_phase_bulletproof"
     r.isNightSleep = true
     r.Targets = {}
     r.Abilities = StartAbilities(role)
@@ -829,26 +845,20 @@ end
 
 function ActivateAbility(player,indexAbility)  -- Функция только для активации способности
   if (player.Role.Abilities[indexAbility].Tag == "ability_police_search") then
-    PhaseActionTag = "ability_police_search"
     UiVoteBlankShow(player)
   elseif (player.Role.Abilities[indexAbility].Tag == "ability_doctor_heal") then
-    PhaseActionTag = "ability_doctor_heal"
     UiVoteBlankShow(player)
   elseif (player.Role.Abilities[indexAbility].Tag == "ability_doctor_selfheal") then
     Effect_HealPlayer(player,player)
   elseif (player.Role.Abilities[indexAbility].Tag == "ability_detective_search") then
-    PhaseActionTag = "ability_detective_search"
     UiVoteBlankShow(player)
   elseif (player.Role.Abilities[indexAbility].Tag == "ability_serialkiller_kill") then
-    PhaseActionTag = "ability_serialkiller_kill"
     UiVoteBlankShow(player)
   elseif (player.Role.Abilities[indexAbility].Tag == "ability_politic_sabotage") then
     Effect_BlockNight(player)
   elseif (player.Role.Abilities[indexAbility].Tag == "ability_framer_sabotage") then
-    PhaseActionTag = "ability_framer_sabotage"
     UiVoteBlankShow(player)
   elseif (player.Role.Abilities[indexAbility].Tag == "ability_lawyer_sabotage") then
-    PhaseActionTag = "ability_lawyer_sabotage"
     UiVoteBlankShow(player) 
   elseif (player.Role.Abilities[indexAbility].Tag == "ability_bulletproof_wear") then
     Effect_GiveArmor(player,player)
@@ -858,22 +868,16 @@ end
 function TwoStepActivateAbility(target_player,owner_player,ability_tag) -- Функция активации способности, где ранее был выбор
   if (ability_tag == "ability_police_search") then
     Effect_InvestigateSide(target_player,owner_player)
-    PhaseActionTag = "tag_phase_night"
   elseif (ability_tag == "ability_doctor_heal") then
     Effect_HealPlayer(target_player,owner_player)
-    PhaseActionTag = "tag_phase_night"
   elseif (ability_tag == "ability_detective_search") then
     Effect_InvestigateRole(target_player,owner_player)
-    PhaseActionTag = "tag_phase_night"
   elseif (ability_tag == "ability_serialkiller_kill") then
     Effect_KillPlayer(target_player,owner_player)
-    PhaseActionTag = "tag_phase_night"
   elseif (ability_tag == "ability_framer_sabotage") then
-    Effect_GiveRoleMask(target_player,owner_player,"Мафия")
-    PhaseActionTag = "tag_phase_night"
+    Effect_GiveRoleMask(target_player,owner_player,"mafia")
   elseif (ability_tag == "ability_lawyer_sabotage") then
     Effect_BlockAction(target_player,owner_player)
-    PhaseActionTag = "tag_phase_night"
   end
 end
 
@@ -912,6 +916,14 @@ function SendMessageToAllMafia(message)
     if (Town_Players[i].Role.IndexTeam == 2 and Town_Players[i].IndexStatus == 1) then
       printToColor(message,Town_Players[i].Color, {0.129, 0.694, 0.607})
     end
+  end
+end
+
+function ShowNightResult()
+  local list = "Убиты:\n"
+  for i=1,#Town_KillList do
+    local plr = FromColorToPlayer(Town_KillList[i])
+    list = list .. plr.Name .. "\n"
   end
 end
 
@@ -982,7 +994,6 @@ end
 
 function Phase_NightAction()
   Town_CurrentPhase = 4
-  PhaseActionTag = "tag_phase_nightaction"
   UiSetPhase(OrderPhaseList[4])
   UiSetTime(Setting_NightActionTime)
   StartTimer(function()
@@ -992,13 +1003,14 @@ function Phase_NightAction()
   Setting_NightActionTime) 
 end
 
-function Phase_DayAction()
+function Phase_DayAction() -- в разработке для некоторых ролей
   Town_CurrentPhase = 5
   PhaseActionTag = "tag_phase_dayaction"
   UiSetPhase(OrderPhaseList[5])
   UiSetTime(Setting_DayActionTime)
   StartTimer(function()
   KillToDead()
+  Town_KillList = {}
   PhaseActionTag = "tag_phase_day"
   end,
   Setting_DayActionTime) 
@@ -1038,12 +1050,17 @@ function DayVote()
         AddKill(Town_Players[i])
       end
     end
-    Phase_DayAction() -- Дается 5 секунд на отмену с помощью способности. Убить игрока если действие не отменило казнь
+    -- Пока так
+    KillToDead()
+    Town_KillList = {}
+    PhaseActionTag = "tag_phase_day"
+    -- В разработке: Phase_DayAction() -- Дается время реакции на отмену с помощью способности. Убить игрока если действие не отменило казнь
   else
     printToAll("Равное кол-во голосов.Голосование заканчивается.Наступает ночь.",{0.856, 0.1, 0.094})
   end
   Town_PlayerVotes = {}
   UpdateEffects()
+  UpdateAbilitiesRecharge()
   GamePhase = 2 -- Разрешение на закрытие глаз
   for i=1,#Town_Players do
     UiShowElement("id-Sleep-Button-"..Town_Players[i].Color) -- Найти способ отключить закрытие глаз в игре от игроков
@@ -1083,6 +1100,7 @@ function NightProgression()
       Night_Stop = true
       for i=1,#Town_Players do
         if (Town_Players[i].Role.Name == Town_StartRoles[Night_Progress] and Town_Players[i].IndexStatus == 1) then
+          PhaseActionTag = Town_Players[i].Role.TagPhase
           Player[Town_Players[i].Color].blindfolded = false
           check = true
         end
@@ -1096,16 +1114,18 @@ function NightProgression()
     Night_Progress = Night_Progress + 1
   else
     UpdateEffects()
+    UpdateAbilitiesRecharge()
     GamePhase = 1
     Town_CounterNights = Town_CounterNights + 1
-    -- Подведение итогов ночи (сделать позже, после тестирования)
-    -- работа с UI: обновление списка игроков (сделать позже, после тестирования)
     for i = 1,#Town_Players do
       Player[Town_Players[i].Color].blindfolded = false
     end
     printToAll("Ночь №"..tostring(Town_CounterNights).." окончена",{0.192, 0.701, 0.168})
-    --printToAll("Итог ночи:",{0.956, 0.392, 0.113})
+    printToAll("Итог ночи:",{0.956, 0.392, 0.113})
+    ShowNightResult()
     KillToDead() -- Перевод списка убийств в смерти
+    Town_KillList = {}
+    UiSetPlayersList()
     broadcastToAll("День начинается!",{0.118, 0.53, 1})
     Phase_DaySpeech()
   end
@@ -1161,6 +1181,14 @@ function NightVote()
   end
 end
 
+function UpdateAbilitiesRecharge()
+  for i=1,#Town_Players do
+    for j=1,#Town_Players[i].Role.Abilities do
+      Town_Players[i].Role.Abilities[j].Recharge = false
+    end
+  end
+end
+
 function UpdateEffects()
   EffectsActivation()
   local k = 1
@@ -1210,6 +1238,7 @@ function EffectsActivation()
         Town_Players[i].Effects[j] = Town_Players[i].Effects[#Town_Players[i].Effects]
         Town_Players[i].Effects[#Town_Players[i].Effects] = nil
       elseif (Town_Players[i].Effects[j].Tag == "effect_armor" and find(Town_Players[i].Color,Town_KillList) != 0 and GamePhase == 2) then
+        local index = find(Town_Players[i].Color,Town_KillList)
         Town_KillList[index] = Town_KillList[#Town_KillList]
         Town_KillList[#Town_KillList] = nil
         Town_Players[i].Effects[j] = Town_Players[i].Effects[#Town_Players[i].Effects]
@@ -1223,9 +1252,10 @@ end
 
 --[[
   Сделать:
-  1. Проверить теги еще раз, чтобы другой человек не активировал, когда уже есть эффект. Или чтоб только в определенную фазу.
-  2. Тестирование 2
-  Комментарий: -
+  1. Тестирование 2
+  Комментарий: 
+  1. Пересмотреть теги при тестировании
+  2. Сделать гайд на добавление роли
   Тестирование:
   1. Влияние мертвецов.
   2. Влияние других игроков на эффекты других
