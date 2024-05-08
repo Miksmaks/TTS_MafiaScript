@@ -274,7 +274,7 @@ function UiVoteBlankShow(currentPlayer) -- аргумент это игрок
           UiHideElement("id-Vote-Row"..tostring(j).."-"..Town_Players[i].Color)
         else
           UiChangeText("id-Vote-Button"..tostring(j).."-"..Town_Players[i].Color,plr.Name)
-          UiChangeColor("id-Vote-Button"..tostring(j).."-"..Town_Players[i].Color,FromStringColorToColor(plr.Color))
+          UiChangeColor("id-Vote-Button"..tostring(j).."-"..Town_Players[i].Color,plr.Color)
         end
       end
       UiChangeText("id-Vote-HeadText-"..Town_Players[i].Color,"Билет для голосования")
@@ -291,7 +291,7 @@ function UiVoteBlankShow(currentPlayer) -- аргумент это игрок
             UiHideElement("id-Vote-Row"..tostring(j).."-"..Town_Players[i].Color)
           else
             UiChangeText("id-Vote-Button"..tostring(j).."-"..Town_Players[i].Color,plr.Name)
-            UiChangeColor("id-Vote-Button"..tostring(j).."-"..Town_Players[i].Color,FromStringColorToColor(plr.Color))
+            UiChangeColor("id-Vote-Button"..tostring(j).."-"..Town_Players[i].Color,plr.Color)
           end
         end
         UiChangeText("id-Vote-HeadText-"..Town_Players[i].Color,"Убить игрока")
@@ -307,7 +307,7 @@ function UiVoteBlankShow(currentPlayer) -- аргумент это игрок
         UiHideElement("id-Vote-Row"..tostring(j).."-"..currentPlayer.Color)
       else
         UiChangeText("id-Vote-Button"..tostring(j).."-"..currentPlayer.Color,plr.Name)
-        UiChangeColor("id-Vote-Button"..tostring(j).."-"..currentPlayer.Color,FromStringColorToColor(plr.Color))
+        UiChangeColor("id-Vote-Button"..tostring(j).."-"..currentPlayer.Color,plr.Color)
       end
     end
     UiChangeText("id-Vote-HeadText-"..currentPlayer.Color,"Выбор цели")
@@ -343,7 +343,7 @@ end
 
 function UI_RoleDesc(player,message,namef)
   for i=1,#Town_Players do
-    if (Town_Players[i].Color == player.color and Town_Players[i].IndexStatus == 2) then
+    if (Town_Players[i].Color == player.color and Town_Players[i].IndexStatus == 1) then
       broadcastToColor("---\n"..Town_Players[i].Role.Description.."\n---",player.color,{0.118, 0.53, 1})
     end
   end
@@ -419,7 +419,7 @@ end
 
 function UI_AbilityMenu(player,message,namef)
   for i=1,#Town_Players do
-    if (Town_Players[i].Color == player.color and Town_Players[i].IndexStatus == 2) then
+    if (Town_Players[i].Color == player.color and Town_Players[i].IndexStatus == 1) then
       local message = tonumber(message)
       if (Town_CurrentPhase == Town_Players[i].Role.Abilities[message].IndexPhase and Town_Players[i].Role.Abilities[message].UseTime > 0 and not Town_Players[i].Role.Abilities[message].Recharge) then
         if ((Town_Players[i].Role.TagPhase == PhaseActionTag) or Town_CurrentPhase == 1) then
@@ -569,6 +569,13 @@ end
 
 -- Команды чата
 function onChat(message,Player) -- Функция связанная с чатом, а точнее команды (занять после тестирования)
+  if (message == "!test1") then
+    debug_showroles()
+  elseif (message == "!test2") then
+    debug_addkill("White")
+  elseif (message == "!test3") then
+    debug_effects("White")
+  end
 	--[[
     if message == "@admin" and Player.admin == true and admin == 0 then -- Вкл/выкл режим админа
       broadcastToAll("ВНИМАНИЕ: "..tostring(Player.color).." активировал режим админа!",{0.627, 0.125, 0.941})
@@ -846,20 +853,28 @@ end
 function ActivateAbility(player,indexAbility)  -- Функция только для активации способности
   if (player.Role.Abilities[indexAbility].Tag == "ability_police_search") then
     UiVoteBlankShow(player)
+    PhaseActionTag = "tag_phase_night"
   elseif (player.Role.Abilities[indexAbility].Tag == "ability_doctor_heal") then
     UiVoteBlankShow(player)
+    PhaseActionTag = "tag_phase_night"
   elseif (player.Role.Abilities[indexAbility].Tag == "ability_doctor_selfheal") then
     Effect_HealPlayer(player,player)
+    PhaseActionTag = "tag_phase_night"
   elseif (player.Role.Abilities[indexAbility].Tag == "ability_detective_search") then
     UiVoteBlankShow(player)
+    PhaseActionTag = "tag_phase_night"
   elseif (player.Role.Abilities[indexAbility].Tag == "ability_serialkiller_kill") then
     UiVoteBlankShow(player)
+    PhaseActionTag = "tag_phase_night"
   elseif (player.Role.Abilities[indexAbility].Tag == "ability_politic_sabotage") then
     Effect_BlockNight(player)
+    PhaseActionTag = "tag_phase_night"
   elseif (player.Role.Abilities[indexAbility].Tag == "ability_framer_sabotage") then
     UiVoteBlankShow(player)
+    PhaseActionTag = "tag_phase_night"
   elseif (player.Role.Abilities[indexAbility].Tag == "ability_lawyer_sabotage") then
     UiVoteBlankShow(player) 
+    PhaseActionTag = "tag_phase_night"
   elseif (player.Role.Abilities[indexAbility].Tag == "ability_bulletproof_wear") then
     Effect_GiveArmor(player,player)
   end
@@ -925,6 +940,7 @@ function ShowNightResult()
     local plr = FromColorToPlayer(Town_KillList[i])
     list = list .. plr.Name .. "\n"
   end
+  printToAll(list,{0.956, 0.392, 0.113})
 end
 
 function StartGame()
@@ -999,6 +1015,9 @@ function Phase_NightAction()
   StartTimer(function()
   PhaseActionTag = "tag_phase_night"
   Night_Stop = false
+  for i=1,#Town_Players do 
+    UiHideElement("id-Vote-Table-"..Town_Players[i].Color)
+  end
   end,
   Setting_NightActionTime) 
 end
@@ -1096,20 +1115,28 @@ function NightProgression()
       Phase_NightVote()
       UiVoteBlankShow()
     else
-      local check = false
-      Night_Stop = true
-      for i=1,#Town_Players do
-        if (Town_Players[i].Role.Name == Town_StartRoles[Night_Progress] and Town_Players[i].IndexStatus == 1) then
-          PhaseActionTag = Town_Players[i].Role.TagPhase
-          Player[Town_Players[i].Color].blindfolded = false
-          check = true
+      local start_phase = true
+      for i=1,#Town_Players do -- проверка что роль должна спать или нет
+        if (Town_Players[i].Role.Name == Town_StartRoles[Night_Progress] and Town_Players[i].Role.isNightSleep) then
+          start_phase = false
         end
       end
-      printToAll("Просыпается "..Town_StartRoles[Night_Progress],{0.129, 0.694, 0.607})
-      if (not check) then
-        SimulatePlayer()
+      if (start_phase) then
+        local check = false
+        Night_Stop = true
+        for i=1,#Town_Players do
+          if (Town_Players[i].Role.Name == Town_StartRoles[Night_Progress] and Town_Players[i].IndexStatus == 1) then
+            PhaseActionTag = Town_Players[i].Role.TagPhase
+            Player[Town_Players[i].Color].blindfolded = false
+            check = true
+          end
+        end
+        printToAll("Просыпается "..Town_StartRoles[Night_Progress],{0.129, 0.694, 0.607})
+        if (not check) then
+          SimulatePlayer()
+        end
+        Phase_NightAction()
       end
-      Phase_NightAction()
     end
     Night_Progress = Night_Progress + 1
   else
@@ -1252,6 +1279,7 @@ end
 
 --[[
   Сделать:
+  0. Ограничить использование в одну фазу одной способности у одного человека (ошибка: доктор может себя хилять и другого за раз)
   1. Тестирование 2
   Комментарий: 
   1. Пересмотреть теги при тестировании
@@ -1360,4 +1388,26 @@ function Effect_GiveArmor(player_target,player_owner)
   item.Description = "Этот бронижелет защищает тебя от ночной атаки. Но он одноразовый."
   item.Tag = "item_armor"
   table.insert(player_target.Inventory, item)
+end
+
+
+-- Дебаг 
+function debug_showroles()
+  for i=1,#Town_Players do
+    print(Town_Players[i].Name .." "..Town_Players[i].Role.Name)
+  end
+end
+
+function debug_addkill(color)
+  table.insert(Town_KillList,color)
+end
+
+function debug_effects(color)
+  for i=1,#Town_Players do
+    if (Town_Players[i].Color == color) then
+      for j=1,#Town_Players[i].Effects do
+        print(Town_Players[i].Effects[j].Name)
+      end
+    end
+  end
 end
