@@ -17,7 +17,7 @@
   <Row id="id-PlayerMenu-RowChat-White" active="false" visibility="" preferredHeight="200">
     <Cell columnSpan="2">
       <VerticalScrollView>
-        <text id="id-PlayerMenu-TextChat-White" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Пусто</text>
+        <text id="id-PlayerMenu-TextChat-White" verticalOverflow="Overflow" height="2200" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Пусто</text>
       </VerticalScrollView>
     </Cell>
   </Row>
@@ -209,7 +209,7 @@
   <Row id="id-PlayerMenu-RowChat-Brown" active="false" visibility="" preferredHeight="200">
     <Cell columnSpan="2">
       <VerticalScrollView>
-        <text id="id-PlayerMenu-TextChat-Brown" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Пусто</text>
+        <text id="id-PlayerMenu-TextChat-Brown" verticalOverflow="Overflow" height="2200" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Пусто</text>
       </VerticalScrollView>
     </Cell>
   </Row>
@@ -401,7 +401,7 @@
   <Row id="id-PlayerMenu-RowChat-Red" active="false" visibility="" preferredHeight="200">
     <Cell columnSpan="2">
       <VerticalScrollView>
-        <text id="id-PlayerMenu-TextChat-Red" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Пусто</text>
+        <text id="id-PlayerMenu-TextChat-Red" verticalOverflow="Overflow" height="2200" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Пусто</text>
       </VerticalScrollView>
     </Cell>
   </Row>
@@ -593,7 +593,7 @@
   <Row id="id-PlayerMenu-RowChat-Orange" active="false" visibility="" preferredHeight="200">
     <Cell columnSpan="2">
       <VerticalScrollView>
-        <text id="id-PlayerMenu-TextChat-Orange" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Пусто</text>
+        <text id="id-PlayerMenu-TextChat-Orange" verticalOverflow="Overflow" height="2200" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Пусто</text>
       </VerticalScrollView>
     </Cell>
   </Row>
@@ -785,7 +785,7 @@
   <Row id="id-PlayerMenu-RowChat-Yellow" active="false" visibility="" preferredHeight="200">
     <Cell columnSpan="2">
       <VerticalScrollView>
-        <text id="id-PlayerMenu-TextChat-Yellow" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Пусто</text>
+        <text id="id-PlayerMenu-TextChat-Yellow" verticalOverflow="Overflow" height="2200" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Пусто</text>
       </VerticalScrollView>
     </Cell>
   </Row>
@@ -977,7 +977,7 @@
   <Row id="id-PlayerMenu-RowChat-Green" active="false" visibility="" preferredHeight="200">
     <Cell columnSpan="2">
       <VerticalScrollView>
-        <text id="id-PlayerMenu-TextChat-Green" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Пусто</text>
+        <text id="id-PlayerMenu-TextChat-Green" verticalOverflow="Overflow" height="2200" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Пусто</text>
       </VerticalScrollView>
     </Cell>
   </Row>
@@ -1169,7 +1169,7 @@
   <Row id="id-PlayerMenu-RowChat-Teal" active="false" visibility="" preferredHeight="200">
     <Cell columnSpan="2">
       <VerticalScrollView>
-        <text id="id-PlayerMenu-TextChat-Teal" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Пусто</text>
+        <text id="id-PlayerMenu-TextChat-Teal" verticalOverflow="Overflow" height="2200" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Пусто</text>
       </VerticalScrollView>
     </Cell>
   </Row>
@@ -1361,7 +1361,7 @@
   <Row id="id-PlayerMenu-RowChat-Blue" active="false" visibility="" preferredHeight="200">
     <Cell columnSpan="2">
       <VerticalScrollView>
-        <text id="id-PlayerMenu-TextChat-Blue" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Пусто</text>
+        <text id="id-PlayerMenu-TextChat-Blue" verticalOverflow="Overflow" height="2200" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Пусто</text>
       </VerticalScrollView>
     </Cell>
   </Row>
@@ -1553,7 +1553,7 @@
   <Row id="id-PlayerMenu-RowChat-Purple" active="false" visibility="" preferredHeight="200">
     <Cell columnSpan="2">
       <VerticalScrollView>
-        <text id="id-PlayerMenu-TextChat-Purple" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Пусто</text>
+        <text id="id-PlayerMenu-TextChat-Purple" verticalOverflow="Overflow" height="2200" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Пусто</text>
       </VerticalScrollView>
     </Cell>
   </Row>
@@ -1745,7 +1745,7 @@
   <Row id="id-PlayerMenu-RowChat-Pink" active="false" visibility="" preferredHeight="200">
     <Cell columnSpan="2">
       <VerticalScrollView>
-        <text id="id-PlayerMenu-TextChat-Pink" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Пусто</text>
+        <text id="id-PlayerMenu-TextChat-Pink" verticalOverflow="Overflow" height="2200" color="#FFFFFF" offsetXY="3 0" alignment="UpperLeft" fontSize="14">Пусто</text>
       </VerticalScrollView>
     </Cell>
   </Row>

@@ -161,6 +161,7 @@ function onLoad() -- Основной архив (категорически н�
   Town_CounterNights = 0
   Town_CurrentPhase = 0
   Town_MafiaChat = {} -- каждый элемент это Владелец надписи и Надпись
+  Town_MafiaChatCounter = 0
   Town_PlayerVotes = {} -- Каждый элемент это Владелец голоса и Голос
   Town_MafiaVotes = {}-- Каждый элемент это Владелец голоса и Голос
   Town_KillList = {} -- По цветам (ибо могут меняться)
@@ -368,9 +369,10 @@ end
 
 function UI_MafiaChat(player,message,namef)
   for i=1,#Town_Players do
-    if (Town_Players[i].Color == player.color) then
+    if (Town_Players[i].Color == player.color and message != "") then
       table.insert(Town_MafiaChat,{Town_Players[i].Name,message})
       UI.setAttribute("id-PlayerMenu-InputChat-"..player.color,"text","")
+      UpdateMafiaChat()
     end
   end
 end
@@ -638,7 +640,11 @@ end
 
 -- Основной триггер
 function onUpdate() -- оставить пустым на потом
-
+  --[[
+  if (Town_MafiaChatCounter < #Town_MafiaChat) then
+    Town_MafiaChatCounter = #Town_MafiaChat
+    UpdateMafiaChat()
+  end]]
 end
 
 function isAllSleep()  --- Проверка сна
@@ -687,6 +693,18 @@ end
 
 function SimulatePlayer()
   wait(NightProgression,random(Setting_NightActionTime,Setting_NightActionTime + 5))
+end
+
+function UpdateMafiaChat()
+  local str = ""
+  for i=1,#Town_MafiaChat do
+    str = str .. Town_MafiaChat[i][1]..": "..Town_MafiaChat[i][2].."\n"
+  end
+  for i=1,#Town_Players do
+    if (Town_Players[i].IndexStatus == 1 and Town_Players[i].Role.IndexTeam == 2) then
+      UiChangeText("id-PlayerMenu-TextChat-"..Town_Players[i].Color,str)
+    end
+  end
 end
 
 function StartAbilities(role)
